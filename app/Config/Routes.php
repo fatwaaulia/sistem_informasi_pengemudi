@@ -107,7 +107,22 @@ $routes->group('superadmin/paket-langganan', ['filter' => 'EnsureSuperAdmin'], s
     $routes->post('update/(:segment)', 'PaketLangganan::update/$1');
     $routes->post('delete/(:segment)', 'PaketLangganan::delete/$1');
 });
+$routes->group('superadmin/pengajuan-perusahaan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+    $routes->get('get-data', 'PengajuanPerusahaan::getData');
+    $routes->get('/', 'PengajuanPerusahaan::index');
+    $routes->get('edit/(:segment)', 'PengajuanPerusahaan::edit/$1');
+    $routes->post('update/(:segment)', 'PengajuanPerusahaan::update/$1');
+});
+$routes->group('superadmin/perusahaan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+    $routes->get('get-data', 'PengajuanPerusahaan::getDataPerusahaanAktif');
+    $routes->get('/', 'PengajuanPerusahaan::perusahaanAktif');
+    $routes->get('detail/(:segment)', 'PengajuanPerusahaan::detailPerusahaanAktif/$1');
+});
 
 /*--------------------------------------------------------------
-  # Admin
+  # Perusahaan
 --------------------------------------------------------------*/
+$routes->group('perusahaan/pengajuan-perusahaan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+    $routes->get('/', 'PengajuanPerusahaan::kirimPengajuan');
+    $routes->post('update', 'PengajuanPerusahaan::prosesKirimPengajuan');
+});

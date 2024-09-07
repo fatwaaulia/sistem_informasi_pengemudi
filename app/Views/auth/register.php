@@ -15,14 +15,21 @@
 							<label for="nama_perusahaan" class="form-label">Nama Perusahaan</label>
 							<input type="nama" class="form-control <?= validation_show_error('nama_perusahaan') ? "is-invalid" : '' ?>" id="nama_perusahaan" name="nama_perusahaan" value="<?= old('nama_perusahaan') ?>" placeholder="nama perusahaan" autocomplete="off" autofocus>
 							<div class="invalid-feedback">
-								<?= validation_show_error('nama_perusahaan') ?>
+								<?= cutString(validation_show_error('nama_perusahaan')) ?>
 							</div>
 						</div>
 						<div class="mb-3">
-							<label for="nama_pic" class="form-label">Nama PIC</label>
-							<input type="nama" class="form-control <?= validation_show_error('nama_pic') ? "is-invalid" : '' ?>" id="nama_pic" name="nama_pic" value="<?= old('nama_pic') ?>" placeholder="nama pic">
+							<label for="nama" class="form-label">Nama PIC</label>
+							<input type="text" class="form-control <?= validation_show_error('nama') ? "is-invalid" : '' ?>" id="nama" name="nama" value="<?= old('nama') ?>" placeholder="nama pic">
 							<div class="invalid-feedback">
-								<?= validation_show_error('nama_pic') ?>
+								<?= cutString(validation_show_error('nama')) ?>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="no_ponsel" class="form-label">No. Ponsel PIC</label>
+							<input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?>" placeholder="08xx">
+							<div class="invalid-feedback">
+								<?= cutString(validation_show_error('no_ponsel')) ?>
 							</div>
 						</div>
 						<div class="mb-3">

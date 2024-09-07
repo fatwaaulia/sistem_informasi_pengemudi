@@ -77,7 +77,9 @@ class Auth extends BaseController
     public function registerProcess()
     {   
         $rules = [
+            'nama_perusahaan' => 'required|is_unique[users.nama_perusahaan]',
             'nama'      => 'required',
+            'no_ponsel' => 'required|is_unique[users.no_ponsel]',
             'email'     => 'required|valid_email|is_unique[users.email]',
             'password'  => 'required|min_length[8]|matches[passconf]',
             'passconf'  => 'required|min_length[8]|matches[password]',
@@ -87,10 +89,13 @@ class Auth extends BaseController
         } else {
             $password = $this->request->getVar('password');
             $data = [
-                'id_role'   => 3,
-                'nama'      => ucwords($this->request->getVar('nama', $this->filter)),
-                'email'     => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
-                'password'  => $this->base_model->password_hash($password),
+                'status_pengajuan_perusahaan' => 'Pending',
+                'id_role'         => 3,
+                'nama_perusahaan' => ucwords($this->request->getVar('nama_perusahaan', $this->filter)),
+                'nama'            => ucwords($this->request->getVar('nama', $this->filter)),
+                'no_ponsel'       => ucwords($this->request->getVar('no_ponsel', $this->filter)),
+                'email'           => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
+                'password'        => $this->base_model->password_hash($password),
             ];
 
             $this->base_model->insert($data);

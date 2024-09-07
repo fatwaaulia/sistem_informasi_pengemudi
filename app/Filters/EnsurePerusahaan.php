@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Admin implements FilterInterface
+class EnsurePerusahaan implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
@@ -15,7 +15,7 @@ class Admin implements FilterInterface
         $user_session = model('Users')->where('id', session()->get('id_user'))->first();
         if (!$user_session) return redirect()->to(base_url());
         
-        if ($user_session['id_role'] != 2) {
+        if ($user_session['id_role'] != 3) {
             $user_role = strtolower(model('Role')->where('id', $user_session['id_role'])->first()['nama']);
             return redirect()->to(base_url($user_role) . '/dashboard')
             ->with('message',

@@ -19,13 +19,14 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Role</th>
-                            <th>Foto</th>
+                            <th>Gambar</th>
                             <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>No. Ponsel</th>
-                            <th>Email</th>
-                            <th>Created At</th>
+                            <th>Harga</th>
+                            <th>Dokumen Pendukung</th>
+                            <th>Tanggal Kegiatan</th>
+                            <th>Select Multiple</th>
+                            <th>Checkbox</th>
+                            <th>Radio</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -45,24 +46,28 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollX: true,
         columns: [
             { data: 'no_urut' },
-            { data: 'nama_role' },
-            { data: null, render: renderFoto },
+            { data: null, render: renderGambar },
             { data: 'nama' },
-            { data: 'jenis_kelamin' },
-            { data: 'no_ponsel' },
-            { data: 'email' },
-            { data: 'created_at' },
+            { data: 'harga' },
+            { data: null, render: renderDokumenPendukung },
+            { data: 'tanggal_kegiatan' },
+            { data: 'select_multiple' },
+            { data: 'checkbox' },
+            { data: 'radio' },
             { data: null, render: renderOpsi },
         ],
     });
 });
 
-function renderFoto(data) {
-    return `<img src="${data.foto_profil}" class="wh-40 img-style rounded-circle" loading="lazy">`;
+function renderGambar(data) {
+    return `<img src="${data.gambar}" class="wh-40 img-style" loading="lazy">`;
+}
+
+function renderDokumenPendukung(data) {
+    return `<a href="<?= base_url($upload_path) ?>${data.dokumen_pendukung}">${data.dokumen_pendukung}</a>`;
 }
 
 function renderOpsi(data) {
-    if (data.id_role == 1) return null;
     let route_edit_data = `<?= $base_route . '/edit/' ?>${data.id}`;
     let route_hapus_data = `<?= $base_route . '/delete/' ?>${data.id}`;
     return `

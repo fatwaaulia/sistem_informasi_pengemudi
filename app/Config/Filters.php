@@ -37,6 +37,7 @@ class Filters extends BaseFilters
         'EnsureIsLogin' => \App\Filters\EnsureIsLogin::class,
         'EnsureSuperAdmin'  => \App\Filters\EnsureSuperAdmin::class,
         'EnsureAdmin'       => \App\Filters\EnsureAdmin::class,
+        'EnsurePerusahaan'  => \App\Filters\EnsurePerusahaan::class,
         'MinifyViewSource'  => \App\Filters\MinifyViewSource::class,
     ];
 

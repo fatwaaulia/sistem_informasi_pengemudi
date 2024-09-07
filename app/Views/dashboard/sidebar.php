@@ -85,89 +85,106 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 	<?php
 	$sidebar = [
 		[
-			'title'		=> 'Dashboard',
-			'icon'		=> 'fa-solid fa-chart-line',
-			'url'		=> base_url($user_role) . '/dashboard',
-			'role'		=> [1, 2, 3],
-			'type'	    => 'no-collapse',
+			'title'	=> 'Dashboard',
+			'icon'	=> 'fa-solid fa-chart-line',
+			'url'	=> base_url($user_role) . '/dashboard',
+			'role'	=> [1, 2, 3],
+			'type'	=> 'no-collapse',
 		],
 		[
-			'title'		=> 'Beranda',
-			'icon'		=> 'fa-solid fa-house',
-			'url'		=> '/',
-			'role'		=> [1, 2],
-			'type'	    => 'no-collapse',
+			'title'	=> 'Pengajuan Perusahaan',
+			'icon'	=> 'fa-solid fa-file',
+			'url'	=> base_url($user_role) . '/pengajuan-perusahaan',
+			'role'	=> [1, 2, 3],
+			'type'	=> 'no-collapse',
 		],
 		[
-			'title'		=> 'MASTER DATA',
-			'role'		=> [1],
-			'type'	    => 'heading',
+			'title'	=> 'Berlangganan',
+			'icon'	=> 'fa-solid fa-thumbs-up',
+			'url'	=> base_url($user_role) . '/berlangganan',
+			'role'	=> [3],
+			'type'	=> 'no-collapse',
 		],
 		[
-			'title'		=> 'Perusahaan',
-			'icon'		=> 'fa-solid fa-building',
-			'url'		=> base_url($user_role) . '/perusahaan',
-			'role'		=> [1],
-			'type'	    => 'no-collapse',
+			'title'	=> 'Riwayat Pencarian',
+			'icon'	=> 'fa-solid fa-magnifying-glass',
+			'url'	=> base_url($user_role) . '/riwayat-pencarian',
+			'role'	=> [3],
+			'type'	=> 'no-collapse',
 		],
 		[
-			'title'		=> 'Manajemen Pengguna',
-			'icon'		=> 'fa-solid fa-user-group',
-			'url'		=> base_url($user_role) . '/users',
-			'role'		=> [1],
-			'type'	    => 'no-collapse',
+			'title'	=> 'Perusahaan',
+			'icon'	=> 'fa-solid fa-building',
+			'url'	=> base_url($user_role) . '/perusahaan',
+			'role'	=> [1],
+			'type'	=> 'no-collapse',
 		],
 		[
-			'title'		=> 'Paket Langganan',
-			'icon'		=> 'fa-solid fa-rug',
-			'url'		=> base_url($user_role) . '/paket-langganan',
-			'role'		=> [1],
-			'type'	    => 'no-collapse',
+			'title'	=> 'MASTER DATA',
+			'role'	=> [1],
+			'type'	=> 'heading',
 		],
 		[
-			'title'		=> 'Form Input',
-			'icon'		=> 'fa-solid fa-keyboard',
-			'url'		=> base_url($user_role) . '/form-input',
-			'role'		=> [1],
-			'type'	    => 'no-collapse',
+			'title'	=> 'Manajemen Pengguna',
+			'icon'	=> 'fa-solid fa-user-group',
+			'url'	=> base_url($user_role) . '/users',
+			'role'	=> [1],
+			'type'	=> 'no-collapse',
+		],
+		[
+			'title'	=> 'Paket Langganan',
+			'icon'	=> 'fa-solid fa-rug',
+			'url'	=> base_url($user_role) . '/paket-langganan',
+			'role'	=> [1],
+			'type'	=> 'no-collapse',
+		],
+		[
+			'title'	=> 'Form Input',
+			'icon'	=> 'fa-solid fa-keyboard',
+			'url'	=> base_url($user_role) . '/form-input',
+			'role'	=> [1],
+			'type'	=> 'no-collapse',
 		],
 		/*--------------------------------------------------------------
 		# Apps
 		--------------------------------------------------------------*/
 		[
-			'title'		=> 'ACCOUNT',
-			'role'		=> [1, 2, 3],
-			'type'	    => 'heading',
+			'title'	=> 'ACCOUNT',
+			'role'	=> [1, 2, 3],
+			'type'	=> 'heading',
 		],
 		[
-			'title'		=> 'App Settings',
-			'icon'		=> 'fa-solid fa-gear',
-			'url'		=> base_url($user_role) . '/app-settings',
-			'role'		=> [1],
-			'type'	    => 'no-collapse',
+			'title'	=> 'App Settings',
+			'icon'	=> 'fa-solid fa-gear',
+			'url'	=> base_url($user_role) . '/app-settings',
+			'role'	=> [1],
+			'type'	=> 'no-collapse',
 		],
 		[
-			'title'		=> 'Profil',
-			'icon'		=> 'fa-solid fa-user',
-			'url'		=> base_url($user_role) . '/profile',
-			'role'		=> [1, 2, 3],
-			'type'	    => 'no-collapse',
+			'title'	=> 'Profil',
+			'icon'	=> 'fa-solid fa-user',
+			'url'	=> base_url($user_role) . '/profile',
+			'role'	=> [1, 2, 3],
+			'type'	=> 'no-collapse',
 		],
 		[
-			'title'		=> 'Keluar',
-			'icon'		=> 'fa-solid fa-arrow-right-from-bracket',
-			'url'		=> base_url('logout'),
-			'role'		=> [1, 2, 3],
-			'type'	    => 'no-collapse',
+			'title'	=> 'Keluar',
+			'icon'	=> 'fa-solid fa-arrow-right-from-bracket',
+			'url'	=> base_url('logout'),
+			'role'	=> [1, 2, 3],
+			'type'	=> 'no-collapse',
 		],
 	];
 	?>
 	<ul class="sidebar-nav" id="sidebar-nav">
 		<?php
-		$uri = service('request')->getUri();
+		$uri = service('uri');
+        $uri->setSilent(true);
+        $base_route	= base_url($uri->getSegment(1) . '/' . $uri->getSegment(2));
 		foreach ($sidebar as $v) :
+			if (in_array($user_session['id_role'], $v['role'])) : // tampilkan menu jika sesuai role
 			if ($v['type'] == 'no-collapse') :
-				($uri == $v['url']) ? $collapsed = '' : $collapsed = 'collapsed';
+				($base_route == $v['url']) ? $collapsed = '' : $collapsed = 'collapsed';
 		?>
 		<li class="nav-item">
 			<a class="nav-link <?= $collapsed ?>" href="<?= $v['url'] ?>">
@@ -177,7 +194,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 		</li>
 		<?php
 			elseif ($v['type'] == 'collapse') :
-				$is_active = in_array($uri, array_column($v['collapse'], 'url'));
+				$is_active = in_array($base_route, array_column($v['collapse'], 'url'));
                 $collapsed = $is_active ? '' : 'collapsed';
                 $collapse_show = $is_active ? 'show' : '';
 		?>
@@ -190,7 +207,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			<ul id="<?= url_title($v['title'], '-', true) ?>" class="nav-content collapse <?= $collapse_show ?>" data-bs-parent="#sidebar-nav">
 				<?php foreach ($v['collapse'] as $collapse) : ?>
 				<li>
-					<a href="<?= $collapse['url'] ?>" class="<?= $collapse['url'] == $uri ? 'active' : '' ?>">
+					<a href="<?= $collapse['url'] ?>" class="<?= $collapse['url'] == $base_route ? 'active' : '' ?>">
 						<i class="fa-solid fa-circle"></i>
 						<span><?= $collapse['title'] ?></span>
 					</a>
@@ -206,6 +223,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			<?= $v['title'] ?>
 		</li>
 		<?php
+			endif;
 			endif;
 		endforeach;
 		?>

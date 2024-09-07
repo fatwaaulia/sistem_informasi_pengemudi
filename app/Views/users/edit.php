@@ -80,39 +80,16 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="alamat" class="form-label">Alamat</label><span class="text-secondary"> (opsional)</span>
-                                    <textarea class="form-control <?= validation_show_error('alamat') ? 'is-invalid' : '' ?>" id="alamat" name="alamat" rows="3" placeholder="masukkan alamat"><?= old('alamat') ?? $data['alamat'] ?></textarea>
-                                    <div class="invalid-feedback">
-                                        <?= cutString(validation_show_error('alamat')) ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="mb-3">
                                     <label for="id_role" class="form-label">Role</label>
-                                    <select class="form-select <?= validation_show_error('id_role') ? 'is-invalid' : '' ?>" id="id_role" name="id_role">
-                                        <?php
-                                        $role = model('Role')->find([2, 3]);
-                                        $selected = old('id_role', $data['id_role']);
-                                        foreach ($role as $v) :
-                                        ?>
-                                        <option value="<?= $v['id'] ?>" <?= $selected == $v['id'] ? 'selected' : '' ?>>
-                                            <?= $v['nama'] ?>
-                                        </option>
-                                        <?php endforeach; ?>
+                                    <select class="form-select" id="id_role" disabled>
+                                        <option>Admin</option>
                                     </select>
-                                    <div class="invalid-feedback">
-                                        <?= cutString(validation_show_error('id_role')) ?>
-                                    </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="no_hp" class="form-label">No. HP</label><span class="text-secondary"> (opsional)</span>
-                                    <div class="input-group">
-                                        <span class="input-group-text">+62</span>
-                                        <input type="number" class="form-control <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" id="no_hp" name="no_hp" value="<?= old('no_hp') ?? $data['no_hp'] ?>" placeholder="8xx">
-                                    </div>
+                                    <label for="no_ponsel" class="form-label">No. Ponsel</label><span class="text-secondary"> (opsional)</span>
+                                    <input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?? $data['no_ponsel'] ?>" placeholder="08xx">
                                     <div class="invalid-feedback">
-                                        <?= cutString(validation_show_error('no_hp')) ?>
+                                        <?= cutString(validation_show_error('no_ponsel')) ?>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -139,9 +116,9 @@
 								        <img src="<?= base_url('assets/icon/show.png') ?>" class="position-absolute" id="eye_passconf">
                                     </div>
                                 </div>
+                                <button type="submit" class="btn btn-primary mt-3 float-end">Simpan Perubahan</button>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3 float-end">Simpan Perubahan</button>
                     </form>
                 </div>
             </div>

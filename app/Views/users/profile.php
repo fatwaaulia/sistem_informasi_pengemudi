@@ -87,13 +87,10 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <label for="no_hp" class="form-label">No. HP</label><span class="text-secondary"> (opsional)</span>
-                                    <div class="input-group">
-                                        <span class="input-group-text">+62</span>
-                                        <input type="number" class="form-control <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" id="no_hp" name="no_hp" value="<?= old('no_hp') ?? $data['no_hp'] ?>" placeholder="8xx">
-                                    </div>
+                                    <label for="no_ponsel" class="form-label">No. Ponsel</label><span class="text-secondary"> (opsional)</span>
+                                    <input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?? $data['no_ponsel'] ?>" placeholder="08xx">
                                     <div class="invalid-feedback">
-                                        <?= cutString(validation_show_error('no_hp')) ?>
+                                        <?= cutString(validation_show_error('no_ponsel')) ?>
                                     </div>
                                 </div>
                                 <div class="mb-3">

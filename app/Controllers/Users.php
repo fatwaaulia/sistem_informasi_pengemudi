@@ -36,7 +36,7 @@ class Users extends BaseController
             $data[$key]['id'] = encode($v['id']);
             $data[$key]['nama_role'] = $nama_role[$v['id_role']];
             $data[$key]['foto_profil'] = $v['foto_profil'] ? base_url($this->upload_path) . $v['foto_profil'] : base_url('assets/uploads/user-default.png');
-            $data[$key]['no_hp'] = $v['no_hp'] ? '+62 ' . $v['no_hp'] : null;
+            $data[$key]['no_ponsel'] = $v['no_ponsel'] ? '+62 ' . $v['no_ponsel'] : null;
             $data[$key]['created_at'] = date('d-m-Y H:i:s', strtotime($v['created_at']));
         }
 
@@ -87,8 +87,7 @@ class Users extends BaseController
             'passconf'      => 'required|min_length[8]|matches[password]',
             'jenis_kelamin' => 'required',
             'foto_profil'   => 'max_size[foto_profil,1024]|ext_in[foto_profil,png,jpg,jpeg]|mime_in[foto_profil,image/png,image/jpg,image/jpeg]|is_image[foto_profil]',
-            'alamat'        => 'max_length[255]',
-            'no_hp'         => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_hp]",
+            'no_ponsel'    => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_ponsel]",
         ];
         if (! $this->validate($rules)) {
             return redirect()->back()->withInput();
@@ -109,8 +108,7 @@ class Users extends BaseController
                 'password'      => $this->base_model->password_hash($password),
                 'jenis_kelamin' => $this->request->getVar('jenis_kelamin', $this->filter),
                 'foto_profil'   => $foto_profil_name,
-                'alamat'        => $this->request->getVar('alamat', $this->filter),
-                'no_hp'         => $this->request->getVar('no_hp', $this->filter),
+                'no_ponsel'         => $this->request->getVar('no_ponsel', $this->filter),
             ];
 
             $this->base_model->insert($data);
@@ -150,15 +148,13 @@ class Users extends BaseController
         $find_data = $this->base_model->find($id);
 
         $rules = [
-            'id_role'       => 'required',
             'nama'          => 'required',
             'password'      => 'permit_empty|min_length[8]|matches[passconf]',
             'passconf'      => 'permit_empty|min_length[8]|matches[password]',
             'jenis_kelamin' => 'required',
             'foto_profil'   => 'max_size[foto_profil,1024]|ext_in[foto_profil,png,jpg,jpeg]|mime_in[foto_profil,image/png,image/jpg,image/jpeg]|is_image[foto_profil]',
-            'alamat'        => 'max_length[255]',
             'email'         => "required|valid_email|is_unique[$this->base_name.email,id,$id]",
-            'no_hp'         => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_hp,id,$id]",
+            'no_ponsel'     => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_ponsel,id,$id]",
         ];
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput();
@@ -175,14 +171,13 @@ class Users extends BaseController
 
             $password = $this->request->getVar('password');
             $data = [
-                'id_role'       => $this->request->getVar('id_role', $this->filter),
+                'id_role'       => 2,
                 'nama'          => ucwords($this->request->getVar('nama', $this->filter)),
                 'email'         => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
                 'password'      => $password != '' ? $this->base_model->password_hash($password) : $find_data['password'],
                 'jenis_kelamin' => $this->request->getVar('jenis_kelamin', $this->filter),
                 'foto_profil'   => $foto_profil_name,
-                'alamat'        => $this->request->getVar('alamat', $this->filter),
-                'no_hp'         => $this->request->getVar('no_hp', $this->filter),
+                'no_ponsel'     => $this->request->getVar('no_ponsel', $this->filter),
             ];
 
             $this->base_model->update($id, $data);
@@ -271,9 +266,8 @@ class Users extends BaseController
             'nama'          => 'required',
             'jenis_kelamin' => 'required',
             'foto_profil'   => 'max_size[foto_profil,1024]|ext_in[foto_profil,png,jpg,jpeg]|mime_in[foto_profil,image/png,image/jpg,image/jpeg]|is_image[foto_profil]',
-            'alamat'        => 'max_length[255]',
             'email'         => "required|valid_email|is_unique[$this->base_name.email,id,$id]",
-            'no_hp'         => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_hp,id,$id]",
+            'no_ponsel'     => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_ponsel,id,$id]",
         ];
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput();
@@ -292,9 +286,8 @@ class Users extends BaseController
                 'nama'          => ucwords($this->request->getVar('nama', $this->filter)),
                 'jenis_kelamin' => $this->request->getVar('jenis_kelamin', $this->filter),
                 'foto_profil'   => $foto_profil_name,
-                'alamat'        => $this->request->getVar('alamat', $this->filter),
                 'email'         => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
-                'no_hp'         => $this->request->getVar('no_hp', $this->filter),
+                'no_ponsel'     => $this->request->getVar('no_ponsel', $this->filter),
             ];
 
             $this->base_model->update($id, $data);
