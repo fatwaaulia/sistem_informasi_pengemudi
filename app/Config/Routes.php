@@ -126,3 +126,20 @@ $routes->group('perusahaan/pengajuan-perusahaan', ['filter' => 'EnsurePerusahaan
     $routes->get('/', 'PengajuanPerusahaan::kirimPengajuan');
     $routes->post('update', 'PengajuanPerusahaan::prosesKirimPengajuan');
 });
+$routes->group('perusahaan/lapor-temuan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+    $routes->get('get-data', 'Temuan::getData');
+    $routes->get('/', 'Temuan::index');
+    $routes->get('new', 'Temuan::new');
+    $routes->post('create', 'Temuan::create');
+    $routes->get('edit/(:segment)', 'Temuan::edit/$1');
+    $routes->post('update/(:segment)', 'Temuan::update/$1');
+    $routes->post('delete/(:segment)', 'Temuan::delete/$1');
+});
+$routes->group('perusahaan/cari-temuan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+    $routes->get('/', 'Temuan::cariTemuan');
+    $routes->post('proses', 'Temuan::prosesCariTemuan');
+});
+$routes->group('perusahaan/riwayat-pencarian', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+    $routes->get('get-data', 'RiwayatPencarian::getData');
+    $routes->get('/', 'RiwayatPencarian::index');
+});

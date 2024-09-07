@@ -19,14 +19,12 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Gambar</th>
-                            <th>Nama</th>
-                            <th>Harga</th>
-                            <th>Dokumen Pendukung</th>
-                            <th>Tanggal Kegiatan</th>
-                            <th>Select Multiple</th>
-                            <th>Checkbox</th>
-                            <th>Radio</th>
+                            <th>NIK</th>
+                            <th>Nama Lengkap</th>
+                            <th>Rincian</th>
+                            <th>Tanggal Temuan</th>
+                            <th>Bukti</th>
+                            <th>Created At</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -46,25 +44,19 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollX: true,
         columns: [
             { data: 'no_urut' },
-            { data: null, render: renderGambar },
+            { data: 'nik' },
             { data: 'nama' },
-            { data: 'harga' },
-            { data: null, render: renderDokumenPendukung },
-            { data: 'tanggal_kegiatan' },
-            { data: 'select_multiple' },
-            { data: 'checkbox' },
-            { data: 'radio' },
+            { data: 'rincian' },
+            { data: 'tanggal' },
+            { data: null, render: renderBukti },
+            { data: 'created_at' },
             { data: null, render: renderOpsi },
         ],
     });
 });
 
-function renderGambar(data) {
-    return `<img src="${data.gambar}" class="wh-40 img-style" loading="lazy">`;
-}
-
-function renderDokumenPendukung(data) {
-    return `<a href="<?= base_url($upload_path) ?>${data.dokumen_pendukung}">${data.dokumen_pendukung}</a>`;
+function renderBukti(data) {
+    return `<img src="${data.bukti}" class="wh-40 img-style" loading="lazy">`;
 }
 
 function renderOpsi(data) {
@@ -88,16 +80,20 @@ function renderOpsi(data) {
                     <p>Apakah Anda yakin ingin menghapus data ini?</p>
                     <table>
                         <tr>
+                            <td>NIK</td>
+                            <td>: ${data.nik}</td>
+                        </tr>
+                        <tr>
                             <td>Nama</td>
                             <td>: ${data.nama}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <form action="${route_hapus_data}" method="post">
                         <?= csrf_field(); ?>
-                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        <button type="submit" class="btn btn-danger">Iya, Hapus</button>
                     </form>
                 </div>
             </div>

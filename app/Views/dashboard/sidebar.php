@@ -100,8 +100,22 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 		],
 		[
 			'title'	=> 'Berlangganan',
-			'icon'	=> 'fa-solid fa-thumbs-up',
+			'icon'	=> 'fa-solid fa-heart-circle-check',
 			'url'	=> base_url($user_role) . '/berlangganan',
+			'role'	=> [3],
+			'type'	=> 'no-collapse',
+		],
+		[
+			'title'	=> 'Lapor Temuan',
+			'icon'	=> 'fa-solid fa-magnifying-glass-arrow-right',
+			'url'	=> base_url($user_role) . '/lapor-temuan',
+			'role'	=> [3],
+			'type'	=> 'no-collapse',
+		],
+		[
+			'title'	=> 'Cari Temuan',
+			'icon'	=> 'fa-solid fa-magnifying-glass',
+			'url'	=> base_url($user_role) . '/cari-temuan',
 			'role'	=> [3],
 			'type'	=> 'no-collapse',
 		],

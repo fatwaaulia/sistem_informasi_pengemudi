@@ -17,11 +17,9 @@
                                     <div class="d-flex">
                                         <div class="position-relative">
                                             <?php
-                                            if ($data['foto_profil']) {
-                                                $foto_profil = base_url($upload_path . $data['foto_profil']);
-                                            } else {
-                                                $foto_profil = base_url('assets/uploads/user-default.png');
-                                            }
+                                            $foto_profil = ($data['foto_profil'])
+                                                ? base_url($upload_path . $data['foto_profil'])
+                                                : base_url('assets/uploads/user-default.png');
                                             ?>
                                             <img src="<?= $foto_profil ?>" class="wh-150 img-style rounded-circle <?= validation_show_error('foto_profil') ? 'border border-danger' : '' ?>" id="frame">
                                             <div class="position-absolute" style="bottom:0px;right:0px">

@@ -89,10 +89,10 @@ function renderOpsi(data) {
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <form action="${route_hapus_data}" method="post">
                         <?= csrf_field(); ?>
-                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        <button type="submit" class="btn btn-danger">Ya, Hapus</button>
                     </form>
                 </div>
             </div>

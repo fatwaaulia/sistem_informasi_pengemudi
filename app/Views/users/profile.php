@@ -123,17 +123,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteImageLabel">Confirm delete</h1>
+                <h1 class="modal-title fs-5" id="deleteImageLabel">Konfirmasi hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                    <p>Are you sure to delete photo?</p>
+                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                 <form action="<?= $base_route . '/delete/image' ?>" method="post">
                     <?= csrf_field(); ?>
-                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    <button type="submit" class="btn btn-danger">Iya, Hapus</button>
                 </form>
             </div>
         </div>

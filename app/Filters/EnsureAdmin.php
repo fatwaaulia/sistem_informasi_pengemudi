@@ -10,10 +10,10 @@ class EnsureAdmin implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->isLogin !== true) return redirect()->to(base_url());
+        if (session()->isLogin !== true) return redirect()->to(base_url('login'));
         
         $user_session = model('Users')->where('id', session()->get('id_user'))->first();
-        if (!$user_session) return redirect()->to(base_url());
+        if (!$user_session) return redirect()->to(base_url('login'));
         
         if ($user_session['id_role'] != 2) {
             $user_role = strtolower(model('Role')->where('id', $user_session['id_role'])->first()['nama']);
