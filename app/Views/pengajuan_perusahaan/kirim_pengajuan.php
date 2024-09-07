@@ -9,16 +9,27 @@
         <div class="col-lg-12">
             <?php
             $pengajuan = false;
-            if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') :
+            if ($data['status_pengajuan_perusahaan'] != 'Pending') :
                 $pengajuan = true;
+                $alert = '';
+                if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') {
+                    $alert = 'alert-primary';
+                } elseif ($data['status_pengajuan_perusahaan'] == 'Aktif') {
+                    $alert = 'alert-success';
+                } elseif ($data['status_pengajuan_perusahaan'] == 'Ditolak') {
+                    $alert = 'alert-danger';
+                }
             ?>
-            <div class="alert alert-primary" role="alert">
+            <div class="alert <?= $alert ?>" role="alert">
                 Status : <b><?= $data['status_pengajuan_perusahaan'] ?></b> <br>
                 Tgl. Pengajuan : <?= date('d-m-Y H:i:s', strtotime($data['submission_at'])) ?> <br>
+                Tgl. Diterima : <?= date('d-m-Y H:i:s', strtotime($data['checked_at'])) ?? '-' ?> <br>
+                <?php if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') : ?>
                 <a href="https://wa.me/6285526250131" target="_blank">
                     <i class="fa-solid fa-phone me-1 mt-2"></i>
                     Hubungi Admin
                 </a>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
             <div class="card">
