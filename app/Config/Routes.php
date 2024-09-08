@@ -89,14 +89,17 @@ $routes->group('superadmin/users', ['filter' => 'EnsureSuperAdmin'], static func
     $routes->post('delete/(:segment)', 'Users::delete/$1');
     $routes->post('delete/image/(:segment)', 'Users::deleteImg/$1');
 });
-$routes->group('superadmin/form-input', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
-    $routes->get('get-data', 'FormInput::getData');
-    $routes->get('/', 'FormInput::index');
-    $routes->get('new', 'FormInput::new');
-    $routes->post('create', 'FormInput::create');
-    $routes->get('edit/(:segment)', 'FormInput::edit/$1');
-    $routes->post('update/(:segment)', 'FormInput::update/$1');
-    $routes->post('delete/(:segment)', 'FormInput::delete/$1');
+$routes->group('superadmin/pengajuan-perusahaan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+    $routes->get('get-data', 'PengajuanPerusahaan::getData');
+    $routes->get('/', 'PengajuanPerusahaan::index');
+    $routes->get('edit/(:segment)', 'PengajuanPerusahaan::edit/$1');
+    $routes->post('update/(:segment)', 'PengajuanPerusahaan::update/$1');
+    $routes->post('delete/(:segment)', 'PengajuanPerusahaan::delete/$1');
+});
+$routes->group('superadmin/perusahaan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+    $routes->get('get-data', 'PengajuanPerusahaan::getDataPerusahaanAktif');
+    $routes->get('/', 'PengajuanPerusahaan::perusahaanAktif');
+    $routes->get('detail/(:segment)', 'PengajuanPerusahaan::detailPerusahaanAktif/$1');
 });
 $routes->group('superadmin/paket-langganan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
     $routes->get('get-data', 'PaketLangganan::getData');
@@ -107,16 +110,30 @@ $routes->group('superadmin/paket-langganan', ['filter' => 'EnsureSuperAdmin'], s
     $routes->post('update/(:segment)', 'PaketLangganan::update/$1');
     $routes->post('delete/(:segment)', 'PaketLangganan::delete/$1');
 });
-$routes->group('superadmin/pengajuan-perusahaan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+
+/*--------------------------------------------------------------
+  # Admin
+--------------------------------------------------------------*/
+$routes->group('admin/pengajuan-perusahaan', ['filter' => 'EnsureAdmin'], static function ($routes) {
     $routes->get('get-data', 'PengajuanPerusahaan::getData');
     $routes->get('/', 'PengajuanPerusahaan::index');
     $routes->get('edit/(:segment)', 'PengajuanPerusahaan::edit/$1');
     $routes->post('update/(:segment)', 'PengajuanPerusahaan::update/$1');
+    $routes->post('delete/(:segment)', 'PengajuanPerusahaan::delete/$1');
 });
-$routes->group('superadmin/perusahaan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+$routes->group('admin/perusahaan', ['filter' => 'EnsureAdmin'], static function ($routes) {
     $routes->get('get-data', 'PengajuanPerusahaan::getDataPerusahaanAktif');
     $routes->get('/', 'PengajuanPerusahaan::perusahaanAktif');
     $routes->get('detail/(:segment)', 'PengajuanPerusahaan::detailPerusahaanAktif/$1');
+});
+$routes->group('admin/paket-langganan', ['filter' => 'EnsureAdmin'], static function ($routes) {
+    $routes->get('get-data', 'PaketLangganan::getData');
+    $routes->get('/', 'PaketLangganan::index');
+    $routes->get('new', 'PaketLangganan::new');
+    $routes->post('create', 'PaketLangganan::create');
+    $routes->get('edit/(:segment)', 'PaketLangganan::edit/$1');
+    $routes->post('update/(:segment)', 'PaketLangganan::update/$1');
+    $routes->post('delete/(:segment)', 'PaketLangganan::delete/$1');
 });
 
 /*--------------------------------------------------------------
@@ -150,4 +167,8 @@ $routes->group('perusahaan/berlangganan', ['filter' => 'EnsurePerusahaan'], stat
     $routes->get('edit/(:segment)', 'Berlangganan::edit/$1');
     $routes->post('update/(:segment)', 'Berlangganan::update/$1');
     $routes->post('delete/(:segment)', 'Berlangganan::delete/$1');
+});
+$routes->group('perusahaan/transaksi-langganan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+    $routes->get('get-data', 'TransaksiLangganan::getData');
+    $routes->get('/', 'TransaksiLangganan::index');
 });

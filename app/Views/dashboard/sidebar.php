@@ -111,9 +111,9 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			'type'	=> 'no-collapse',
 		],
 		[
-			'title'	=> 'Riwayat Langganan',
-			'icon'	=> 'fa-solid fa-heart-circle-check',
-			'url'	=> base_url($user_role) . '/riwayat-langganan',
+			'title'	=> 'Transaksi Langganan',
+			'icon'	=> 'fa-solid fa-dollar-sign',
+			'url'	=> base_url($user_role) . '/transaksi-langganan',
 			'role'	=> [3],
 			'type'	=> 'no-collapse',
 		],
@@ -147,12 +147,12 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			'title'	=> 'Perusahaan',
 			'icon'	=> 'fa-solid fa-building',
 			'url'	=> base_url($user_role) . '/perusahaan',
-			'role'	=> [1],
+			'role'	=> [1, 2],
 			'type'	=> 'no-collapse',
 		],
 		[
 			'title'	=> 'MASTER DATA',
-			'role'	=> [1],
+			'role'	=> [1, 2],
 			'type'	=> 'heading',
 		],
 		[
@@ -166,14 +166,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			'title'	=> 'Paket Langganan',
 			'icon'	=> 'fa-solid fa-rug',
 			'url'	=> base_url($user_role) . '/paket-langganan',
-			'role'	=> [1],
-			'type'	=> 'no-collapse',
-		],
-		[
-			'title'	=> 'Form Input',
-			'icon'	=> 'fa-solid fa-keyboard',
-			'url'	=> base_url($user_role) . '/form-input',
-			'role'	=> [1],
+			'role'	=> [1, 2],
 			'type'	=> 'no-collapse',
 		],
 		/*--------------------------------------------------------------

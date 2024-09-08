@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FormInput extends Model
+class TransaksiLangganan extends Model
 {
-    protected $table         = 'form_input';
+    protected $table         = 'transaksi_langganan';
     protected $protectFields = false;
     protected $useTimestamps = true;
 }

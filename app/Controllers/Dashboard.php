@@ -14,17 +14,7 @@ class Dashboard extends BaseController
         } elseif ($user_session['id_role'] == 2) {
             $view['content'] = view('dashboard/admin', $data);
         } elseif ($user_session['id_role'] == 3) {
-            $data_perusahaan = [
-                $user_session['nama'],
-                $user_session['jenis_kelamin'],
-                $user_session['no_ponsel'],
-                $user_session['nama_perusahaan'],
-                $user_session['alamat_perusahaan'],
-                $user_session['no_telepon_perusahaan'],
-                $user_session['no_akta_perusahaan'],
-                $user_session['dokumen_akta_perusahaan'],
-            ];
-            if (in_array('', $data_perusahaan)) {
+            if ($user_session['status_pengajuan_perusahaan'] != 'Aktif') {
                 return redirect()->to(base_url('perusahaan/pengajuan-perusahaan'))
                 ->with('message',
                 "<script>
@@ -37,8 +27,10 @@ class Dashboard extends BaseController
                     })
                 </script>");
             }
+
             $view['content'] = view('dashboard/perusahaan', $data);
         }
+
         $view['sidebar'] = view('dashboard/sidebar', $data);
         return view('dashboard/header', $view);
     }

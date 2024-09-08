@@ -24,12 +24,12 @@ class PengajuanPerusahaan extends BaseController
         $limit = $this->request->getVar('length') ?? $total_rows;
         $offset = $this->request->getVar('start') ?? 0;
 
-        $data = $this->base_model->where('status_pengajuan_perusahaan', 'Menunggu Verifikasi')->findAll($limit, $offset);
-        
+        $data = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])->findAll($limit, $offset);
+
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
-            $data       = $this->base_model->where('status_pengajuan_perusahaan', 'Menunggu Verifikasi')->like('nama', $search)->findAll($limit, $offset);
-            $total_rows = $this->base_model->where('status_pengajuan_perusahaan', 'Menunggu Verifikasi')->like('nama', $search)->countAllResults();
+            $data       = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])->like('nama_perusahaan', $search)->findAll($limit, $offset);
+            $total_rows = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])->like('nama_perusahaan', $search)->countAllResults();
         }
 
         foreach ($data as $key => $v) {
@@ -110,6 +110,35 @@ class PengajuanPerusahaan extends BaseController
                 })
             </script>");
         }
+    }
+
+    public function delete($id_encode = null)
+    {
+        $id = decode($id_encode);
+        $find_data = $this->base_model->find($id);
+
+        $dokumen_akta_perusahaan = $this->upload_path . 'dokumen_akta_perusahaan/' . $find_data['dokumen_akta_perusahaan'];
+        if (is_file($dokumen_akta_perusahaan)) unlink($dokumen_akta_perusahaan);
+
+        $data = [
+            'no_akta_perusahaan'          => '',
+            'dokumen_akta_perusahaan'     => '',
+            'status_pengajuan_perusahaan' => 'Pending',
+            'submission_at'  => null,
+        ];
+
+        $this->base_model->update($id, $data);
+        return redirect()->to($this->base_route)
+        ->with('message',
+        "<script>
+            Swal.fire({
+            icon: 'success',
+            title: 'Data berhasil dihapus',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            })
+        </script>");
     }
 
     public function getDataPerusahaanAktif()

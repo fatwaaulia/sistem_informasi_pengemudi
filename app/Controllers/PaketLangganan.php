@@ -22,7 +22,7 @@ class PaketLangganan extends BaseController
         $offset = $this->request->getVar('start') ?? 0;
 
         $data = $this->base_model->findAll($limit, $offset);
-        
+
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
             $data       = $this->base_model->like('nama', $search)->findAll($limit, $offset);
