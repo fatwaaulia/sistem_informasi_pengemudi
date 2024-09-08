@@ -208,62 +208,37 @@ class Temuan extends BaseController
     --------------------------------------------------------------*/
     public function cariTemuan()
     {
-        $nik = $this->request->getVar('nik', $this->filter);
+        $nik = $this->request->getVar('nik', FILTER_SANITIZE_NUMBER_INT);
+
         $cek_temuan = $this->base_model->where('nik', $nik)->first();
+
+        if ($cek_temuan) {
+            $get_data = [
+                'id_temuan'  => $cek_temuan['id'],
+                'id_pelapor' => $cek_temuan['id_pelapor'],
+                'nama'       => $cek_temuan['nama'],
+                'rincian'    => $cek_temuan['rincian'],
+                'tanggal'    => $cek_temuan['tanggal'],
+                'bukti'      => $cek_temuan['bukti'],
+            ];
+            $get_data['nik'] = $nik;
+            $get_data['id_peminta'] = $this->user_session['id'];
+
+            // model('RiwayatPencarian')->insert($get_data);
+        }
 
         $data = [
             'get_data'    => $this->base_route . '/get-data',
             'upload_path' => $this->upload_path,
             'base_route'  => $this->base_route,
             'title'       => 'Cari Temuan',
+            'nik'         => $nik,
             'status'      => $cek_temuan ? 'NIK ditemukan' : 'NIK tidak ditemukan',
-            'data'        => $cek_temuan,
+            'data'        => $cek_temuan ?? [],
         ];
 
         $view['sidebar'] = view('dashboard/sidebar');
         $view['content'] = view($this->base_name . '/cari_temuan', $data);
         return view('dashboard/header', $view);
-    }
-
-    public function prosesCariTemuan()
-    {
-        $rules = [
-            'nik' => "required|numeric",
-        ];
-        if (! $this->validate($rules)) {
-            return redirect()->back()->withInput();
-        } else {
-            $nik = $this->request->getVar('nik', $this->filter);
-            $cek_temuan = $this->base_model->where('nik', $nik)->first();
-            $status = 'NIK tidak ditemukan';
-
-            if ($cek_temuan) {
-                $status = 'NIK ditemukan';
-                $data = [
-                    'id_temuan'  => $cek_temuan['id'],
-                    'id_pelapor' => $cek_temuan['id_pelapor'],
-                    'nama'       => $cek_temuan['nama'],
-                    'rincian'    => $cek_temuan['rincian'],
-                    'tanggal'    => $cek_temuan['tanggal'],
-                    'bukti'      => $cek_temuan['bukti'],
-                ];
-            }
-            $data['nik'] = $nik;
-            $data['id_peminta'] = $this->user_session['id'];
-
-            model('RiwayatPencarian')->insert($data);
-
-            return redirect()->to($this->base_route . "?nik=$nik")
-            ->with('message',
-            "<script>
-                Swal.fire({
-                icon: 'info',
-                title: '$status',
-                showConfirmButton: false,
-                timer: 2500,
-                timerProgressBar: true,
-                })
-            </script>");
-        }
     }
 }

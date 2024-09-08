@@ -137,7 +137,6 @@ $routes->group('perusahaan/lapor-temuan', ['filter' => 'EnsurePerusahaan'], stat
 });
 $routes->group('perusahaan/cari-temuan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
     $routes->get('/', 'Temuan::cariTemuan');
-    $routes->post('proses', 'Temuan::prosesCariTemuan');
 });
 $routes->group('perusahaan/riwayat-pencarian', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
     $routes->get('get-data', 'RiwayatPencarian::getData');
