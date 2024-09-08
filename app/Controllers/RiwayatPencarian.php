@@ -15,9 +15,6 @@ class RiwayatPencarian extends BaseController
         $this->upload_path  = 'assets/uploads/temuan/';
     }
 
-    /*--------------------------------------------------------------
-    # Lapor Temuan
-    --------------------------------------------------------------*/
     public function getData()
     {
         $total_rows = $this->base_model->countAll();

@@ -209,18 +209,19 @@ class Temuan extends BaseController
     public function cariTemuan()
     {
         $nik = $this->request->getVar('nik', FILTER_SANITIZE_NUMBER_INT);
-
         $cek_temuan = $this->base_model->where('nik', $nik)->first();
 
-        if ($cek_temuan) {
-            $get_data = [
-                'id_temuan'  => $cek_temuan['id'],
-                'id_pelapor' => $cek_temuan['id_pelapor'],
-                'nama'       => $cek_temuan['nama'],
-                'rincian'    => $cek_temuan['rincian'],
-                'tanggal'    => $cek_temuan['tanggal'],
-                'bukti'      => $cek_temuan['bukti'],
-            ];
+        if ($nik) {
+            if ($cek_temuan) {
+                $get_data = [
+                    'id_temuan'  => $cek_temuan['id'],
+                    'id_pelapor' => $cek_temuan['id_pelapor'],
+                    'nama'       => $cek_temuan['nama'],
+                    'rincian'    => $cek_temuan['rincian'],
+                    'tanggal'    => $cek_temuan['tanggal'],
+                    'bukti'      => $cek_temuan['bukti'],
+                ];
+            }
             $get_data['nik'] = $nik;
             $get_data['id_peminta'] = $this->user_session['id'];
 

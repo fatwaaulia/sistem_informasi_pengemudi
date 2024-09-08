@@ -99,11 +99,28 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			'type'	=> 'no-collapse',
 		],
 		[
+			'title'	=> 'LANGGANAN',
+			'role'	=> [3],
+			'type'	=> 'heading',
+		],
+		[
 			'title'	=> 'Berlangganan',
 			'icon'	=> 'fa-solid fa-heart-circle-check',
 			'url'	=> base_url($user_role) . '/berlangganan',
 			'role'	=> [3],
 			'type'	=> 'no-collapse',
+		],
+		[
+			'title'	=> 'Riwayat Langganan',
+			'icon'	=> 'fa-solid fa-heart-circle-check',
+			'url'	=> base_url($user_role) . '/riwayat-langganan',
+			'role'	=> [3],
+			'type'	=> 'no-collapse',
+		],
+		[
+			'title'	=> 'TEMUAN',
+			'role'	=> [3],
+			'type'	=> 'heading',
 		],
 		[
 			'title'	=> 'Lapor Temuan',
