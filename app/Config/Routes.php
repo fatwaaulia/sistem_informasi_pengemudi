@@ -142,3 +142,12 @@ $routes->group('perusahaan/riwayat-pencarian', ['filter' => 'EnsurePerusahaan'],
     $routes->get('get-data', 'RiwayatPencarian::getData');
     $routes->get('/', 'RiwayatPencarian::index');
 });
+$routes->group('perusahaan/berlangganan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+    $routes->get('get-data', 'Berlangganan::getData');
+    $routes->get('/', 'Berlangganan::index');
+    $routes->get('new', 'Berlangganan::new');
+    $routes->post('create', 'Berlangganan::create');
+    $routes->get('edit/(:segment)', 'Berlangganan::edit/$1');
+    $routes->post('update/(:segment)', 'Berlangganan::update/$1');
+    $routes->post('delete/(:segment)', 'Berlangganan::delete/$1');
+});
