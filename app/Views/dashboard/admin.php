@@ -26,4 +26,40 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="card mb-3">
+                <div class="card-body text-center" style="border-bottom:4px solid var(--bs-primary); border-radius:var(--border-radius)">
+                    <p class="fw-500 d-block mb-2">
+                        <i class="fa-solid fa-building me-1"></i>
+                        Perusahaan Aktif
+                    </p>
+                    <?php
+                    $users = model('Users')->where([
+                                'id_role' => 3,
+                                'status_pengajuan_perusahaan' => 'Aktif'])
+                            ->findAll();
+                    ?>
+                    <h3 class="mb-0"><?= count($users) ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="card mb-3">
+                <div class="card-body text-center" style="border-bottom:4px solid var(--bs-primary); border-radius:var(--border-radius)">
+                    <p class="fw-500 d-block mb-2">
+                        <i class="fa-solid fa-file me-1"></i>
+                        Pengajuan Perusahaan
+                    </p>
+                    <?php
+                    $pengajuan_perusahaan = model('Users')->where([
+                                'id_role' => 3,
+                                'status_pengajuan_perusahaan' => 'Menunggu Verifikasi'])
+                            ->findAll();
+                    ?>
+                    <h3 class="mb-0"><?= count($pengajuan_perusahaan) ?></h3>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
