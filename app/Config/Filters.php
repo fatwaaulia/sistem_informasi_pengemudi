@@ -35,9 +35,10 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'EnsureIsLogin' => \App\Filters\EnsureIsLogin::class,
-        'EnsureSuperAdmin'  => \App\Filters\EnsureSuperAdmin::class,
-        'EnsureAdmin'       => \App\Filters\EnsureAdmin::class,
-        'EnsurePerusahaan'  => \App\Filters\EnsurePerusahaan::class,
+        'EnsureSuperAdmin'      => \App\Filters\EnsureSuperAdmin::class,
+        'EnsureAdmin'           => \App\Filters\EnsureAdmin::class,
+        'EnsurePerusahaan'      => \App\Filters\EnsurePerusahaan::class,
+        'EnsurePoinPerusahaan'  => \App\Filters\EnsurePoinPerusahaan::class,
         'MinifyViewSource'  => \App\Filters\MinifyViewSource::class,
     ];
 
@@ -76,7 +77,7 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             // 'honeypot',
-            'csrf',
+            // 'csrf',
             // 'invalidchars',
         ],
         'after' => [

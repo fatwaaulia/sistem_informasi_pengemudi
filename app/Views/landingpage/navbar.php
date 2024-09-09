@@ -25,25 +25,16 @@ $uri->setSilent(true);
 
 <nav class="navbar navbar-expand-lg bg-light position-absolute w-100" style="z-index:100">
     <div class="container">
-        <a class="navbar-brand" href="<?= base_url() ?>">
+        <a class="navbar-brand d-flex align-items-center" href="<?= base_url() ?>">
             <img src="<?= $logo ?>" style="height:45px" alt="<?= $app_settings['nama_aplikasi'] ?>">
+            <h4 class="ms-2">SLIP</h4>
         </a>
         <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars my-1"></i>
         </button>
         <div class="collapse navbar-collapse justify-content-between py-3 py-md-0" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">Beranda</a>
-                <a class="nav-link <?= ($uri->getSegment(1) == 'berita') ? 'nav-active' : '' ?>" href="<?= base_url('berita') ?>">Berita</a>
-                <li class="nav-item dropdown">
-                    <a class="nav-link <?= in_array($uri->getSegment(1), ['event', 'calendar']) ? 'nav-active' : '' ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Activities <i class="fa-solid fa-angle-down"></i>
-                    </a>
-                    <ul class="dropdown-menu border-0">
-                        <li><a class="dropdown-item text-nowrap <?= ($uri->getSegment(1) == 'event') ? 'nav-active' : '' ?>" href="<?= base_url('event') ?>">Event</a></li>
-                        <li><a class="dropdown-item text-nowrap <?= ($uri->getSegment(1) == 'calendar') ? 'nav-active' : '' ?>" href="<?= base_url('calendar') ?>">Calender</a></li>
-                    </ul>
-                </li>
+                <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">HOME</a>
             </div>
             <div class="navbar-nav">
                 <?php 

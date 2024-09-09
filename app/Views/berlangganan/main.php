@@ -81,18 +81,24 @@
                                 <tr>
                                     <td>
                                         <h5><?= $v['nama_paket'] ?></h5>
-                                        <?= $v['poin'] ?> Poin
-                                    </td>
-                                    <td>Rp <?= number_format($v['harga_promo'], 0, ',', '.') ?></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end">
-                                        Pajak <br>
-                                        Total
+                                        <?= $v['poin'] ?> Poin <br>
+                                        <span class="text-secondary">
+                                            <?= $v['deskripsi'] ?>
+                                        </span>
                                     </td>
                                     <td>
-                                        Rp 0 <br>
-                                        <span class="fw-600">Rp <?= number_format($v['harga_promo'], 0, ',', '.') ?></span>
+                                        <?php if ($v['harga_normal'] > $v['harga_promo']) : ?>
+                                        <small class="text-decoration-line-through text-secondary">
+                                            Rp <?= number_format($v['harga_normal'], 0, ',', '.') ?>
+                                        </small> <br>
+                                        <?php endif; ?>
+                                        Rp <?= number_format($v['harga_promo'], 0, ',', '.') ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end">Total</td>
+                                    <td>
+                                        <h5 class="fw-600">Rp <?= number_format($v['harga_promo'], 0, ',', '.') ?></h5>
                                     </td>
                                 </tr>
                             </tbody>
@@ -100,7 +106,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary">Bayar Sekarang</button>
+                        <form action="<?= base_url('perusahaan/transaksi-langganan/create') ?>" method="post">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="id_paket" value="<?= $v['id'] ?>">
+                            <button type="submit" class="btn btn-primary">Berlangganan Sekarang</button>
+                        </form>
                     </div>
                 </div>
             </div>

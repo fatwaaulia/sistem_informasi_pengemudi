@@ -12,11 +12,13 @@
                     <thead>
                         <tr>
                             <th>No.</th>
+                            <th>Kode</th>
                             <th>Tgl. Transaksi</th>
                             <th>Status</th>
-                            <th>Nama Paket</th>
+                            <th>Paket</th>
                             <th>Harga</th>
                             <th>Poin</th>
+                            <th>Opsi</th>
                         </tr>
                     </thead>
                 </table>
@@ -35,38 +37,22 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollX: true,
         columns: [
             { data: 'no_urut' },
+            { data: 'kode' },
             { data: 'created_at' },
-            { data: null, render: renderNIK },
-            { data: 'nama' },
-            { data: 'rincian' },
-            { data: 'tanggal' },
-            { data: null, render: renderBukti },
+            { data: 'status' },
+            { data: 'nama_paket' },
+            { data: 'harga_promo' },
+            { data: 'poin' },
+            { data: null, render: renderOpsi },
         ],
     });
 });
 
-function renderNIK(data) {
-    return `<span class="${data.id_temuan != null ? 'text-success' : 'text-danger'}">${data.nik}</span>`;
-}
-
-function renderBukti(data) {
+function renderOpsi(data) {
+    let route_edit_data = `<?= $base_route . '/detail?code=' ?>${data.kode}`;
     return `
-    <a data-fancybox="bukti" href="${data.bukti}">
-        <img src="${data.bukti}" class="wh-40 img-style" loading="lazy">
+    <a href="${route_edit_data}" class="me-2" title="edit">
+        <i class="fa-solid fa-circle-info fa-lg"></i>
     </a>`;
 }
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
-<script>
-Fancybox.bind("[data-fancybox]", {
-    Toolbar: {
-        display: {
-            left: ['infobar'],
-            middle: [''],
-            right: ['close'],
-        },
-    },
-});
 </script>

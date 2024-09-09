@@ -15,6 +15,9 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 	</div>
 	<nav class="header-nav ms-auto">
 		<ul class="d-flex align-items-center">
+			<div class="me-3 fw-600">
+				<label><?= $user_session['id_role'] == 3 ? $user_session['poin'] : '-'; ?> Poin</label>
+			</div>
 			<label for="darkMode" class="me-2">
 				<i class="fa-solid fa-circle-half-stroke"></i>
 			</label>

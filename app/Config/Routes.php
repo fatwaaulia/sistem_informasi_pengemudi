@@ -31,11 +31,7 @@ $routes->get('/', 'Landingpage::beranda');
 /*--------------------------------------------------------------
   # API
 --------------------------------------------------------------*/
-// $routes->post('webhook/xendit', function() {
-    // $json = file_get_contents('php://input');
-    // echo $json;
-    // echo 'oke';
-// });
+$routes->post('webhook/xendit', 'Webhook::xendit');
 
 /*--------------------------------------------------------------
   # Autentikasi
@@ -44,11 +40,6 @@ $routes->get('/', 'Landingpage::beranda');
 $routes->get('login', 'Auth::login');
 $routes->post('login-process', 'Auth::loginProcess');
 $routes->get('logout', 'Auth::logout');
-// lupa password
-$routes->get('forgot-password', 'Auth::forgotPassword');
-$routes->post('forgot-password-process', 'Auth::forgotPasswordProcess');
-$routes->get('reset-password/(:segment)', 'Auth::resetPassword/$1');
-$routes->post('reset-password-process/(:segment)', 'Auth::resetPasswordProcess/$1');
 // register
 $routes->get('register', 'Auth::register');
 $routes->post('register-process', 'Auth::registerProcess');
@@ -152,7 +143,7 @@ $routes->group('perusahaan/lapor-temuan', ['filter' => 'EnsurePerusahaan'], stat
     $routes->post('update/(:segment)', 'Temuan::update/$1');
     $routes->post('delete/(:segment)', 'Temuan::delete/$1');
 });
-$routes->group('perusahaan/cari-temuan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+$routes->group('perusahaan/cari-temuan', ['filter' => ['EnsurePerusahaan', 'EnsurePoinPerusahaan']], static function ($routes) {
     $routes->get('/', 'Temuan::cariTemuan');
 });
 $routes->group('perusahaan/riwayat-pencarian', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
@@ -171,4 +162,6 @@ $routes->group('perusahaan/berlangganan', ['filter' => 'EnsurePerusahaan'], stat
 $routes->group('perusahaan/transaksi-langganan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
     $routes->get('get-data', 'TransaksiLangganan::getData');
     $routes->get('/', 'TransaksiLangganan::index');
+    $routes->post('create', 'TransaksiLangganan::create');
+    $routes->get('detail', 'TransaksiLangganan::detail');
 });

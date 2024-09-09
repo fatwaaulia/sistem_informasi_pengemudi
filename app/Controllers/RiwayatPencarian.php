@@ -32,8 +32,6 @@ class RiwayatPencarian extends BaseController
         foreach ($data as $key => $v) {
             $data[$key]['no_urut'] = $offset + $key + 1;
             $data[$key]['id'] = encode($v['id']);
-            $data[$key]['bukti'] = $v['bukti'] ? base_url($this->upload_path) . $v['bukti'] : base_url('assets/uploads/default.png');
-            $data[$key]['tanggal'] = $v['tanggal'] ? date('d-m-Y', strtotime($v['tanggal'])) : '';
             $data[$key]['created_at'] = date('d-m-Y H:i:s', strtotime($v['created_at']));
         }
 

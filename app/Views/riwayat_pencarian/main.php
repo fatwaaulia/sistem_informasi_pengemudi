@@ -38,23 +38,26 @@ document.addEventListener('DOMContentLoaded', function() {
             { data: 'no_urut' },
             { data: 'created_at' },
             { data: null, render: renderNIK },
-            { data: 'nama' },
-            { data: 'rincian' },
-            { data: 'tanggal' },
+            { data: null, render: data => (data.id_temuan) ? JSON.parse(data.nama).join('<br>') : '' },
+            { data: null, render: data => (data.id_temuan) ? JSON.parse(data.rincian).join('<br>') : '' },
+            { data: null, render: data => (data.id_temuan) ? JSON.parse(data.tanggal).join('<br>') : '' },
             { data: null, render: renderBukti },
         ],
     });
 });
 
 function renderNIK(data) {
-    return `<span class="${data.id_temuan != null ? 'text-success' : 'text-danger'}">${data.nik}</span>`;
+    return `<span class="${data.id_temuan != '' ? 'text-success' : 'text-danger'}">${data.nik}</span>`;
 }
 
 function renderBukti(data) {
-    return `
-    <a data-fancybox="bukti" href="${data.bukti}">
-        <img src="${data.bukti}" class="wh-40 img-style" loading="lazy">
-    </a>`;
+    if (!data.id_temuan) return '';
+    let dir = '<?= base_url() ?>assets/uploads/temuan/';
+
+    return JSON.parse(data.bukti).map(gambar => `
+    <a data-fancybox="bukti" href="${dir + gambar}">
+        <img src="${dir + gambar}" class="wh-40 img-style" loading="lazy">
+    </a>`);
 }
 </script>
 
