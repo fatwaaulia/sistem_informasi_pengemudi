@@ -7,7 +7,18 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <div class="alert alert-primary" role="alert">
+            <?php
+            $alert = '';
+            if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') {
+                $alert = 'alert-primary';
+            } elseif ($data['status_pengajuan_perusahaan'] == 'Aktif') {
+                $alert = 'alert-success';
+            } elseif ($data['status_pengajuan_perusahaan'] == 'Ditolak') {
+                $action = $base_route . '/update';
+                $alert = 'alert-danger';
+            }
+            ?>
+            <div class="alert <?= $alert ?>" role="alert">
                 Status : <b><?= $data['status_pengajuan_perusahaan'] ?></b> <br>
                 Tgl. Pengajuan : <?= date('d-m-Y H:i:s', strtotime($data['submission_at'])) ?> <br>
             </div>

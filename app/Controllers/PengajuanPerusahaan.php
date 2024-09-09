@@ -24,12 +24,18 @@ class PengajuanPerusahaan extends BaseController
         $limit = $this->request->getVar('length') ?? $total_rows;
         $offset = $this->request->getVar('start') ?? 0;
 
-        $data = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])->findAll($limit, $offset);
+        $data = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])
+                ->orderBy('submission_at ASC')
+                ->findAll($limit, $offset);
 
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
-            $data       = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])->like('nama_perusahaan', $search)->findAll($limit, $offset);
-            $total_rows = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])->like('nama_perusahaan', $search)->countAllResults();
+            $data       = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])
+                            ->orderBy('submission_at ASC')
+                            ->like('nama_perusahaan', $search)->findAll($limit, $offset);
+            $total_rows = $this->base_model->whereIn('status_pengajuan_perusahaan', ['Menunggu Verifikasi', 'Ditolak'])
+                            ->orderBy('submission_at ASC')
+                            ->like('nama_perusahaan', $search)->countAllResults();
         }
 
         foreach ($data as $key => $v) {
@@ -88,11 +94,22 @@ class PengajuanPerusahaan extends BaseController
             return redirect()->back()->withInput();
         } else {
             $status_pengajuan_perusahaan = $this->request->getVar('status_pengajuan_perusahaan', $this->filter);
+
+            if ($status_pengajuan_perusahaan == 'Ditolak') {
+                $dokumen_akta_perusahaan_filename = '';
+                $dokumen_akta_perusahaan = $this->upload_path . 'dokumen_akta_perusahaan/' . $find_data['dokumen_akta_perusahaan'];
+                if (is_file($dokumen_akta_perusahaan)) unlink($dokumen_akta_perusahaan);
+
+            }
+            
             $checked_at = null;
             if ($status_pengajuan_perusahaan == 'Aktif') {
+                $dokumen_akta_perusahaan_filename = $find_data['dokumen_akta_perusahaan'];
                 $checked_at = date('Y-m-d H:i:s');
             }
+
             $data = [
+                'dokumen_akta_perusahaan'     => $dokumen_akta_perusahaan_filename,
                 'status_pengajuan_perusahaan' => $status_pengajuan_perusahaan,
                 'checked_at'                  => $checked_at,
             ];

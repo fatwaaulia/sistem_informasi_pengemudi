@@ -9,16 +9,23 @@
         <div class="col-lg-6">
             <?php
             $pengajuan = false;
-            if ($data['status_pengajuan_perusahaan'] != 'Pending') :
+            $alert = '';
+            $action = '#';
+
+            if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') {
                 $pengajuan = true;
-                $alert = '';
-                if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') {
-                    $alert = 'alert-primary';
-                } elseif ($data['status_pengajuan_perusahaan'] == 'Aktif') {
-                    $alert = 'alert-success';
-                } elseif ($data['status_pengajuan_perusahaan'] == 'Ditolak') {
-                    $alert = 'alert-danger';
-                }
+                $action = $base_route . '/update';
+                $alert = 'alert-primary';
+            } elseif ($data['status_pengajuan_perusahaan'] == 'Aktif') {
+                $pengajuan = true;
+                $action = '#';
+                $alert = 'alert-success';
+            } elseif ($data['status_pengajuan_perusahaan'] == 'Ditolak') {
+                $action = $base_route . '/update';
+                $alert = 'alert-danger';
+            }
+
+            if ($data['status_pengajuan_perusahaan'] != 'Pending') :
             ?>
             <div class="alert <?= $alert ?>" role="alert">
                 Status : <b><?= $data['status_pengajuan_perusahaan'] ?></b> <br>
@@ -34,7 +41,7 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-body">
-                    <form action="<?= $base_route . '/update/' ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= $base_route . '/update' ?>" method="post" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                         <div class="mb-2">
                             <span class="fw-600">DATA PERUSAHAAN</span>
@@ -126,7 +133,15 @@
                             </div>
                         </div>
                         <?php if (!$pengajuan) : ?>
-                        <button type="submit" class="btn btn-primary mt-3 float-end">Ajukan Perusahaan</button>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="memastikanDataBenar" required>
+                                <label class="form-check-label" for="memastikanDataBenar">
+                                    Saya memastikan data perusahaan diatas sudah benar.
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3 float-end">Ajukan <?= $data['status_pengajuan_perusahaan'] == 'Ditolak' ? 'Ulang' : 'Perusahaan'; ?></button>
                         <?php endif; ?>
                     </form>
                 </div>

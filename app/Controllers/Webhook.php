@@ -61,7 +61,6 @@ class Webhook extends BaseController
                     'invoice_status' => $response['status'],
                     'paid_at' => $response['paid_at'] ?? null,
                 ];
-
                 model('TransaksiLangganan')->update($cek_transaksi['id'], $data);
 
                 // tambah poin jika sudah terbayar
