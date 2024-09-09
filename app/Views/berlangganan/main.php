@@ -55,7 +55,8 @@
                             <h2 class="fw-600 mb-0"><?= $v['poin'] ?></h2>&nbsp;Poin
                         </div>
                     </div>
-                    <div class="mt-auto">
+                    <div class="mt-auto text-center">
+                        <small>*Berlaku hingga 1 tahun</small>
                         <button class="btn btn-primary w-100 mt-3" data-bs-toggle="modal" data-bs-target="#berlangganan<?= $key+1 ?>">Langganan</button>
                     </div>
                 </div>
@@ -85,6 +86,8 @@
                                         <span class="text-secondary">
                                             <?= $v['deskripsi'] ?>
                                         </span>
+                                        <br>
+                                        <small>*Berlaku hingga 1 tahun</small>
                                     </td>
                                     <td>
                                         <?php if ($v['harga_normal'] > $v['harga_promo']) : ?>

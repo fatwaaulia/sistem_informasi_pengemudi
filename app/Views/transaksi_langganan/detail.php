@@ -46,6 +46,8 @@
                                     <span class="text-secondary">
                                         <?= $transaksi_langganan['deskripsi'] ?>
                                     </span>
+                                    <br>
+                                    <small>*Berlaku hingga 1 tahun</small>
                                 </td>
                                 <td>
                                     <?php if ($transaksi_langganan['harga_normal'] > $transaksi_langganan['harga_promo']) : ?>

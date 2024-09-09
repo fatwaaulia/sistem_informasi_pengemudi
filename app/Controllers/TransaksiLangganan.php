@@ -22,12 +22,12 @@ class TransaksiLangganan extends BaseController
         $offset = $this->request->getVar('start') ?? 0;
 
         $user_session = model('Users')->where('id', session()->get('id_user'))->first();
-        $data = $this->base_model->where('id_perusahaan', $user_session['id'])->findAll($limit, $offset);
+        $data = $this->base_model->where('id_perusahaan', $user_session['id'])->orderBy('id DESC')->findAll($limit, $offset);
         
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
-            $data       = $this->base_model->like('nama', $search)->findAll($limit, $offset);
-            $total_rows = $this->base_model->like('nama', $search)->countAllResults();
+            $data       = $this->base_model->like('nama', $search)->orderBy('id DESC')->findAll($limit, $offset);
+            $total_rows = $this->base_model->like('nama', $search)->orderBy('id DESC')->countAllResults();
         }
 
         foreach ($data as $key => $v) {
@@ -194,8 +194,9 @@ class TransaksiLangganan extends BaseController
                 'invoice_status' => $response['status'],
                 'expired_at'     => $response['expiry_date'],
                 'invoice_received'  => json_encode($response, true),
-                'invoice_sent'   => json_encode($invoice_sent, true),
-                'paid_at'        => null,
+                'invoice_sent'      => json_encode($invoice_sent, true),
+                'paid_at'           => null,
+                'layanan_berakhir'  => date('Y-m-d H:i:s', strtotime('+1 year')),
             ];
     
             $this->base_model->insert($data);

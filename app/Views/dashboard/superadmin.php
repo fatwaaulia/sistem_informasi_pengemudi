@@ -31,10 +31,15 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
             <div class="card mb-3">
                 <div class="card-body text-center" style="border-bottom:4px solid var(--bs-primary); border-radius:var(--border-radius)">
                     <p class="fw-500 d-block mb-2">
-                        <i class="fa-solid fa-user-group me-1"></i>
-                        Total Pengguna
+                        <i class="fa-solid fa-building me-1"></i>
+                        Total Perusahaan Aktif
                     </p>
-                    <?php $users = model('Users')->findAll() ?>
+                    <?php
+                    $users = model('Users')->where([
+                                'id_role' => 3,
+                                'status_pengajuan_perusahaan' => 'Aktif'])
+                            ->findAll();
+                    ?>
                     <h3 class="mb-0"><?= count($users) ?></h3>
                 </div>
             </div>
