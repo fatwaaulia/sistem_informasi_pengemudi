@@ -134,7 +134,7 @@ $routes->group('perusahaan/pengajuan-perusahaan', ['filter' => 'EnsurePerusahaan
     $routes->get('/', 'PengajuanPerusahaan::kirimPengajuan');
     $routes->post('update', 'PengajuanPerusahaan::prosesKirimPengajuan');
 });
-$routes->group('perusahaan/lapor-temuan', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
+$routes->group('perusahaan/lapor-temuan', ['filter' => ['EnsurePerusahaan', 'EnsurePoinPerusahaan']], static function ($routes) {
     $routes->get('get-data', 'Temuan::getData');
     $routes->get('/', 'Temuan::index');
     $routes->get('new', 'Temuan::new');

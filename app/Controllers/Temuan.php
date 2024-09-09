@@ -226,7 +226,13 @@ class Temuan extends BaseController
             $get_data['nik'] = $nik;
             $get_data['id_peminta'] = $this->user_session['id'];
 
-            // model('RiwayatPencarian')->insert($get_data);
+            model('RiwayatPencarian')->insert($get_data);
+
+            $user_session = model('Users')->where('id', session()->get('id_user'))->first();
+            $data = [
+                'poin' => $user_session['poin'] - 1, 
+            ];
+            model('Users')->update($user_session['id'], $data);
         }
 
         $data = [
