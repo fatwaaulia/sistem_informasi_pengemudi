@@ -60,6 +60,41 @@ class TransaksiLangganan extends BaseController
 
     public function create()
     {
+        $id_perusahaan = $this->user_session['id'];
+
+        $cek_log = model('TransaksiLogs')->where('id_perusahaan', $id_perusahaan)->orderBy('id DESC')->first();
+
+        // Misalkan $cek_log['created_at'] adalah string tanggal/waktu, misalnya '2024-09-09 12:00:00'
+        $created_at = $cek_log['created_at'];
+
+        // Mengubah waktu `created_at` ke timestamp
+        $created_at_timestamp = strtotime($created_at);
+
+        // Mengambil timestamp waktu sekarang
+        $now_timestamp = time();
+
+        // Menghitung selisih waktu dalam detik
+        $time_difference = $now_timestamp - $created_at_timestamp;
+        
+        if ($time_difference <= 60) {
+            return redirect()->to(base_url() . 'perusahaan/berlangganan')
+            ->with('message',
+            "<script>
+                Swal.fire({
+                icon: 'error',
+                title: 'Anda terlalu cepat melakukan transaksi. Silakan lakukan transaksi ".(60-$time_difference)." detik lagi.',
+                showConfirmButton: false,
+                timer: 2500,
+                timerProgressBar: true,
+                })
+            </script>");
+        }
+
+        $data = [
+            'id_perusahaan'  => $id_perusahaan,
+        ];
+        model('TransaksiLogs')->insert($data);
+
         for (;;) {
             $random_string = strtoupper(random_string('alnum', 6));
             $cek_kode = $this->base_model->getWhere(['kode' => $random_string])->getNumRows();
@@ -69,7 +104,6 @@ class TransaksiLangganan extends BaseController
             }
         }
 
-        $id_perusahaan = $this->user_session['id'];
         $id_paket = $this->request->getVar('id_paket', $this->filter);
         $paket_langganan = model('PaketLangganan')->find($id_paket);
 
@@ -142,7 +176,6 @@ class TransaksiLangganan extends BaseController
 
         $response = json_decode($response, true);
 
-        dd($response);
         if (isset($response['id'])) {
             $data = [
                 'id_perusahaan'  => $id_perusahaan,
