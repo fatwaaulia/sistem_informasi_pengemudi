@@ -142,7 +142,8 @@ class TransaksiLangganan extends BaseController
 
         $response = json_decode($response, true);
 
-        if ($response['id']) {
+        dd($response);
+        if (isset($response['id'])) {
             $data = [
                 'id_perusahaan'  => $id_perusahaan,
                 'id_paket'       => $id_paket,

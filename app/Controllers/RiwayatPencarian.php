@@ -26,8 +26,10 @@ class RiwayatPencarian extends BaseController
         
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
-            $data       = $this->base_model->like('nama', $search)->findAll($limit, $offset);
-            $total_rows = $this->base_model->like('nama', $search)->countAllResults();
+            $data       = $this->base_model->like('nik', $search)
+                            ->where('id_peminta', $user_session['id'])->findAll($limit, $offset);
+            $total_rows = $this->base_model->like('nik', $search)
+                            ->where('id_peminta', $user_session['id'])->countAllResults();
         }
 
         foreach ($data as $key => $v) {

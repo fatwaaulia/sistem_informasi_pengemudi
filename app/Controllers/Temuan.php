@@ -29,8 +29,10 @@ class Temuan extends BaseController
         
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
-            $data       = $this->base_model->like('nama', $search)->findAll($limit, $offset);
-            $total_rows = $this->base_model->like('nama', $search)->countAllResults();
+            $data       = $this->base_model->like('nik', $search)
+                            ->where('id_pelapor', session()->get('id_user'))->findAll($limit, $offset);
+            $total_rows = $this->base_model->like('nik', $search)
+                            ->where('id_pelapor', session()->get('id_user'))->countAllResults();
         }
 
         foreach ($data as $key => $v) {
@@ -230,8 +232,10 @@ class Temuan extends BaseController
 
             $user_session = model('Users')->where('id', session()->get('id_user'))->first();
             $data = [
-                'poin' => $user_session['poin'] - 1, 
+                'poin'        => $user_session['poin'] - 1,
+                'poin_keluar' => $user_session['poin_keluar'] + 1,
             ];
+
             model('Users')->update($user_session['id'], $data);
         }
 

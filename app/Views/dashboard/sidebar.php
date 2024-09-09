@@ -16,8 +16,8 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 	<nav class="header-nav ms-auto">
 		<ul class="d-flex align-items-center">
 			<?php if ($user_session['id_role'] == 3) : ?>
-			<div class="me-3 fw-600">
-				<label><?= $user_session['poin'] ?> Poin</label>
+			<div class="me-3">
+				<label class="fw-600"><?= $user_session['poin'] ?> Poin</label>
 			</div>
 			<?php endif; ?>
 			<label for="darkMode" class="me-2">

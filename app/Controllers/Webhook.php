@@ -72,7 +72,8 @@ class Webhook extends BaseController
 
                         $perusahaan = model('Users')->where('id', $transaksi_langganan['id_perusahaan'])->first();
                         $data = [
-                            'poin' => $perusahaan['poin'] + $transaksi_langganan['poin'],
+                            'poin'       => $perusahaan['poin'] + $transaksi_langganan['poin'],
+                            'poin_masuk' => $perusahaan['poin_masuk'] + $transaksi_langganan['poin'],
                         ];
                         model('Users')->update($perusahaan['id'], $data);
                     }
