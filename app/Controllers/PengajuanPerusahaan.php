@@ -58,7 +58,7 @@ class PengajuanPerusahaan extends BaseController
             'get_data'    => $this->base_route . '/get-data',
             'upload_path' => $this->upload_path,
             'base_route'  => $this->base_route,
-            'title'       => ucwords(str_replace('_', ' ', $this->base_name)),
+            'title'       => 'Pengajuan Perusahaan',
         ];
 
         $view['sidebar'] = view('dashboard/sidebar');
@@ -250,6 +250,9 @@ class PengajuanPerusahaan extends BaseController
             'no_ponsel'     => 'required',
             'nama_perusahaan'         => "required|is_unique[$this->base_name.nama_perusahaan,id,$id]",
             'alamat_perusahaan'       => 'required',
+            'negara_perusahaan'       => 'required',
+            'kota_perusahaan'         => 'required',
+            'kode_pos_perusahaan'     => 'required',
             'no_telepon_perusahaan'   => "required|is_unique[$this->base_name.no_telepon_perusahaan,id,$id]",
             'email_perusahaan'        => "required|valid_email|is_unique[users.email_perusahaan,id,$id]",
             'no_akta_perusahaan'      => "required|is_unique[$this->base_name.no_akta_perusahaan,id,$id]",
@@ -274,6 +277,9 @@ class PengajuanPerusahaan extends BaseController
                 'no_ponsel'     => $this->request->getVar('no_ponsel', $this->filter),
                 'nama_perusahaan'       => $this->request->getVar('nama_perusahaan', $this->filter),
                 'alamat_perusahaan'     => $this->request->getVar('alamat_perusahaan', $this->filter),
+                'negara_perusahaan'     => $this->request->getVar('negara_perusahaan', $this->filter),
+                'kota_perusahaan'       => $this->request->getVar('kota_perusahaan', $this->filter),
+                'kode_pos_perusahaan'   => $this->request->getVar('kode_pos_perusahaan', $this->filter),
                 'no_telepon_perusahaan' => $this->request->getVar('no_telepon_perusahaan', $this->filter),
                 'email_perusahaan'      => $this->request->getVar('email_perusahaan', $this->filter),
                 'no_akta_perusahaan'    => $this->request->getVar('no_akta_perusahaan', $this->filter),

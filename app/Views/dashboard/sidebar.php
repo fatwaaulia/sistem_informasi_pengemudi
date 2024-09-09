@@ -11,7 +11,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 		<a href="<?= base_url($user_role) . '/dashboard' ?>" class="logo d-flex align-items-center">
 			<img src="<?= $logo ?>">
 		</a>
-		<i class="fa-solid fa-bars toggle-sidebar-btn" id="toggleSidebarBtn"></i>
+		<i class="fa-solid fa-bars toggle-sidebar-btn" style="font-size:14px!important" id="toggleSidebarBtn"></i>
 	</div>
 	<nav class="header-nav ms-auto">
 		<ul class="d-flex align-items-center">
@@ -110,14 +110,14 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 		],
 		[
 			'title'	=> 'Berlangganan',
-			'icon'	=> 'fa-solid fa-heart-circle-check',
+			'icon'	=> 'fa-regular fa-bell',
 			'url'	=> base_url($user_role) . '/berlangganan',
 			'role'	=> [3],
 			'type'	=> 'no-collapse',
 		],
 		[
 			'title'	=> 'Transaksi Langganan',
-			'icon'	=> 'fa-solid fa-dollar-sign',
+			'icon'	=> 'fa-solid fa-money-bills',
 			'url'	=> base_url($user_role) . '/transaksi-langganan',
 			'role'	=> [3],
 			'type'	=> 'no-collapse',
@@ -143,7 +143,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 		],
 		[
 			'title'	=> 'Riwayat Pencarian',
-			'icon'	=> 'fa-solid fa-magnifying-glass',
+			'icon'	=> 'fa-solid fa-list-check',
 			'url'	=> base_url($user_role) . '/riwayat-pencarian',
 			'role'	=> [3],
 			'type'	=> 'no-collapse',

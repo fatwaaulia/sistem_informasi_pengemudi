@@ -87,7 +87,7 @@ class Users extends BaseController
             'passconf'      => 'required|min_length[8]|matches[password]',
             'jenis_kelamin' => 'required',
             'foto_profil'   => 'max_size[foto_profil,1024]|ext_in[foto_profil,png,jpg,jpeg]|mime_in[foto_profil,image/png,image/jpg,image/jpeg]|is_image[foto_profil]',
-            'no_ponsel'    => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_ponsel]",
+            'no_ponsel'    => "permit_empty|numeric|min_length[10]|max_length[15]",
         ];
         if (! $this->validate($rules)) {
             return redirect()->back()->withInput();
@@ -154,7 +154,7 @@ class Users extends BaseController
             'jenis_kelamin' => 'required',
             'foto_profil'   => 'max_size[foto_profil,1024]|ext_in[foto_profil,png,jpg,jpeg]|mime_in[foto_profil,image/png,image/jpg,image/jpeg]|is_image[foto_profil]',
             'email'         => "required|valid_email|is_unique[$this->base_name.email,id,$id]",
-            'no_ponsel'     => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_ponsel,id,$id]",
+            'no_ponsel'     => "permit_empty|numeric|min_length[10]|max_length[15]",
         ];
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput();
@@ -266,8 +266,7 @@ class Users extends BaseController
             'nama'          => 'required',
             'jenis_kelamin' => 'required',
             'foto_profil'   => 'max_size[foto_profil,1024]|ext_in[foto_profil,png,jpg,jpeg]|mime_in[foto_profil,image/png,image/jpg,image/jpeg]|is_image[foto_profil]',
-            'email'         => "required|valid_email|is_unique[$this->base_name.email,id,$id]",
-            'no_ponsel'     => "permit_empty|numeric|min_length[10]|max_length[15]|is_unique[$this->base_name.no_ponsel,id,$id]",
+            'no_ponsel'     => "permit_empty|numeric|min_length[10]|max_length[15]",
         ];
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput();
@@ -286,7 +285,6 @@ class Users extends BaseController
                 'nama'          => ucwords($this->request->getVar('nama', $this->filter)),
                 'jenis_kelamin' => $this->request->getVar('jenis_kelamin', $this->filter),
                 'foto_profil'   => $foto_profil_name,
-                'email'         => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
                 'no_ponsel'     => $this->request->getVar('no_ponsel', $this->filter),
             ];
 

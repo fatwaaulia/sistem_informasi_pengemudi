@@ -10,19 +10,23 @@
             <?php
             $pengajuan = false;
             $alert = '';
+            $text_alert = '';
             $action = '#';
 
             if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') {
                 $pengajuan = true;
                 $action = $base_route . '/update';
-                $alert = 'alert-primary';
+                $alert = 'alert-warning';
+                $btn_alert = 'btn-warning';
             } elseif ($data['status_pengajuan_perusahaan'] == 'Aktif') {
                 $pengajuan = true;
                 $action = '#';
                 $alert = 'alert-success';
+                $btn_alert = 'btn-success';
             } elseif ($data['status_pengajuan_perusahaan'] == 'Ditolak') {
                 $action = $base_route . '/update';
                 $alert = 'alert-danger';
+                $btn_alert = 'btn-danger';
             }
 
             if ($data['status_pengajuan_perusahaan'] != 'Pending') :
@@ -30,13 +34,14 @@
             <div class="alert <?= $alert ?>" role="alert">
                 Status : <b><?= $data['status_pengajuan_perusahaan'] ?></b> <br>
                 Tgl. Pengajuan : <?= date('d-m-Y H:i:s', strtotime($data['submission_at'])) ?> <br>
-                Tgl. Diterima : <?= $data['checked_at'] ? date('d-m-Y H:i:s', strtotime($data['checked_at'])) : '-' ?> <br>
-                <?php if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') : ?>
-                <a href="https://wa.me/6285526250131" target="_blank">
-                    <i class="fa-solid fa-phone me-1 mt-2"></i>
-                    Hubungi Admin
-                </a>
-                <?php endif; ?>
+                Tgl. Diterima : <?= $data['checked_at'] ? date('d-m-Y H:i:s', strtotime($data['checked_at'])) : '-' ?>
+                
+                <div class="mt-2">
+                    <a href="https://wa.me/6285526250131" class="btn <?= $btn_alert ?>" target="_blank">
+                        <i class="fa-solid fa-phone me-1 mt-2"></i>
+                        Hubungi Admin
+                    </a>
+                </div>
             </div>
             <?php endif; ?>
             <div class="card">
@@ -61,8 +66,29 @@
                             </div>
                         </div>
                         <div class="mb-3">
+                            <label for="negara_perusahaan" class="form-label">Negara Perusahaan</label>
+                            <input type="text" class="form-control <?= validation_show_error('negara_perusahaan') ? "is-invalid" : '' ?>" id="negara_perusahaan" name="negara_perusahaan" value="<?= old('negara_perusahaan') ?? $data['negara_perusahaan'] ?>" placeholder="masukkan negara perusahaan" <?= $pengajuan ? 'disabled' : '' ?>>
+                            <div class="invalid-feedback">
+                                <?= cutString(validation_show_error('negara_perusahaan')) ?>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kota_perusahaan" class="form-label">Kota Perusahaan</label>
+                            <input type="text" class="form-control <?= validation_show_error('kota_perusahaan') ? "is-invalid" : '' ?>" id="kota_perusahaan" name="kota_perusahaan" value="<?= old('kota_perusahaan') ?? $data['kota_perusahaan'] ?>" placeholder="masukkan kota perusahaan" <?= $pengajuan ? 'disabled' : '' ?>>
+                            <div class="invalid-feedback">
+                                <?= cutString(validation_show_error('kota_perusahaan')) ?>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kode_pos_perusahaan" class="form-label">Kode Pos Perusahaan</label>
+                            <input type="text" class="form-control <?= validation_show_error('kode_pos_perusahaan') ? "is-invalid" : '' ?>" id="kode_pos_perusahaan" name="kode_pos_perusahaan" value="<?= old('kode_pos_perusahaan') ?? $data['kode_pos_perusahaan'] ?>" placeholder="masukkan kode pos perusahaan" <?= $pengajuan ? 'disabled' : '' ?>>
+                            <div class="invalid-feedback">
+                                <?= cutString(validation_show_error('kode_pos_perusahaan')) ?>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label for="no_telepon_perusahaan" class="form-label">No. Telepon Perusahaan</label>
-                            <input type="number" class="form-control <?= validation_show_error('no_telepon_perusahaan') ? "is-invalid" : '' ?>" id="no_telepon_perusahaan" name="no_telepon_perusahaan" value="<?= old('no_telepon_perusahaan') ?? $data['no_telepon_perusahaan'] ?>" placeholder="08xx" <?= $pengajuan ? 'disabled' : '' ?>>
+                            <input type="number" class="form-control <?= validation_show_error('no_telepon_perusahaan') ? "is-invalid" : '' ?>" id="no_telepon_perusahaan" name="no_telepon_perusahaan" value="<?= old('no_telepon_perusahaan') ?? $data['no_telepon_perusahaan'] ?>" placeholder="6285xxx" <?= $pengajuan ? 'disabled' : '' ?>>
                             <div class="invalid-feedback">
                                 <?= cutString(validation_show_error('no_telepon_perusahaan')) ?>
                             </div>
@@ -120,7 +146,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="no_ponsel" class="form-label">No. Ponsel PIC</label>
-                            <input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?? $data['no_ponsel'] ?>" placeholder="08xx" <?= $pengajuan ? 'disabled' : '' ?>>
+                            <input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?? $data['no_ponsel'] ?>" placeholder="6285xxx" <?= $pengajuan ? 'disabled' : '' ?>>
                             <div class="invalid-feedback">
                                 <?= cutString(validation_show_error('no_ponsel')) ?>
                             </div>

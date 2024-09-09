@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="no_ponsel" class="form-label">No. Ponsel</label><span class="text-secondary"> (opsional)</span>
-                                    <input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?? $data['no_ponsel'] ?>" placeholder="08xx">
+                                    <input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?? $data['no_ponsel'] ?>" placeholder="6285xxx">
                                     <div class="invalid-feedback">
                                         <?= cutString(validation_show_error('no_ponsel')) ?>
                                     </div>

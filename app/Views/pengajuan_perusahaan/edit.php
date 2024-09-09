@@ -10,7 +10,7 @@
             <?php
             $alert = '';
             if ($data['status_pengajuan_perusahaan'] == 'Menunggu Verifikasi') {
-                $alert = 'alert-primary';
+                $alert = 'alert-warning';
             } elseif ($data['status_pengajuan_perusahaan'] == 'Aktif') {
                 $alert = 'alert-success';
             } elseif ($data['status_pengajuan_perusahaan'] == 'Ditolak') {
@@ -36,6 +36,18 @@
                         <div class="mb-3">
                             <label for="alamat_perusahaan" class="form-label">Alamat Perusahaan</label>
                             <textarea class="form-control" id="alamat_perusahaan" rows="3" disabled><?= $data['alamat_perusahaan'] ?></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="negara_perusahaan" class="form-label">Negara Perusahaan</label>
+                            <input type="text" class="form-control" id="negara_perusahaan" name="negara_perusahaan" value="<?= $data['negara_perusahaan'] ?>" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kota_perusahaan" class="form-label">Kota Perusahaan</label>
+                            <input type="text" class="form-control" id="kota_perusahaan" name="kota_perusahaan" value="<?= $data['kota_perusahaan'] ?>" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kode_pos_perusahaan" class="form-label">Kode Pos Perusahaan</label>
+                            <input type="text" class="form-control" id="kode_pos_perusahaan" name="kode_pos_perusahaan" value="<?= $data['kode_pos_perusahaan'] ?>" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="no_telepon_perusahaan" class="form-label">No. Telepon Perusahaan</label>

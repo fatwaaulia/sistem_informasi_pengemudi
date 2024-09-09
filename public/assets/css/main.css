@@ -60,9 +60,13 @@ img, video, iframe {
 }
 a, a:hover {
     color: var(--main-color);
-    text-decoration: none!important;
+    text-decoration:underline!important;
 }
 hr { opacity: unset; }
+
+.nav-link, .nav-link:hover, .btn, .btn:hover, .dropdown-item, .dropdown-item:hover {
+    text-decoration:none!important;
+}
 
 .img-style {
     background-repeat: no-repeat;
@@ -131,6 +135,13 @@ hr { opacity: unset; }
 }
 .invalid-feedback { display: block; }
 .dropdown-item { white-space: unset; }
+.btn {
+    --bs-btn-padding-x: 0.75rem;
+    --bs-btn-padding-y: 0.475rem;
+}
+.form-control, .form-select {
+    min-height: 45px!important;
+}
 .btn-primary,
 .btn-primary:active,
 .btn-primary:visited,

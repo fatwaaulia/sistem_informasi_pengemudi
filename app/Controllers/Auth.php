@@ -79,7 +79,7 @@ class Auth extends BaseController
         $rules = [
             'nama_perusahaan' => 'required|is_unique[users.nama_perusahaan]',
             'nama'      => 'required',
-            'no_ponsel' => 'required|is_unique[users.no_ponsel]',
+            'no_ponsel' => 'required',
             'email'     => 'required|valid_email|is_unique[users.email]',
             'password'  => 'required|min_length[8]|matches[passconf]',
             'passconf'  => 'required|min_length[8]|matches[password]',

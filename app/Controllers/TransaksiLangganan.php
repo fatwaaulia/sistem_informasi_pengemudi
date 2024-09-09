@@ -73,21 +73,23 @@ class TransaksiLangganan extends BaseController
         $id_paket = $this->request->getVar('id_paket', $this->filter);
         $paket_langganan = model('PaketLangganan')->find($id_paket);
 
+        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
+
         $invoice_sent = '{
             "external_id": "'. $kode . '",
             "amount": ' . $paket_langganan['harga_promo'] . ',
             "description": "Invoice Paket Layanan ' . $paket_langganan['nama_paket'] . ' #' . $kode . '",
             "invoice_duration": 86400,
             "customer": {
-                "given_names": "Azrul Ananda Anam",
-                "email": "afatwa40@gmail.com",
-                "mobile_number": "+6282345566500",
+                "given_names": "' . $user_session['nama'] . '",
+                "email": "' . $user_session['email'] . '",
+                "mobile_number": "' . $user_session['no_ponsel'] . '",
                 "addresses": [
                     {
-                        "city": "Banyuwangi",
-                        "country": "Indonesia",
-                        "postal_code": "68465",
-                        "state": "Jl. Diponegoro No. 123 Genteng Banyuwangi"
+                        "city": "' . $user_session['kota_perusahaan'] . '",
+                        "country": "' . $user_session['negara_perusahaan'] . '",
+                        "postal_code": "' . $user_session['kode_pos_perusahaan'] . '",
+                        "state": "' . $user_session['alamat_perusahaan'] . '"
                     }
                 ]
             },
