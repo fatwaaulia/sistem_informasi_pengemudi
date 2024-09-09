@@ -24,7 +24,8 @@ class Temuan extends BaseController
         $limit = $this->request->getVar('length') ?? $total_rows;
         $offset = $this->request->getVar('start') ?? 0;
 
-        $data = $this->base_model->findAll($limit, $offset);
+        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
+        $data = $this->base_model->where('id_pelapor', $user_session['id'])->findAll($limit, $offset);
         
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
