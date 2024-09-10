@@ -64,30 +64,24 @@ class TransaksiLangganan extends BaseController
 
         $cek_log = model('TransaksiLogs')->where('id_perusahaan', $id_perusahaan)->orderBy('id DESC')->first();
 
-        // Misalkan $cek_log['created_at'] adalah string tanggal/waktu, misalnya '2024-09-09 12:00:00'
-        $created_at = $cek_log['created_at'];
-
-        // Mengubah waktu `created_at` ke timestamp
-        $created_at_timestamp = strtotime($created_at);
-
-        // Mengambil timestamp waktu sekarang
-        $now_timestamp = time();
-
-        // Menghitung selisih waktu dalam detik
-        $time_difference = $now_timestamp - $created_at_timestamp;
-        
-        if ($time_difference <= 60) {
-            return redirect()->to(base_url() . 'perusahaan/berlangganan')
-            ->with('message',
-            "<script>
-                Swal.fire({
-                icon: 'error',
-                title: 'Anda terlalu cepat melakukan transaksi. Silakan lakukan transaksi ".(60-$time_difference)." detik lagi.',
-                showConfirmButton: false,
-                timer: 2500,
-                timerProgressBar: true,
-                })
-            </script>");
+        if ($cek_log) {
+            $created_at_timestamp = strtotime($cek_log['created_at']);
+            $now_timestamp = time();
+            $time_difference = $now_timestamp - $created_at_timestamp;
+            
+            if ($time_difference <= 60) {
+                return redirect()->to(base_url() . 'perusahaan/berlangganan')
+                ->with('message',
+                "<script>
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Anda terlalu cepat melakukan transaksi. Silakan lakukan transaksi ".(60-$time_difference)." detik lagi.',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true,
+                    })
+                </script>");
+            }
         }
 
         $data = [
