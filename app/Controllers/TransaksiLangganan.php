@@ -71,9 +71,91 @@ class TransaksiLangganan extends BaseController
     public function create()
     {
         $id_perusahaan = $this->user_session['id'];
+        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
 
+        $id_paket = $this->request->getVar('id_paket', $this->filter);
+        $paket_langganan = model('PaketLangganan')->find($id_paket);
+
+        for (;;) {
+            $random_string = strtoupper(random_string('alnum', 6));
+            $cek_kode = $this->base_model->getWhere(['kode' => $random_string])->getNumRows();
+            if ($cek_kode == 0) {
+                $kode = $random_string;
+                break;
+            }
+        }
+
+        // cek free trial apakah sudah pernah digunakan
+        if ($paket_langganan['harga_promo'] == 0) {
+
+            if ($user_session['bonus_free_trial_at'] != null) {
+                # pernah pakai free trial
+                return redirect()->to(base_url() . 'perusahaan/berlangganan')
+                ->with('message',
+                "<script>
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Free Trial tidak dapat digunakan lagi!',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true,
+                    })
+                </script>");
+            } else {
+                # jika free trial belum pernah digunakan
+                $data = [
+                    'id_perusahaan'  => $id_perusahaan,
+                    'id_paket'       => $id_paket,
+                    'nama_paket'     => $paket_langganan['nama_paket'],
+                    'harga_normal'   => $paket_langganan['harga_normal'],
+                    'harga_promo'    => $paket_langganan['harga_promo'],
+                    'label'          => $paket_langganan['label'],
+                    'deskripsi'      => $paket_langganan['deskripsi'],
+                    'poin'           => $paket_langganan['poin'],
+                    'status_pencairan_poin' => 'Berhasil',
+                    'status'         => 'Lunas',
+                    'kode'           => $kode,
+                    'invoice_url'    => 'Free Trial',
+                    'invoice_id'     => 'Free Trial',
+                    'invoice_status' => 'Free Trial',
+                    'expired_at'     => null,
+                    'invoice_received'  => 'Free Trial',
+                    'invoice_sent'      => 'Free Trial',
+                    'paid_at'           => null,
+                    'layanan_berakhir'  => date('Y-m-d H:i:s', strtotime('+1 year')),
+                ];
+
+                $this->base_model->insert($data);
+                $id_transaksi_terakhir = $this->base_model->insertID();
+
+                $perusahaan = model('Users')->where('id', $id_perusahaan)->first();
+                $data = [
+                    'poin'                   => $perusahaan['poin'] + $paket_langganan['poin'],
+                    'poin_masuk'             => $perusahaan['poin_masuk'] + $paket_langganan['poin'],
+                    'id_transaksi_langganan' => $id_transaksi_terakhir,
+                    'nama_paket'             => $paket_langganan['nama_paket'],
+                    'layanan_mulai'          => date('Y-m-d H:i:s'),
+                    'layanan_berakhir'       => date('Y-m-d H:i:s', strtotime('+1 year')),
+                    'bonus_free_trial_at'    => date('Y-m-d H:i:s'),
+                ];
+                model('Users')->update($perusahaan['id'], $data);
+
+                return redirect()->to(base_url() . 'perusahaan/transaksi-langganan/detail?code=' . $kode)
+                ->with('message',
+                "<script>
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Free Trial telah diaktifkan.',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true,
+                    })
+                </script>");
+            }
+        }
+
+        // hentikan proses jika terlalu cepat melakukan transaksi kurang dari 1 menit
         $cek_log = model('TransaksiLogs')->where('id_perusahaan', $id_perusahaan)->orderBy('id DESC')->first();
-
         if ($cek_log) {
             $created_at_timestamp = strtotime($cek_log['created_at']);
             $now_timestamp = time();
@@ -99,20 +181,7 @@ class TransaksiLangganan extends BaseController
         ];
         model('TransaksiLogs')->insert($data);
 
-        for (;;) {
-            $random_string = strtoupper(random_string('alnum', 6));
-            $cek_kode = $this->base_model->getWhere(['kode' => $random_string])->getNumRows();
-            if ($cek_kode == 0) {
-                $kode = $random_string;
-                break;
-            }
-        }
-
-        $id_paket = $this->request->getVar('id_paket', $this->filter);
-        $paket_langganan = model('PaketLangganan')->find($id_paket);
-
-        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
-
+        // proses payment gateway dimulai
         $invoice_sent = '{
             "external_id": "'. $kode . '",
             "amount": ' . $paket_langganan['harga_promo'] . ',

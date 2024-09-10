@@ -50,7 +50,7 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
             <div class="card mb-3">
                 <div class="card-body text-center" style="border-bottom:4px solid var(--bs-primary); border-radius:var(--border-radius)">
                     <p class="fw-500 d-block mb-2">
-                        <i class="fa-solid fa-rug me-1"></i>
+                        <i class="fa-solid fa-bell me-1"></i>
                         Paket Saat Ini
                     </p>
                     <h3 class="mb-0"><?= $user_session['nama_paket'] ? $user_session['nama_paket'] : '-'; ?></h3>

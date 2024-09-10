@@ -21,7 +21,7 @@
             <div class="alert <?= $alert_status ?>" role="alert">
                 Status : <b><?= $transaksi_langganan['status'] ?></b> <br>
                 Tgl. Transaksi : <?= date('d-m-Y H:i:s', strtotime($transaksi_langganan['created_at'])) ?> <br>
-                Tgl. Kedaluwarsa : <?= date('d-m-Y H:i:s', strtotime($transaksi_langganan['expired_at'])) ?> <br>
+                Tgl. Kedaluwarsa : <?= $transaksi_langganan['expired_at'] ? date('d-m-Y H:i:s', strtotime($transaksi_langganan['expired_at'])) : '-' ?> <br>
                 Tgl. Terbayar : <?= $transaksi_langganan['paid_at'] ? date('d-m-Y H:i:s', strtotime($transaksi_langganan['paid_at'])) : '-' ?> <br>
             </div>
             <div class="card">
