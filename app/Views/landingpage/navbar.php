@@ -4,7 +4,10 @@
     100% {transform: translateY(0px);}
 }
 .smoothScroll { animation: smoothScroll .7s forwards; }
-.navbar { box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1)!important; }
+.navbar {
+    height: 90px;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1)!important;
+}
 .nav-link { color: #000000!important }
 .nav-link:hover { color:var(--main-color)!important; }
 .nav-active {
@@ -27,7 +30,6 @@ $uri->setSilent(true);
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="<?= base_url() ?>">
             <img src="<?= $logo ?>" style="height:45px" alt="<?= $app_settings['nama_aplikasi'] ?>">
-            <h4 class="ms-2">SLIP</h4>
         </a>
         <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars my-1"></i>
@@ -46,8 +48,8 @@ $uri->setSilent(true);
                         $foto_profil = base_url('assets/uploads/user-default.png');
                     }
                  ?>
-                <a href="<?= base_url('login') ?>" class="mt-3 mt-lg-0">
-                    <img src="<?= $foto_profil ?>" alt="Profile" class="rounded-circle wh-40">
+                <a href="<?= base_url('login') ?>" class="mt-3 mt-lg-0 text-decoration-none">
+                    <img src="<?= $foto_profil ?>" alt="Profile" class="rounded-circle wh-50">
                     <span class="ps-2 text-black"><?= mb_strimwidth($user['nama'], 0, 15, "..."); ?></span>
                 </a>
                 <?php else : ?>

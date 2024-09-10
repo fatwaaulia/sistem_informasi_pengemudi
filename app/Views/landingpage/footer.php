@@ -14,27 +14,6 @@ footer a:hover {color: white;}
                 <img src="<?= $logo; ?>" class="w-50 w-md-25 w-lg-50" alt="logo">
             </div>
             <div class="col-lg-3 pb-3">
-                <h5 class="mb-3">Web App</h5>
-                <div class="mb-2">
-                    <a href="/" class="text-slider-left">> Beranda</a>
-                </div>
-            </div>
-            <div class="col-lg-3 pb-3">
-                <h5 class="mb-3">Media & Informasi</h5>
-                <div class="mb-2">
-                    <a href="<?= base_url('berita') ?>" class="text-slider-left">> Berita</a>
-                </div>
-            </div>
-            <style>
-            .sosial-media img {
-                filter: grayscale(100%);
-                transition: .3s;
-            }
-            .sosial-media:hover img {
-                filter: grayscale(0%);
-            }
-            </style>
-            <div class="col-lg-3 pb-3">
                 <h5 class="mb-3">Lokasi</h5>
                 <div class="mb-2">
                     <div>

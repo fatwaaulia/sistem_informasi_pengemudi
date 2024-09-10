@@ -17,7 +17,9 @@ class RiwayatPencarian extends BaseController
 
     public function getData()
     {
-        $total_rows = $this->base_model->countAll();
+        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
+
+        $total_rows = $this->base_model->where('id_peminta', $user_session['id'])->countAllResults();
         $limit = $this->request->getVar('length') ?? $total_rows;
         $offset = $this->request->getVar('start') ?? 0;
 
@@ -39,7 +41,7 @@ class RiwayatPencarian extends BaseController
         }
 
         return $this->response->setJSON([
-            'recordsTotal'    => $this->base_model->countAll(),
+            'recordsTotal'    => $this->base_model->where('id_peminta', $user_session['id'])->countAllResults(),
             'recordsFiltered' => $total_rows,
             'data'            => $data,
         ]);

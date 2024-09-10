@@ -11,7 +11,7 @@
                 <form action="" method="get">
                     <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="number" class="form-control <?= validation_show_error('nik') ? 'is-invalid' : '' ?>" id="nik" name="nik" value="<?= $nik ?>" placeholder="masukkan nik" oninput="document.getElementById('modalNIK').innerText=this.value ? this.value : '~tidak boleh kosong~';" required>
+                        <input type="number" class="form-control <?= validation_show_error('nik') ? 'is-invalid' : '' ?>" id="nik" name="nik" value="<?= $nik ?>" placeholder="masukkan nik" oninput="document.getElementById('modalNIK').innerText=this.value ? this.value : '~tidak boleh kosong~';" onkeydown="if(event.key === 'Enter') event.preventDefault();" required>
                         <div class="invalid-feedback">
                             <?= cutString(validation_show_error('nik')) ?>
                         </div>

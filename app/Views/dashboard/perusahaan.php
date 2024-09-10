@@ -34,20 +34,14 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
                         <i class="fa-solid fa-coins me-1"></i>
                         Total Poin
                     </p>
-                    <?php
-                    $user = model('Users')->where([
-                                'id_role' => 3,
-                                'status_pengajuan_perusahaan' => 'Aktif'])
-                            ->first();
-                    ?>
-                    <h3 class="mb-0"><?= $user['poin'] ?></h3>
+                    <h3 class="mb-0"><?= $user_session['poin'] ?></h3>
                     <small class="text-success me-2">
                         <i class="fa-solid fa-arrow-down"></i>
-                        <?= $user['poin_masuk'] ?>
+                        <?= $user_session['poin_masuk'] ?>
                     </small>
                     <small class="text-danger">
                         <i class="fa-solid fa-arrow-up"></i>
-                        <?= $user['poin_keluar'] ?>
+                        <?= $user_session['poin_keluar'] ?>
                     </small>
                 </div>
             </div>
@@ -59,15 +53,9 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
                         <i class="fa-solid fa-rug me-1"></i>
                         Paket Saat Ini
                     </p>
-                    <?php
-                    $user = model('Users')->where([
-                                'id_role' => 3,
-                                'status_pengajuan_perusahaan' => 'Aktif'])
-                            ->first();
-                    ?>
-                    <h3 class="mb-0"><?= $user['nama_paket'] ?></h3>
+                    <h3 class="mb-0"><?= $user_session['nama_paket'] ? $user_session['nama_paket'] : '-'; ?></h3>
                     <small>
-                        Berakhir pada <?= date('d-m-Y', strtotime($user['layanan_berakhir'])); ?>
+                        Berakhir pada <?= $user_session['layanan_berakhir'] ? date('d-m-Y', strtotime($user_session['layanan_berakhir'])) : '-'; ?>
                     </small>
                 </div>
             </div>

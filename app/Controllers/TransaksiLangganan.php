@@ -17,17 +17,27 @@ class TransaksiLangganan extends BaseController
     
     public function getData()
     {
-        $total_rows = $this->base_model->countAll();
+        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
+
+        $total_rows = $this->base_model->where('id_perusahaan', $user_session['id'])->countAllResults();
         $limit = $this->request->getVar('length') ?? $total_rows;
         $offset = $this->request->getVar('start') ?? 0;
 
-        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
-        $data = $this->base_model->where('id_perusahaan', $user_session['id'])->orderBy('id DESC')->findAll($limit, $offset);
+        $data = $this->base_model
+                ->where('id_perusahaan', $user_session['id'])
+                ->orderBy('id DESC')
+                ->findAll($limit, $offset);
         
         $search = $this->request->getVar('search')['value'] ?? null;
         if ($search) {
-            $data       = $this->base_model->like('nama', $search)->orderBy('id DESC')->findAll($limit, $offset);
-            $total_rows = $this->base_model->like('nama', $search)->orderBy('id DESC')->countAllResults();
+            $data       = $this->base_model
+                            ->where('id_perusahaan', $user_session['id'])
+                            ->like('nama', $search)->orderBy('id DESC')
+                            ->findAll($limit, $offset);
+            $total_rows = $this->base_model
+                            ->where('id_perusahaan', $user_session['id'])
+                            ->like('nama', $search)->orderBy('id DESC')
+                            ->countAllResults();
         }
 
         foreach ($data as $key => $v) {
@@ -38,7 +48,7 @@ class TransaksiLangganan extends BaseController
         }
 
         return $this->response->setJSON([
-            'recordsTotal'    => $this->base_model->countAll(),
+            'recordsTotal'    => $this->base_model->where('id_perusahaan', $user_session['id'])->countAllResults(),
             'recordsFiltered' => $total_rows,
             'data'            => $data,
         ]);

@@ -23,9 +23,9 @@
     <div class="row mb-5">
         <?php foreach ($paket_langganan as $key => $v) : ?>
             <div class="col-12 col-md-6 col-lg-6 col-xl-4 d-flex">
-            <div class="card card-paket-langganan d-flex flex-column flex-fill">
+            <div class="card card-paket-langganan d-flex flex-column flex-fill pt-4">
                 <?php if ($v['label']) : ?>
-                <div class="position-absolute text-white" style="right:0; border-radius: 0 var(--border-radius) 0 50px; background: linear-gradient(180deg, #f60 0%, #ff871d 100%);">
+                <div class="position-absolute text-white" style="right:0; top:0; border-radius: 0 var(--border-radius) 0 50px; background: linear-gradient(180deg, #f60 0%, #ff871d 100%);">
                     <div class="fw-500 wow fadeInUp" style="padding:8px 8px 8px 30px">
                         <i class="fa-solid fa-chess-queen fa-lg me-1"></i>
                         <?= $v['label'] ?>
