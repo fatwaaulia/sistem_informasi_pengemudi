@@ -27,6 +27,8 @@ $routes->set404Override(
   # Landing Page
 --------------------------------------------------------------*/
 $routes->get('/', 'Landingpage::beranda');
+$routes->get('kebijakan-privasi', 'Landingpage::kebijakanPrivasi');
+$routes->get('syarat-ketentuan', 'Landingpage::syaratKetentuan');
 
 /*--------------------------------------------------------------
   # API

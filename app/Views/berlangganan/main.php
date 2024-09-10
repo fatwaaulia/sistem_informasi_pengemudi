@@ -20,10 +20,10 @@
         color: #052c65!important;
     }
     </style>
-    <div class="row mb-5">
+    <div class="row mb-5 g-4">
         <?php foreach ($paket_langganan as $key => $v) : ?>
-            <div class="col-12 col-md-6 col-lg-6 col-xl-4 d-flex">
-            <div class="card card-paket-langganan d-flex flex-column flex-fill pt-4">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-4">
+            <div class="card card-paket-langganan pt-4 h-100">
                 <?php if ($v['label']) : ?>
                 <div class="position-absolute text-white" style="right:0; top:0; border-radius: 0 var(--border-radius) 0 50px; background: linear-gradient(180deg, #f60 0%, #ff871d 100%);">
                     <div class="fw-500 wow fadeInUp" style="padding:8px 8px 8px 30px">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <?php endif; ?>
-                <div class="card-body d-flex flex-column">
+                <div class="card-body">
                     <div class="text-center">
                         <h4 class="fw-600 text-primary-emphasis mb-4 wow fadeInUp"><?= $v['nama_paket'] ?></h4>
                         <div class="wow fadeInUp">
@@ -55,7 +55,7 @@
                             <h2 class="fw-600 mb-0"><?= $v['poin'] ?></h2>&nbsp;Poin
                         </div>
                     </div>
-                    <div class="mt-auto text-center">
+                    <div class="text-center">
                         <small>*Berlaku hingga 1 tahun</small>
                         <button class="btn btn-primary w-100 mt-3" data-bs-toggle="modal" data-bs-target="#berlangganan<?= $key+1 ?>">Langganan</button>
                     </div>

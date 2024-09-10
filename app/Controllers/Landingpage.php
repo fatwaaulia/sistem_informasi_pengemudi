@@ -20,4 +20,24 @@ class Landingpage extends BaseController
         $view['footer'] = view('landingpage/footer');
         return view('landingpage/header', $view);
     }
+
+    public function kebijakanPrivasi()
+    {
+        $data['title'] = 'Kebijakan Privasi';
+
+        $view['navbar'] = view('landingpage/navbar');
+        $view['content'] = view('landingpage/kebijakan_privasi');
+        $view['footer'] = view('landingpage/footer');
+        return view('landingpage/header', $view);
+    }
+
+    public function syaratKetentuan()
+    {
+        $data['title'] = 'Syarat dan Ketentuan';
+
+        $view['navbar'] = view('landingpage/navbar');
+        $view['content'] = view('landingpage/syarat_ketentuan');
+        $view['footer'] = view('landingpage/footer');
+        return view('landingpage/header', $view);
+    }
 }

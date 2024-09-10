@@ -1,35 +1,72 @@
 <style>
 .header {
-    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(<?= base_url('assets/img/rhys-moult-7eaFIKeo1MQ-unsplash.jpg') ?>);
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    background-attachment: fixed;
+    min-height: 90vh;
+    background-image: linear-gradient(25deg, #17153B 50%, #2E236C 90%, #433D8B 110%);
+    border-radius: 0 0 0 150px;
+    padding-top: 180px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+h1 {
+    line-height: 130%;
+}
+h5 {
+    line-height: 150%;
+}
+.owl-stage-outer { 
+overflow: visible;
+}
+
+ .owl-item {
+   opacity: 0;
+   transition: opacity 500ms;
+}
+.owl-item.active {
+  opacity: 1;
 }
 </style>
-<div class="container-fluid header img-style">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="position-relative text-white justify-items-center" id="headerTitle">
-                    <h4>Selamat Datang di</h4>
-                    <h1 class="fw-600 mb-4"><?= model('AppSettings')->find(1)['nama_aplikasi']; ?></h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="owl-carousel owl-header owl-theme">
+                <?php
+                $data_slider = [
+                    [
+                        'judul' => 'Sistem Terintegrasi Data Pelanggaran Pengemudi',
+                        'deskripsi' => 'Temukan informasi pelanggaran pengemudi dari seluruh Indonesia untuk membantu Anda memilih pengemudi terbaik bagi perusahaan Anda.',
+                        'gambar' => '1.png',
+                    ],
+                    [
+                        'judul' => 'Ajukan Data Pelanggaran Pengemudi',
+                        'deskripsi' => 'Anda juga dapat berkontribusi dengan menambahkan data pelanggaran pengemudi, yang akan tersedia bagi seluruh perusahaan ekspedisi terdaftar di Indonesia.',
+                        'gambar' => '2.png',
+                    ],
+                    [
+                        'judul' => 'Akses 24/7, Kapanpun & Dimanapun',
+                        'deskripsi' => 'Nikmati kemudahan layanan kami yang dapat diakses kapan saja dan di mana saja, selama 24 jam setiap hari.',
+                        'gambar' => '3.png',
+                    ],
+                ];
+                foreach($data_slider as $v) :
+                ?>
+                <div class="header">
+                    <div class="row">
+                        <div class="col-12 col-lg-5">
+                            <h1 class="text-danger fw-600"><?= $v['judul'] ?></h1>
+                            <h5 class="text-white mt-3"><?= $v['deskripsi'] ?></h5>
+                        </div>
+                        <div class="col-12 col-lg-6 position-relative" style="min-height:70vh">
+                            <img src="<?= base_url('assets/img/slider/'. $v['gambar']) ?>" class="position-absolute" style="bottom:0; right:0px; width:80%;">
+                        </div>
+                    </div>
                 </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
 </div>
-<script>
-$(document).scroll(() => {
-    $('#headerTitle').css({
-        'bottom': -($(this).scrollTop() / 1.85) + "px"
-    });
-});
-</script>
  
-<link rel="stylesheet" href="<?= base_url('assets/modules/owlcarousel2/owl.carousel.min.css') ?>">
-<link rel="stylesheet" href="<?= base_url('assets/modules/owlcarousel2/owl.theme.default.css') ?>">
 <style>
 .owl-carousel .nav-button {
     border-radius:50%!important;
@@ -42,117 +79,92 @@ $(document).scroll(() => {
 }
 .owl-carousel .owl-prev {
     position: absolute;
-    top:65px;
+    top:70px;
     left:-15px;
 }
 .owl-carousel .owl-next {
     position: absolute;
-    top: 65px;
+    top: 70px;
     right: -15px;
 }
-.owl-theme .owl-nav [class*=owl-] {
-    color: red;
-    background: #F4F4F4;
-    border-radius: 3px;
-    transition:.3s;
+
+.card-paket-langganan {
+    transition: .3s;
 }
-.owl-theme .owl-nav [class*=owl-]:hover {
-    color: #474747;
-    background: #a0a6ab;
-    border-radius: 3px;
+.card-paket-langganan:hover {
+    color: #052c65!important;
+    background-color: #cfe2ff;
+}
+.card-paket-langganan:hover p,
+.card-paket-langganan:hover h2,
+.card-paket-langganan:hover h4,
+.card-paket-langganan:hover div {
+    color: #052c65!important;
 }
 </style>
-<section class="pt-0">
-    <div class="container-fluid bg-primary-subtle" style="background-image:url('<?= base_url('assets/img/bg-activity.png') ?>');background-repeat:no-repeat;padding-top:50px">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <a href="<?= base_url('perusahaan/berlangganan') ?>" class="float-end">
-                        <b>Lihat Semua Paket</b>
-                    </a>
-                </div>
+<section class="container-fluid bg-secondary-subtle py-5">
+    <div class="container">
+        <div class="row">
+            <div class="offset-1 col-9 offset-lg-0 col-lg-3 offset-xl-0 col-xl-3">
+                <img src="<?= base_url('assets/img/sopir-jempol-oke.png') ?>" alt="sopir-jempol-oke.png" class="w-100 mb-4 mb-md-0">
+                <h5>SLIP Indonesia</h5>
+                <h3>Satu Layanan, Beragam Manfaat!</h3>
             </div>
-            <div class="row">
-                <div class="col-12 col-lg-3 col-xl-3">
-                    <img src="<?= base_url('assets/img/sopir-jempol-oke.png') ?>" alt="sopir-jempol-oke.png" class="w-100">
+            <div class="col-12 col-lg-9 offset-xl-1 col-xl-8">
+                <div class="text-end mb-3">
+                <a href="<?= base_url('perusahaan/berlangganan') ?>"  style="margin-right: 30px">
+                    <b>Lihat Semua Paket</b>
+                </a>
                 </div>
-                <div class="col-12 col-lg-9 offset-xl-1 col-xl-8 position-relative">
-                    <div class="owl-carousel owl-activities owl-theme wow fadeInUp">
-                        <?php
-                        $paket_langganan = model('PaketLangganan')->findAll();
-                        foreach($paket_langganan as $v) :
-                        ?>
-                        <div class="card card-paket-langganan d-flex flex-column flex-fill pt-4">
-                            <?php if ($v['label']) : ?>
-                            <div class="position-absolute text-white" style="right:0; top:0; border-radius: 0 var(--border-radius) 0 50px; background: linear-gradient(180deg, #f60 0%, #ff871d 100%);">
-                                <div class="fw-500 wow fadeInUp" style="padding:8px 8px 8px 30px">
-                                    <i class="fa-solid fa-chess-queen fa-lg me-1"></i>
-                                    <?= $v['label'] ?>
-                                </div>
-                            </div>
-                            <?php endif; ?>
-                            <div class="card-body d-flex flex-column">
-                                <div class="text-center">
-                                    <h4 class="fw-600 text-primary-emphasis mb-4 wow fadeInUp"><?= $v['nama_paket'] ?></h4>
-                                    <div class="wow fadeInUp">
-                                        <?php if ($v['harga_normal'] > $v['harga_promo']) : ?>
-                                        <span class="text-decoration-line-through text-secondary">Rp <?= number_format($v['harga_normal'], 0, ',', '.') ?></span>
-                                        <span class="badge bg-danger-subtle text-danger">
-                                            <?php
-                                            $diskon = (($v['harga_normal'] - $v['harga_promo']) / $v['harga_normal']) * 100; 
-                                            echo round($diskon) . '%';
-                                            ?>
-                                        </span>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="d-flex justify-content-center text-primary-emphasis wow fadeInUp">
-                                        Rp&nbsp;<h2 class="fw-600 text-primary-emphasis"><?= number_format($v['harga_promo'], 0, ',', '.'); ?></h2>
-                                    </div>
-                                    <p class="mt-3"><?= $v['deskripsi'] ?></p>
-                                    <hr>
-                                    <div class="d-flex justify-content-center">
-                                        <h2 class="fw-600 mb-0"><?= $v['poin'] ?></h2>&nbsp;Poin
-                                    </div>
-                                </div>
-                                <div class="mt-auto text-center">
-                                    <small>*Berlaku hingga 1 tahun</small>
-                                    <button class="btn btn-primary w-100 mt-3">Langganan</button>
-                                </div>
+                <div class="owl-carousel owl-paket-layanan owl-theme">
+                    <?php
+                    $paket_langganan = model('PaketLangganan')->findAll();
+                    foreach($paket_langganan as $v) :
+                    ?>
+                    <div class="card card-paket-langganan pt-4" style="min-height:380px">
+                        <?php if ($v['label']) : ?>
+                        <div class="position-absolute text-white" style="right:0; top:0; border-radius: 0 var(--border-radius) 0 50px; background: linear-gradient(180deg, #f60 0%, #ff871d 100%);">
+                            <div class="fw-500 wow fadeInUp" style="padding:8px 8px 8px 30px">
+                                <i class="fa-solid fa-chess-queen fa-lg me-1"></i>
+                                <?= $v['label'] ?>
                             </div>
                         </div>
-                        <?php endforeach; ?>
+                        <?php endif; ?>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h4 class="fw-600 text-primary-emphasis mb-4 wow fadeInUp"><?= $v['nama_paket'] ?></h4>
+                                <div class="wow fadeInUp">
+                                    <?php if ($v['harga_normal'] > $v['harga_promo']) : ?>
+                                    <span class="text-decoration-line-through text-secondary">Rp <?= number_format($v['harga_normal'], 0, ',', '.') ?></span>
+                                    <span class="badge bg-danger-subtle text-danger">
+                                        <?php
+                                        $diskon = (($v['harga_normal'] - $v['harga_promo']) / $v['harga_normal']) * 100; 
+                                        echo round($diskon) . '%';
+                                        ?>
+                                    </span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="d-flex justify-content-center text-primary-emphasis wow fadeInUp">
+                                    Rp&nbsp;<h2 class="fw-600 text-primary-emphasis"><?= number_format($v['harga_promo'], 0, ',', '.'); ?></h2>
+                                </div>
+                                <p class="mt-3 wow fadeInUp"><?= $v['deskripsi'] ?></p>
+                                <hr>
+                                <div class="d-flex justify-content-center wow fadeInUp">
+                                    <h2 class="fw-600 mb-0"><?= $v['poin'] ?></h2>&nbsp;Poin
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <small class="wow fadeInUp">*Berlaku hingga 1 tahun</small>
+                                <button class="btn btn-primary w-100 mt-3">Langganan</button>
+                            </div>
+                        </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<script src="<?= base_url('assets/modules/owlcarousel2/owl.carousel.min.js') ?>"></script>
-<script>
-$(document).ready(function() {
-    $('.owl-activities').owlCarousel({
-        nav: true,
-        navText: [
-            '<div class="nav-button owl-prev" style="font-size:16px"> <i class="fa-solid fa-arrow-left"></i> </div>',
-            '<div class="nav-button owl-next" style="font-size:16px"> <i class="fa-solid fa-arrow-right"></i> </div>'
-        ],
-        dots: false,
-        stagePadding: 25,
-        margin: 25,
-        responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            992: {
-                items: 2
-            }
-        }
-    });
-});
-</script>
 
 <section class="container position-relative bg-white">
     <div class="row gx-5">
@@ -166,3 +178,53 @@ $(document).ready(function() {
         </div>
     </div>
 </section>
+
+<link rel="stylesheet" href="<?= base_url('assets/modules/owlcarousel2/owl.carousel.min.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/modules/owlcarousel2/owl.theme.default.css') ?>">
+<script src="<?= base_url('assets/modules/owlcarousel2/owl.carousel.min.js') ?>"></script>
+<script>
+$(document).ready(function() {
+    $('.owl-paket-layanan').owlCarousel({
+        nav: true,
+        navText: [
+            '<div class="nav-button owl-prev text-danger" style="font-size:16px"> <i class="fa-solid fa-arrow-left"></i> </div>',
+            '<div class="nav-button owl-next text-danger" style="font-size:16px"> <i class="fa-solid fa-arrow-right"></i> </div>'
+        ],
+        dots: false,
+        stagePadding: 25,
+        margin: 25,
+        autoHeight: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 2
+            }
+        }
+    });
+    $('.owl-header').owlCarousel({
+        autoplay:true,
+        loop:true,
+        autoplayTimeout:7000,
+        nav: true,
+        dots: false,
+        stagePadding: 25,
+        margin: 25,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 1
+            },
+            992: {
+                items: 1
+            }
+        }
+    });
+});
+</script>

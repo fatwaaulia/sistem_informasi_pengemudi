@@ -7,56 +7,17 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 footer a {color: white;}
 footer a:hover {color: white;}
 </style>
-<footer class="container-fluid px-0 text-white pt-5 pb-3 bg-dark">
+<footer class="container-fluid px-0 text-white pt-3 pb-3 bg-dark">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 pb-4">
-                <img src="<?= $logo; ?>" class="w-50 w-md-25 w-lg-50" alt="logo">
-            </div>
-            <div class="col-lg-3 pb-3">
-                <h5 class="mb-3">Lokasi</h5>
-                <div class="mb-2">
-                    <div>
-                        <i class="fa-solid fa-location-dot me-2"></i>
-                        <?= $app_settings['nama_perusahaan'] ?>
-                    </div>
-                    <div><?= $app_settings['alamat'] ?></div>
-                </div>
-            </div>
-        </div>
-        <hr style="opacity: .25;">
-        <div class="row">
-            <div class="col-lg-12 py-1">
+            <div class="col-lg-6 py-1">
                 <span>Copyright © 2024 | Web App</span>
+            </div>
+            <div class="col-lg-6 py-1 text-end">
+                <a href="<?= base_url() ?>kebijakan-privasi" class="me-2">Kebijakan Privasi</a>
+                <a href="<?= base_url() ?>syarat-ketentuan" class="me-2">Syarat dan Ketentuan</a>
+                <a href="https://wa.me/6285526250131" target="_blank">Hubungi Kami</a>
             </div>
         </div>
     </div>
 </footer>
-
-<style>
-.btn-scroll-to-top,
-.btn-scroll-to-top:focus {
-    position: fixed;
-    bottom: 2%;
-    right: 3%;
-    border: 2px solid white!important;
-    transition: .3s;
-}
-.btn-scroll-to-top:hover {
-    border: 2px solid white!important;
-    bottom: 3%;
-}
-</style>
-<button class="btn btn-primary btn-scroll-to-top d-none" style="z-index:999;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    <i class="fa-solid fa-arrow-up"></i>
-</button>
-<script>
-$(document).scroll(() => {
-    let scroll = $(document).scrollTop();
-    if(scroll > 300) {
-        $('.btn-scroll-to-top').removeClass('d-none');
-    } else {
-        $('.btn-scroll-to-top').addClass('d-none');
-    }
-});
-</script>
