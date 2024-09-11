@@ -43,7 +43,7 @@
                     <span class="fw-600">Hasil Pencarian</span>
                 </div>
                 <div>
-                    Status : <span><?= $status ?></span>
+                    Status : <span class="text-<?= ($status == 'NIK atau SIM tidak ditemukan') ? 'danger' : 'success' ?>"><?= $status ?></span>
                 </div>
                 <?php if ($status != 'NIK atau SIM tidak ditemukan') : ?>
                 <a href="<?= base_url() . 'perusahaan/cari-temuan/unduh-pdf?nik=' . $nik . '&no_sim=' . $no_sim ?>" target="_blank" class="btn btn-primary mt-3">Unduh Pdf</a>
