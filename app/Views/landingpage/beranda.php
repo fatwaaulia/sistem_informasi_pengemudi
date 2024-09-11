@@ -28,7 +28,7 @@ overflow: visible;
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 mt-3">
             <div class="owl-carousel owl-header owl-theme">
                 <?php
                 $data_slider = [

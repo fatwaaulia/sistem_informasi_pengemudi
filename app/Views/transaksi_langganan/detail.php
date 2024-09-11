@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <?php
             $alert_status = 'alert-primary';
             if ($transaksi_langganan['status'] == 'Menunggu Pembayaran') {
@@ -35,7 +35,7 @@
                         <thead>
                             <tr>
                                 <th class="text-primary-emphasis">Paket Langganan</th>
-                                <th class="text-primary-emphasis">Biaya</th>
+                                <th class="text-primary-emphasis text-end">Biaya</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@
                                     <br>
                                     <small>*Berlaku hingga 1 tahun</small>
                                 </td>
-                                <td>
+                                <td class="text-end">
                                     <?php if ($transaksi_langganan['harga_normal'] > $transaksi_langganan['harga_promo']) : ?>
                                     <small class="text-decoration-line-through text-secondary">
                                         Rp <?= number_format($transaksi_langganan['harga_normal'], 0, ',', '.') ?>
@@ -61,7 +61,7 @@
                             <tr>
                                 <td class="text-end">Total</td>
                                 <td>
-                                    <h5 class="fw-600">Rp <?= number_format($transaksi_langganan['harga_promo'], 0, ',', '.') ?></h5>
+                                    <h5 class="fw-600 text-end">Rp <?= number_format($transaksi_langganan['harga_promo'], 0, ',', '.') ?></h5>
                                 </td>
                             </tr>
                         </tbody>

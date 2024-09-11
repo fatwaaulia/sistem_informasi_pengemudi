@@ -12,7 +12,7 @@
                     <form action="<?= $base_route . '/update/' . encode($data['id']) ?>" method="post" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <div class="d-flex">
                                         <div class="position-relative">

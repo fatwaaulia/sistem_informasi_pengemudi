@@ -36,7 +36,7 @@ $uri->setSilent(true);
         </button>
         <div class="collapse navbar-collapse justify-content-between py-3 py-md-0" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">HOME</a>
+                <!-- <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">HOME</a> -->
             </div>
             <div class="navbar-nav">
                 <?php 

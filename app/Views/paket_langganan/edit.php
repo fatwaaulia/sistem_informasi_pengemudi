@@ -12,7 +12,7 @@
                     <form action="<?= $base_route . '/update/' . encode($data['id']) ?>" method="post" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <label for="nama_paket" class="form-label">Nama Paket</label>
                                     <input type="text" class="form-control <?= validation_show_error('nama_paket') ? 'is-invalid' : '' ?>" id="nama_paket" name="nama_paket" value="<?= old('nama_paket') ?? $data['nama_paket'] ?>" placeholder="masukkan nama paket">

@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <form action="<?= $base_route . '/update' ?>" method="post" enctype="multipart/form-data">
@@ -129,6 +129,12 @@
                                 <?= cutString(validation_show_error('email')) ?>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#ubah_password">
+                                <i class="fa-solid fa-lock me-2"></i>
+                                <span class="align-middle">Ubah Password</span>
+                            </a>
+                        </div>
                         <button type="submit" class="btn btn-primary mt-3 float-end">Simpan Perubahan</button>
                     </form>
                 </div>
@@ -137,3 +143,153 @@
     </div>
 </div>
 </section>
+
+<!-- Modal hapus foto profil -->
+<div class="modal fade" id="deleteImage" tabindex="-1" aria-labelledby="deleteImageLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteImageLabel">Konfirmasi hapus</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <form action="<?= $base_route . '/delete/image' ?>" method="post">
+                    <?= csrf_field(); ?>
+                    <button type="submit" class="btn btn-danger">Iya, Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal ubah password -->
+<div class="modal fade" id="ubah_password" tabindex="-1" aria-labelledby="ubahPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ubahPasswordLabel">Ubah Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<?= $base_route . '/update/password' ?>" method="post">
+                <?= csrf_field(); ?>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="oldpass" class="form-label">Password Saat Ini</label>
+                        <div class="position-relative">
+                            <input onkeyup="changeOldPass()" type="password" class="form-control" name="oldpass" value="<?= old('oldpass') ?>" id="oldpass" placeholder="Password saat ini">
+                            <img src="<?= base_url('assets/icon/show.png') ?>" class="position-absolute" id="eye_oldpass">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password Baru</label>
+                        <div class="mb-2 position-relative">
+                            <input onkeyup="changePassword()" type="password" class="form-control" name="password" value="<?= old('password') ?>" id="password" placeholder="Password baru">
+                            <div class="invalid-feedback">
+                                <span id="msg_password"></span>
+                            </div>
+                            <img src="<?= base_url('assets/icon/show.png') ?>" class="position-absolute" id="eye_password">
+                        </div>
+                        <div class="position-relative">
+                            <input onkeyup="changePassconf()" type="password" class="form-control" name="passconf" value="<?= old('passconf') ?>" id="passconf" placeholder="Confirm password">
+                            <div class="invalid-feedback">
+                                <span id="msg_passconf"></span>
+                            </div>
+                            <img src="<?= base_url('assets/icon/show.png') ?>" class="position-absolute" id="eye_passconf">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="simpan_password" disabled>Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleVisibility(inputElement, eyeElement) {
+    const showIcon = "<?= base_url('assets/icon/show.png') ?>";
+    const hideIcon = "<?= base_url('assets/icon/hide.png') ?>";
+    inputElement.type = inputElement.type === 'password' ? 'text' : 'password';
+    eyeElement.src = inputElement.type === 'password' ? showIcon : hideIcon;
+}
+
+const eyeOldpass = document.getElementById('eye_oldpass');
+const oldpass = document.getElementById('oldpass');
+eyeOldpass.addEventListener('click', () => {
+    toggleVisibility(oldpass, eyeOldpass);
+});
+
+const eyePassword = document.getElementById('eye_password');
+const password = document.getElementById('password');
+eyePassword.addEventListener('click', () => {
+    toggleVisibility(password, eyePassword);
+});
+
+const eyePassconf = document.getElementById('eye_passconf');
+const passconf = document.getElementById('passconf');
+eyePassconf.addEventListener('click', () => {
+    toggleVisibility(passconf, eyePassconf);
+});
+
+function validatePassword() {
+    const str_oldpass = $('#oldpass').val();
+    const str_password = $('#password').val();
+    const str_passconf = $('#passconf').val();
+
+    const passwordLengthValid = str_password.length >= 8;
+    const passwordMatch = str_passconf === str_password;
+
+    if (passwordLengthValid && passwordMatch) {
+        enableSaveButton(str_oldpass);
+        resetInvalidFeedback();
+    } else {
+        if (!passwordLengthValid) {
+            handleInvalidPassword('password', 'minimal 8 karakter');
+        } else {
+            resetInvalidFeedback('password');
+        }
+
+        if (!passwordMatch) {
+            handleInvalidPassword('passconf', 'password tidak sama');
+        } else {
+            resetInvalidFeedback('passconf');
+        }
+
+        disableSaveButton();
+    }
+}
+
+function handleInvalidPassword(inputId, message) {
+    $(`#${inputId}`).addClass('is-invalid');
+    $(`#msg_${inputId}`).html(message);
+}
+
+function resetInvalidFeedback(inputId = null) {
+    if (inputId) {
+        $(`#${inputId}`).removeClass('is-invalid');
+        $(`#msg_${inputId}`).html('');
+    } else {
+        $('#password').removeClass('is-invalid');
+        $('#msg_password').html('');
+        $('#passconf').removeClass('is-invalid');
+        $('#msg_passconf').html('');
+    }
+}
+
+function enableSaveButton(str_oldpass) {
+    $('#simpan_password').prop("disabled", !str_oldpass);
+}
+
+function disableSaveButton() {
+    $('#simpan_password').prop("disabled", true);
+}
+
+$('#password').on('input', validatePassword);
+$('#passconf').on('input', validatePassword);
+</script>
