@@ -53,14 +53,21 @@ function renderNIK(data) {
 }
 
 function renderFotoSopir(data) {
-    if (!data.id_temuan) return '';
+    if (!data.id_temuan || !data.foto_sopir) return '';
     let dir = '<?= base_url() ?>assets/uploads/temuan/';
 
-    return JSON.parse(data.foto_sopir).map(foto => `
-    <a data-fancybox="foto" href="${dir + foto}">
-        <img src="${dir + foto}" class="wh-40 img-style" loading="lazy">
-    </a>`);
+    try {
+        return JSON.parse(data.foto_sopir).map(foto => `
+            <a data-fancybox="foto" href="${dir + foto}">
+                <img src="${dir + foto}" class="wh-40 img-style" loading="lazy">
+            </a>`
+        ).join('');
+    } catch (e) {
+        console.error('Invalid JSON in foto_sopir:', e);
+        return '';
+    }
 }
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
