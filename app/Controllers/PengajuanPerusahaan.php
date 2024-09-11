@@ -138,7 +138,7 @@ class PengajuanPerusahaan extends BaseController
         if (is_file($dokumen_akta_perusahaan)) unlink($dokumen_akta_perusahaan);
 
         $data = [
-            'no_akta_perusahaan'          => '',
+            'no_nib_perusahaan'          => '',
             'dokumen_akta_perusahaan'     => '',
             'status_pengajuan_perusahaan' => 'Pending',
             'submission_at'  => null,
@@ -255,7 +255,7 @@ class PengajuanPerusahaan extends BaseController
             'kode_pos_perusahaan'     => 'required',
             'no_telepon_perusahaan'   => "required|is_unique[$this->base_name.no_telepon_perusahaan,id,$id]",
             'email_perusahaan'        => "required|valid_email|is_unique[users.email_perusahaan,id,$id]",
-            'no_akta_perusahaan'      => "required|is_unique[$this->base_name.no_akta_perusahaan,id,$id]",
+            'no_nib_perusahaan'      => "required|is_unique[$this->base_name.no_nib_perusahaan,id,$id]",
             'dokumen_akta_perusahaan' => $uploaded . 'max_size[dokumen_akta_perusahaan,10240]|ext_in[dokumen_akta_perusahaan,pdf]|mime_in[dokumen_akta_perusahaan,application/pdf]',
         ];
         if (! $this->validate($rules)) {
@@ -282,7 +282,7 @@ class PengajuanPerusahaan extends BaseController
                 'kode_pos_perusahaan'   => $this->request->getVar('kode_pos_perusahaan', $this->filter),
                 'no_telepon_perusahaan' => $this->request->getVar('no_telepon_perusahaan', $this->filter),
                 'email_perusahaan'      => $this->request->getVar('email_perusahaan', $this->filter),
-                'no_akta_perusahaan'    => $this->request->getVar('no_akta_perusahaan', $this->filter),
+                'no_nib_perusahaan'    => $this->request->getVar('no_nib_perusahaan', $this->filter),
                 'dokumen_akta_perusahaan' => $dokumen_akta_perusahaan_name,
                 'status_pengajuan_perusahaan'  => 'Menunggu Verifikasi',
                 'submission_at'  => date('Y-m-d H:i:s'),

@@ -101,10 +101,10 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="no_akta_perusahaan" class="form-label">No. Akta Perusahaan</label>
-                            <input type="text" class="form-control <?= validation_show_error('no_akta_perusahaan') ? "is-invalid" : '' ?>" id="no_akta_perusahaan" name="no_akta_perusahaan" value="<?= old('no_akta_perusahaan') ?? $data['no_akta_perusahaan'] ?>" placeholder="No. 15/2024, Notaris: Budi Santoso" <?= $pengajuan ? 'disabled' : '' ?>>
+                            <label for="no_nib_perusahaan" class="form-label">No. NIB Perusahaan</label>
+                            <input type="text" class="form-control <?= validation_show_error('no_nib_perusahaan') ? "is-invalid" : '' ?>" id="no_nib_perusahaan" name="no_nib_perusahaan" value="<?= old('no_nib_perusahaan') ?? $data['no_nib_perusahaan'] ?>" placeholder="masukkan nomor nib perusahaan" <?= $pengajuan ? 'disabled' : '' ?>>
                             <div class="invalid-feedback">
-                                <?= cutString(validation_show_error('no_akta_perusahaan')) ?>
+                                <?= cutString(validation_show_error('no_nib_perusahaan')) ?>
                             </div>
                         </div>
                         <div class="mb-3">

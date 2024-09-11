@@ -14,7 +14,7 @@
                             <th>No.</th>
                             <th>Tgl. Diterima</th>
                             <th>Nama Perusahaan</th>
-                            <th>No. Akta Perusahaan</th>
+                            <th>No. NIB Perusahaan</th>
                             <th>Nama PIC</th>
                             <th>No. Ponsel PIC</th>
                             <th>Opsi</th>
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { data: 'no_urut' },
             { data: 'checked_at' },
             { data: 'nama_perusahaan' },
-            { data: 'no_akta_perusahaan' },
+            { data: 'no_nib_perusahaan' },
             { data: 'nama' },
             { data: 'no_ponsel' },
             { data: null, render: renderOpsi },
