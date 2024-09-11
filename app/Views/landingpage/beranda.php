@@ -134,15 +134,20 @@ overflow: visible;
                             <div class="text-center">
                                 <h4 class="fw-600 text-primary-emphasis mb-4 wow fadeInUp"><?= $v['nama_paket'] ?></h4>
                                 <div class="wow fadeInUp">
-                                    <?php if ($v['harga_normal'] > $v['harga_promo']) : ?>
-                                    <span class="text-decoration-line-through text-secondary">Rp <?= number_format($v['harga_normal'], 0, ',', '.') ?></span>
-                                    <span class="badge bg-danger-subtle text-danger">
-                                        <?php
-                                        $diskon = (($v['harga_normal'] - $v['harga_promo']) / $v['harga_normal']) * 100; 
-                                        echo round($diskon) . '%';
-                                        ?>
-                                    </span>
-                                    <?php endif; ?>
+                                    <?php
+                                    $diskon = 0;
+                                    $hidden_diskon = 'visibility:hidden';
+                                    if ($v['harga_normal'] > $v['harga_promo']) {
+                                        $diskon = (($v['harga_normal'] - $v['harga_promo']) / $v['harga_normal']) * 100;
+                                        $hidden_diskon = '';
+                                    }
+                                    ?>
+                                    <div style="<?= $hidden_diskon ?>">
+                                        <span class="text-decoration-line-through text-secondary">Rp <?= number_format($v['harga_normal'], 0, ',', '.') ?></span>
+                                        <span class="badge bg-danger-subtle text-danger">
+                                            <?= round($diskon) . '%'; ?>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-center text-primary-emphasis wow fadeInUp">
                                     Rp&nbsp;<h2 class="fw-600 text-primary-emphasis"><?= number_format($v['harga_promo'], 0, ',', '.'); ?></h2>
@@ -155,7 +160,7 @@ overflow: visible;
                             </div>
                             <div class="text-center">
                                 <small class="wow fadeInUp">*Berlaku hingga 1 tahun</small>
-                                <button class="btn btn-primary w-100 mt-3">Langganan</button>
+                                <a href="<?= base_url() . 'perusahaan/berlangganan' ?>" class="btn btn-primary w-100 mt-3">Langganan</a>
                             </div>
                         </div>
                     </div>

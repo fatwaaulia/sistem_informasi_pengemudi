@@ -16,7 +16,7 @@ class EnsureAdmin implements FilterInterface
         if (!$user_session) return redirect()->to(base_url('login'));
         
         if ($user_session['id_role'] != 2) {
-            $user_role = strtolower(model('Role')->where('id', $user_session['id_role'])->first()['nama']);
+            $user_role = strtolower(model('Role')->where('id', $user_session['id_role'])->first()['slug']);
             return redirect()->to(base_url($user_role) . '/dashboard')
             ->with('message',
             "<script>
