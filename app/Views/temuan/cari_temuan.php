@@ -46,7 +46,7 @@
                     Status : <span class="text-<?= ($status == 'NIK atau SIM tidak ditemukan') ? 'danger' : 'success' ?>"><?= $status ?></span>
                 </div>
                 <?php if ($status != 'NIK atau SIM tidak ditemukan') : ?>
-                <a href="<?= base_url() . 'perusahaan/cari-temuan/unduh-pdf?nik=' . $nik . '&no_sim=' . $no_sim ?>" target="_blank" class="btn btn-primary mt-3">Unduh Pdf</a>
+                <a href="<?= base_url() . 'perusahaan/cari-temuan/unduh-pdf?nik=' . $nik . '&no_sim=' . $no_sim ?>" target="_blank" class="btn btn-primary mt-3">Unduh PDF</a>
                 <?php endif; ?>
                 <hr>
                 <?php foreach ($data as $v) : ?>
@@ -75,10 +75,32 @@
                     Perusahaan Pelapor : <?= $v['nama_perusahaan'] ?>
                 </div>
                 <div class="mb-2">
-                    Foto Sopir :
-                    <?php if($v['foto_sopir']) : ?>
-                    <img src="<?= base_url('assets/uploads/temuan/') . $v['foto_sopir'] ?>" class="wh-250 img-style mt-2">
-                    <?php else : echo 'Tidak menyertakan foto'; endif; ?>
+                    <div class="row gy-3">
+                        <div class="col-12 col-md-6">
+                            Foto Sopir : <br>
+                            <?php if($v['foto_sopir']) : ?>
+                            <img src="<?= base_url('assets/uploads/temuan/foto_sopir/') . $v['foto_sopir'] ?>" class="wh-250 img-style mt-2">
+                            <?php else : echo 'Tidak menyertakan foto sopir'; endif; ?>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            Foto KTP : <br>
+                            <?php if($v['foto_ktp']) : ?>
+                            <img src="<?= base_url('assets/uploads/temuan/foto_ktp/') . $v['foto_ktp'] ?>" class="wh-250 img-style mt-2">
+                            <?php else : echo 'Tidak menyertakan foto ktp'; endif; ?>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            Foto SIM : <br>
+                            <?php if($v['foto_sim']) : ?>
+                            <img src="<?= base_url('assets/uploads/temuan/foto_sim/') . $v['foto_sim'] ?>" class="wh-250 img-style mt-2">
+                            <?php else : echo 'Tidak menyertakan foto sim'; endif; ?>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            Foto Temuan : <br>
+                            <?php if($v['foto_temuan']) : ?>
+                            <img src="<?= base_url('assets/uploads/temuan/foto_temuan/') . $v['foto_temuan'] ?>" class="wh-250 img-style mt-2">
+                            <?php else : echo 'Tidak menyertakan foto temuan'; endif; ?>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <?php endforeach; endif; ?>

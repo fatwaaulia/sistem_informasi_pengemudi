@@ -227,6 +227,9 @@ hr { opacity: .25; }
 /*--------------------------------------------------------------
   # Datatables
 --------------------------------------------------------------*/
+table.dataTable thead th {
+    font-weight: 500!important;
+}
 .dataTables_wrapper input:focus,
 .dataTables_wrapper select:focus {
     border-color: var(--main-color);

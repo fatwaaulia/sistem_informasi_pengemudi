@@ -30,7 +30,7 @@
     <table width="910" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:10px;">
         <tr>
             <td width="20%">
-                <img src="<?= base_url() . 'assets/uploads/temuan/' . $temuan[0]['foto_sopir'] ?>" width="80%">
+                <img src="<?= base_url() . 'assets/uploads/temuan/foto_sopir/' . $temuan[0]['foto_sopir'] ?>" width="80%">
             </td>
             <td width="20%">
                 <p style="margin:10px 0; padding:0;" class="fw-600">NIK</p>

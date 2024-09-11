@@ -56,7 +56,7 @@ class Temuan extends BaseController
         foreach ($data as $key => $v) {
             $data[$key]['no_urut'] = $offset + $key + 1;
             $data[$key]['id'] = encode($v['id']);
-            $data[$key]['foto_sopir'] = $v['foto_sopir'] ? base_url($this->upload_path) . $v['foto_sopir'] : base_url('assets/uploads/default.png');
+            $data[$key]['foto_temuan'] = $v['foto_temuan'] ? base_url($this->upload_path . 'foto_temuan/') . $v['foto_temuan'] : base_url('assets/uploads/default.png');
             $data[$key]['tanggal_kejadian'] = $v['tanggal_kejadian'] != '0000-00-00' ? date('d-m-Y', strtotime($v['tanggal_kejadian'])) : '';
             $data[$key]['created_at'] = date('d-m-Y H:i:s', strtotime($v['created_at']));
         }
@@ -99,8 +99,12 @@ class Temuan extends BaseController
     public function create()
     {
         $rules = [
-            'nik'        => "required|numeric|min_length[16]|max_length[16]",
-            'foto_sopir' => 'max_size[foto_sopir,10240]|ext_in[foto_sopir,png,jpg,jpeg]|mime_in[foto_sopir,image/png,image/jpg,image/jpeg]|is_image[foto_sopir]',
+            'nik'               => "required|numeric|min_length[16]|max_length[16]",
+            'catatan_kejadian'  => "required",
+            'foto_sopir'        => 'max_size[foto_sopir,10240]|ext_in[foto_sopir,png,jpg,jpeg]|mime_in[foto_sopir,image/png,image/jpg,image/jpeg]|is_image[foto_sopir]',
+            'foto_ktp'          => 'max_size[foto_ktp,10240]|ext_in[foto_ktp,png,jpg,jpeg]|mime_in[foto_ktp,image/png,image/jpg,image/jpeg]|is_image[foto_ktp]',
+            'foto_sim'          => 'max_size[foto_sim,10240]|ext_in[foto_sim,png,jpg,jpeg]|mime_in[foto_sim,image/png,image/jpg,image/jpeg]|is_image[foto_sim]',
+            'foto_temuan'       => 'max_size[foto_temuan,10240]|ext_in[foto_temuan,png,jpg,jpeg]|mime_in[foto_temuan,image/png,image/jpg,image/jpeg]|is_image[foto_temuan]',
         ];
         if (! $this->validate($rules)) {
             return redirect()->back()->withInput();
@@ -108,23 +112,50 @@ class Temuan extends BaseController
             $foto_sopir = $this->request->getFile('foto_sopir');
             if ($foto_sopir != '') {
                 $foto_sopir_name = $foto_sopir->getRandomName();
-                $this->image->withFile($foto_sopir)->save($this->upload_path . $foto_sopir_name, 60);
+                $this->image->withFile($foto_sopir)->save($this->upload_path . 'foto_sopir/' . $foto_sopir_name, 60);
             } else {
                 $foto_sopir_name = '';
             }
 
+            $foto_ktp = $this->request->getFile('foto_ktp');
+            if ($foto_ktp != '') {
+                $foto_ktp_name = $foto_ktp->getRandomName();
+                $this->image->withFile($foto_ktp)->save($this->upload_path . 'foto_ktp/' . $foto_ktp_name, 60);
+            } else {
+                $foto_ktp_name = '';
+            }
+
+            $foto_sim = $this->request->getFile('foto_sim');
+            if ($foto_sim != '') {
+                $foto_sim_name = $foto_sim->getRandomName();
+                $this->image->withFile($foto_sim)->save($this->upload_path . 'foto_sim/' . $foto_sim_name, 60);
+            } else {
+                $foto_sim_name = '';
+            }
+
+            $foto_temuan = $this->request->getFile('foto_temuan');
+            if ($foto_temuan != '') {
+                $foto_temuan_name = $foto_temuan->getRandomName();
+                $this->image->withFile($foto_temuan)->save($this->upload_path . 'foto_temuan/' . $foto_temuan_name, 60);
+            } else {
+                $foto_temuan_name = '';
+            }
+
             $data = [
-                'id_pelapor' => $this->user_session['id'],
-                'nama_perusahaan' => $this->user_session['nama_perusahaan'],
-                'nik'        => $this->request->getVar('nik', $this->filter),
-                'nama'       => $this->request->getVar('nama', $this->filter),
-                'no_sim'        => $this->request->getVar('no_sim', $this->filter),
-                'no_ponsel'        => $this->request->getVar('no_ponsel', $this->filter),
-                'tanggal_lahir' => $this->request->getVar('tanggal_lahir', $this->filter),
-                'alamat'        => $this->request->getVar('alamat', $this->filter),
-                'catatan_kejadian'    => $this->request->getVar('catatan_kejadian', $this->filter),
-                'tanggal_kejadian'    => $this->request->getVar('tanggal_kejadian', $this->filter),
-                'foto_sopir'      => $foto_sopir_name,
+                'id_pelapor'        => $this->user_session['id'],
+                'nama_perusahaan'   => $this->user_session['nama_perusahaan'],
+                'nik'               => $this->request->getVar('nik', $this->filter),
+                'nama'              => $this->request->getVar('nama', $this->filter),
+                'no_sim'            => $this->request->getVar('no_sim', $this->filter),
+                'no_ponsel'         => $this->request->getVar('no_ponsel', $this->filter),
+                'tanggal_lahir'     => $this->request->getVar('tanggal_lahir', $this->filter),
+                'alamat'            => $this->request->getVar('alamat', $this->filter),
+                'catatan_kejadian'  => $this->request->getVar('catatan_kejadian', $this->filter),
+                'tanggal_kejadian'  => $this->request->getVar('tanggal_kejadian', $this->filter),
+                'foto_sopir'        => $foto_sopir_name,
+                'foto_ktp'          => $foto_ktp_name,
+                'foto_sim'          => $foto_sim_name,
+                'foto_temuan'       => $foto_temuan_name,
             ];
 
             $jumlah_temuan = $this->base_model->where('id_pelapor', $this->user_session['id'])->countAllResults();
@@ -188,34 +219,70 @@ class Temuan extends BaseController
         $find_data = $this->base_model->find($id);
 
         $rules = [
-            'nik'        => "required|numeric|min_length[16]|max_length[16]",
-            'foto_sopir' => 'max_size[foto_sopir,10240]|ext_in[foto_sopir,png,jpg,jpeg]|mime_in[foto_sopir,image/png,image/jpg,image/jpeg]|is_image[foto_sopir]',
+            'nik'               => "required|numeric|min_length[16]|max_length[16]",
+            'catatan_kejadian'  => "required",
+            'foto_sopir'        => 'max_size[foto_sopir,10240]|ext_in[foto_sopir,png,jpg,jpeg]|mime_in[foto_sopir,image/png,image/jpg,image/jpeg]|is_image[foto_sopir]',
+            'foto_ktp'          => 'max_size[foto_ktp,10240]|ext_in[foto_ktp,png,jpg,jpeg]|mime_in[foto_ktp,image/png,image/jpg,image/jpeg]|is_image[foto_ktp]',
+            'foto_sim'          => 'max_size[foto_sim,10240]|ext_in[foto_sim,png,jpg,jpeg]|mime_in[foto_sim,image/png,image/jpg,image/jpeg]|is_image[foto_sim]',
+            'foto_temuan'       => 'max_size[foto_temuan,10240]|ext_in[foto_temuan,png,jpg,jpeg]|mime_in[foto_temuan,image/png,image/jpg,image/jpeg]|is_image[foto_temuan]',
         ];
         if (! $this->validate($rules)) {
             return redirect()->back()->withInput();
         } else {
             $foto_sopir = $this->request->getFile('foto_sopir');
             if ($foto_sopir != '') {
-                $file = $this->upload_path . $find_data['foto_sopir'];
+                $file = $this->upload_path . 'foto_sopir/' . $find_data['foto_sopir'];
                 if (is_file($file)) unlink($file);
                 $foto_sopir_name = $foto_sopir->getRandomName();
-                $this->image->withFile($foto_sopir)->save($this->upload_path . $foto_sopir_name, 60);
+                $this->image->withFile($foto_sopir)->save($this->upload_path . 'foto_sopir/' . $foto_sopir_name, 60);
             } else {
                 $foto_sopir_name = $find_data['foto_sopir'];
             }
 
+            $foto_ktp = $this->request->getFile('foto_ktp');
+            if ($foto_ktp != '') {
+                $file = $this->upload_path . 'foto_ktp/' . $find_data['foto_ktp'];
+                if (is_file($file)) unlink($file);
+                $foto_ktp_name = $foto_ktp->getRandomName();
+                $this->image->withFile($foto_ktp)->save($this->upload_path . 'foto_ktp/' . $foto_ktp_name, 60);
+            } else {
+                $foto_ktp_name = $find_data['foto_ktp'];
+            }
+
+            $foto_sim = $this->request->getFile('foto_sim');
+            if ($foto_sim != '') {
+                $file = $this->upload_path . 'foto_sim/' . $find_data['foto_sim'];
+                if (is_file($file)) unlink($file);
+                $foto_sim_name = $foto_sim->getRandomName();
+                $this->image->withFile($foto_sim)->save($this->upload_path . 'foto_sim/' . $foto_sim_name, 60);
+            } else {
+                $foto_sim_name = $find_data['foto_sim'];
+            }
+
+            $foto_temuan = $this->request->getFile('foto_temuan');
+            if ($foto_temuan != '') {
+                $file = $this->upload_path . 'foto_temuan/' . $find_data['foto_temuan'];
+                if (is_file($file)) unlink($file);
+                $foto_temuan_name = $foto_temuan->getRandomName();
+                $this->image->withFile($foto_temuan)->save($this->upload_path . 'foto_temuan/' . $foto_temuan_name, 60);
+            } else {
+                $foto_temuan_name = $find_data['foto_temuan'];
+            }
+
             $data = [
-                'id_pelapor' => $this->user_session['id'],
-                'nama_perusahaan' => $this->user_session['nama_perusahaan'],
-                'nik'        => $this->request->getVar('nik', $this->filter),
-                'nama'       => $this->request->getVar('nama', $this->filter),
-                'no_sim'        => $this->request->getVar('no_sim', $this->filter),
-                'no_ponsel'        => $this->request->getVar('no_ponsel', $this->filter),
-                'tanggal_lahir' => $this->request->getVar('tanggal_lahir', $this->filter),
-                'alamat'        => $this->request->getVar('alamat', $this->filter),
-                'catatan_kejadian'    => $this->request->getVar('catatan_kejadian', $this->filter),
-                'tanggal_kejadian'    => $this->request->getVar('tanggal_kejadian', $this->filter),
-                'foto_sopir'      => $foto_sopir_name,
+                'nama_perusahaan'   => $this->user_session['nama_perusahaan'],
+                'nik'               => $this->request->getVar('nik', $this->filter),
+                'nama'              => $this->request->getVar('nama', $this->filter),
+                'no_sim'            => $this->request->getVar('no_sim', $this->filter),
+                'no_ponsel'         => $this->request->getVar('no_ponsel', $this->filter),
+                'tanggal_lahir'     => $this->request->getVar('tanggal_lahir', $this->filter),
+                'alamat'            => $this->request->getVar('alamat', $this->filter),
+                'catatan_kejadian'  => $this->request->getVar('catatan_kejadian', $this->filter),
+                'tanggal_kejadian'  => $this->request->getVar('tanggal_kejadian', $this->filter),
+                'foto_sopir'        => $foto_sopir_name,
+                'foto_ktp'          => $foto_ktp_name,
+                'foto_sim'          => $foto_sim_name,
+                'foto_temuan'       => $foto_temuan_name,
             ];
 
             $this->base_model->update($id, $data);
@@ -238,7 +305,7 @@ class Temuan extends BaseController
         $id = decode($id_encode);
         $find_data = $this->base_model->find($id);
 
-        $foto_sopir = $this->upload_path . $find_data['foto_sopir'];
+        $foto_sopir = $this->upload_path . 'foto_sopir/' . $find_data['foto_sopir'];
         if (is_file($foto_sopir)) unlink($foto_sopir);
 
         $this->base_model->delete($id);
@@ -298,6 +365,9 @@ class Temuan extends BaseController
                 'catatan_kejadian'  => json_encode(array_column($cek_temuan, 'catatan_kejadian'), true),
                 'tanggal_kejadian'  => json_encode(array_column($cek_temuan, 'tanggal_kejadian'), true),
                 'foto_sopir'        => json_encode(array_column($cek_temuan, 'foto_sopir'), true),
+                'foto_ktp'        => json_encode(array_column($cek_temuan, 'foto_ktp'), true),
+                'foto_sim'        => json_encode(array_column($cek_temuan, 'foto_sim'), true),
+                'foto_temuan'     => json_encode(array_column($cek_temuan, 'foto_temuan'), true),
             ];
 
             $get_data['nik'] = $nik;

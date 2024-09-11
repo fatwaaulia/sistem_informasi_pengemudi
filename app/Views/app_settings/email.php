@@ -43,7 +43,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
         <div class="col-md-12">
             <div style="background:#ededed;text-align:center;color:#888888;padding:16px 12px">
                 <span>
-                    <?= $app_settings['copyright'] ?>
+                    &copy; <?= date('Y') . $app_settings['nama_aplikasi'] ?>
                 </span>
             </div>
         </div>

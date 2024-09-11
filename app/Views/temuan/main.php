@@ -32,7 +32,7 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
                             <th>No. Ponsel</th>
                             <th>Catatan Kejadian</th>
                             <th>Tanggal Kejadian</th>
-                            <th>Foto Sopir</th>
+                            <th>Foto Temuan</th>
                             <th>Created At</th>
                             <th>Opsi</th>
                         </tr>
@@ -60,15 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
             { data: 'no_ponsel' },
             { data: 'catatan_kejadian' },
             { data: 'tanggal_kejadian' },
-            { data: null, render: renderFotoSopir },
+            { data: null, render: renderTemuan },
             { data: 'created_at' },
             { data: null, render: renderOpsi },
         ],
     });
 });
 
-function renderFotoSopir(data) {
-    return `<img src="${data.foto_sopir}" class="wh-40 img-style" loading="lazy">`;
+function renderTemuan(data) {
+    return `<img src="${data.foto_temuan}" class="wh-40 img-style" loading="lazy">`;
 }
 
 function renderOpsi(data) {

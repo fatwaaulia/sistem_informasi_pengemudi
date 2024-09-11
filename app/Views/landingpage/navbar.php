@@ -34,7 +34,7 @@ $uri->setSilent(true);
         <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars my-1"></i>
         </button>
-        <div class="collapse navbar-collapse justify-content-between py-3 py-md-0" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-between py-3 py-md-0 bg-light" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <!-- <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">HOME</a> -->
             </div>
@@ -66,7 +66,7 @@ $uri->setSilent(true);
 <script>
 $(document).scroll(() => {
     let scroll = $(document).scrollTop();
-    if(scroll > 150) {
+    if(scroll > 400) {
         $('.navbar').removeClass('position-absolute w-100');
         $('.navbar').addClass('fixed-top smoothScroll');
     } else {

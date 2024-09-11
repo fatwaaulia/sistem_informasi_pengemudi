@@ -64,5 +64,19 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
                 </div>
             </div>
         </div>
+        <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="card mb-3">
+                <div class="card-body text-center" style="border-bottom:4px solid var(--bs-primary); border-radius:var(--border-radius)">
+                    <p class="fw-500 d-block mb-2">
+                        <i class="fa-solid fa-magnifying-glass-arrow-right me-1"></i>
+                        Temuan
+                    </p>
+                    <h3 class="mb-0"><?= model('Temuan')->where('id_pelapor', $user_session['id'])->countAllResults() ?></h3>
+                    <small>
+                        Laporan Anda
+                    </small>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

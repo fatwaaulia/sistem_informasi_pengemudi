@@ -28,18 +28,18 @@ overflow: visible;
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 mt-3">
+        <div class="col-12 mb-3">
             <div class="owl-carousel owl-header owl-theme">
                 <?php
                 $data_slider = [
                     [
-                        'judul' => 'Sistem Terintegrasi Data Pelanggaran Pengemudi',
-                        'deskripsi' => 'Temukan informasi pelanggaran pengemudi dari seluruh Indonesia untuk membantu Anda memilih pengemudi terbaik bagi perusahaan Anda.',
+                        'judul' => 'Sistem Terintegrasi Data Catatan Pengemudi',
+                        'deskripsi' => 'Temukan informasi catatan pengemudi dari seluruh Indonesia untuk membantu Anda memilih pengemudi terbaik bagi perusahaan Anda.',
                         'gambar' => '1.png',
                     ],
                     [
-                        'judul' => 'Ajukan Data Pelanggaran Pengemudi',
-                        'deskripsi' => 'Anda juga dapat berkontribusi dengan menambahkan data pelanggaran pengemudi, yang akan tersedia bagi seluruh perusahaan ekspedisi terdaftar di Indonesia.',
+                        'judul' => 'Ajukan Data Catatan Pengemudi',
+                        'deskripsi' => 'Anda juga dapat berkontribusi dengan menambahkan data catatan pengemudi, yang akan tersedia bagi seluruh perusahaan ekspedisi terdaftar di Indonesia.',
                         'gambar' => '2.png',
                     ],
                     [
@@ -55,6 +55,9 @@ overflow: visible;
                         <div class="col-12 col-lg-5">
                             <h1 class="text-danger fw-600"><?= $v['judul'] ?></h1>
                             <h5 class="text-white mt-3"><?= $v['deskripsi'] ?></h5>
+                            <a href="<?= base_url('perusahaan/berlangganan') ?>" class="btn btn-primary mt-4">
+                                berlangganan
+                            </a>
                         </div>
                         <div class="col-12 col-lg-6 position-relative" style="min-height:70vh">
                             <img src="<?= base_url('assets/img/slider/'. $v['gambar']) ?>" class="position-absolute" style="bottom:0; right:0px; width:80%;">

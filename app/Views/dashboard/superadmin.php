@@ -65,16 +65,10 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
             <div class="card mb-3">
                 <div class="card-body text-center" style="border-bottom:4px solid var(--bs-primary); border-radius:var(--border-radius)">
                     <p class="fw-500 d-block mb-2">
-                        <i class="fa-solid fa-file me-1"></i>
-                        Lapor Temuan
+                        <i class="fa-solid fa-magnifying-glass-arrow-right me-1"></i>
+                        Temuan
                     </p>
-                    <?php
-                    $pengajuan_perusahaan = model('Users')->where([
-                                'id_role' => 3,
-                                'status_pengajuan_perusahaan' => 'Menunggu Verifikasi'])
-                            ->findAll();
-                    ?>
-                    <h3 class="mb-0"><?= count($pengajuan_perusahaan) ?></h3>
+                    <h3 class="mb-0"><?= model('Temuan')->countAll() ?></h3>
                 </div>
             </div>
         </div>
