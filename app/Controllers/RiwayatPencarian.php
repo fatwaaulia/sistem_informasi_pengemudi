@@ -19,19 +19,35 @@ class RiwayatPencarian extends BaseController
     {
         $user_session = model('Users')->where('id', session()->get('id_user'))->first();
 
-        $total_rows = $this->base_model->where('id_peminta', $user_session['id'])->countAllResults();
-        $limit = $this->request->getVar('length') ?? $total_rows;
-        $offset = $this->request->getVar('start') ?? 0;
+        if (in_array($user_session['id_role'], [1, 2])) {
 
-        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
-        $data = $this->base_model->where('id_peminta', $user_session['id'])->findAll($limit, $offset);
-        
-        $search = $this->request->getVar('search')['value'] ?? null;
-        if ($search) {
-            $data       = $this->base_model->like('nik', $search)
-                            ->where('id_peminta', $user_session['id'])->findAll($limit, $offset);
-            $total_rows = $this->base_model->like('nik', $search)
-                            ->where('id_peminta', $user_session['id'])->countAllResults();
+            $total_rows = $this->base_model->countAllResults();
+            $limit = $this->request->getVar('length') ?? $total_rows;
+            $offset = $this->request->getVar('start') ?? 0;
+
+            $data = $this->base_model->findAll($limit, $offset);
+            
+            $search = $this->request->getVar('search')['value'] ?? null;
+            if ($search) {
+                $data       = $this->base_model->like('nik', $search)->findAll($limit, $offset);
+                $total_rows = $this->base_model->like('nik', $search)->countAllResults();
+            }
+
+        } else {
+
+            $total_rows = $this->base_model->where('id_peminta', $user_session['id'])->countAllResults();
+            $limit = $this->request->getVar('length') ?? $total_rows;
+            $offset = $this->request->getVar('start') ?? 0;
+
+            $data = $this->base_model->where('id_peminta', $user_session['id'])->findAll($limit, $offset);
+            
+            $search = $this->request->getVar('search')['value'] ?? null;
+            if ($search) {
+                $data       = $this->base_model->like('nik', $search)
+                                ->where('id_peminta', $user_session['id'])->findAll($limit, $offset);
+                $total_rows = $this->base_model->like('nik', $search)
+                                ->where('id_peminta', $user_session['id'])->countAllResults();
+            }
         }
 
         foreach ($data as $key => $v) {
@@ -41,7 +57,9 @@ class RiwayatPencarian extends BaseController
         }
 
         return $this->response->setJSON([
-            'recordsTotal'    => $this->base_model->where('id_peminta', $user_session['id'])->countAllResults(),
+            'recordsTotal'    => in_array($user_session['id_role'], [1, 2])
+                                    ? $this->base_model->countAllResults()
+                                    : $this->base_model->where('id_peminta', $user_session['id'])->countAllResults(),
             'recordsFiltered' => $total_rows,
             'data'            => $data,
         ]);

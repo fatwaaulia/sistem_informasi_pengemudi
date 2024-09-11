@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <div class="alert alert-primary" role="alert">
                 Status : <b><?= $data['status_pengajuan_perusahaan'] ?></b> <br>
                 Tgl. Diterima : <?= date('d-m-Y H:i:s', strtotime($data['checked_at'])) ?> <br>

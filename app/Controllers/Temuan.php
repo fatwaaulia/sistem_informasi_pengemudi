@@ -22,31 +22,49 @@ class Temuan extends BaseController
     {
         $user_session = model('Users')->where('id', session()->get('id_user'))->first();
 
-        $total_rows = $this->base_model->where('id_pelapor', $user_session['id'])->countAllResults();
-        $limit = $this->request->getVar('length') ?? $total_rows;
-        $offset = $this->request->getVar('start') ?? 0;
+        if (in_array($user_session['id_role'], [1, 2])) {
 
-        $user_session = model('Users')->where('id', session()->get('id_user'))->first();
-        $data = $this->base_model->where('id_pelapor', $user_session['id'])->findAll($limit, $offset);
-        
-        $search = $this->request->getVar('search')['value'] ?? null;
-        if ($search) {
-            $data       = $this->base_model->like('nik', $search)
-                            ->where('id_pelapor', session()->get('id_user'))->findAll($limit, $offset);
-            $total_rows = $this->base_model->like('nik', $search)
-                            ->where('id_pelapor', session()->get('id_user'))->countAllResults();
+            $total_rows = $this->base_model->countAllResults();
+            $limit = $this->request->getVar('length') ?? $total_rows;
+            $offset = $this->request->getVar('start') ?? 0;
+
+            $data = $this->base_model->findAll($limit, $offset);
+
+            $search = $this->request->getVar('search')['value'] ?? null;
+            if ($search) {
+                $data       = $this->base_model->like('nik', $search)->findAll($limit, $offset);
+                $total_rows = $this->base_model->like('nik', $search)->countAllResults();
+            }
+
+        } else {
+
+            $total_rows = $this->base_model->where('id_pelapor', $user_session['id'])->countAllResults();
+            $limit = $this->request->getVar('length') ?? $total_rows;
+            $offset = $this->request->getVar('start') ?? 0;
+
+            $data = $this->base_model->where('id_pelapor', $user_session['id'])->findAll($limit, $offset);
+
+            $search = $this->request->getVar('search')['value'] ?? null;
+            if ($search) {
+                $data       = $this->base_model->like('nik', $search)
+                                ->where('id_pelapor', session()->get('id_user'))->findAll($limit, $offset);
+                $total_rows = $this->base_model->like('nik', $search)
+                                ->where('id_pelapor', session()->get('id_user'))->countAllResults();
+            }
         }
 
         foreach ($data as $key => $v) {
             $data[$key]['no_urut'] = $offset + $key + 1;
             $data[$key]['id'] = encode($v['id']);
             $data[$key]['foto_sopir'] = $v['foto_sopir'] ? base_url($this->upload_path) . $v['foto_sopir'] : base_url('assets/uploads/default.png');
-            $data[$key]['tanggal_kejadian'] = date('d-m-Y', strtotime($v['tanggal_kejadian']));
+            $data[$key]['tanggal_kejadian'] = $v['tanggal_kejadian'] != '0000-00-00' ? date('d-m-Y', strtotime($v['tanggal_kejadian'])) : '';
             $data[$key]['created_at'] = date('d-m-Y H:i:s', strtotime($v['created_at']));
         }
 
         return $this->response->setJSON([
-            'recordsTotal'    => $this->base_model->where('id_pelapor', $user_session['id'])->countAllResults(),
+            'recordsTotal'    => in_array($user_session['id_role'], [1, 2]) 
+                                    ? $this->base_model->countAllResults()
+                                    : $this->base_model->where('id_pelapor', $user_session['id'])->countAllResults(),
             'recordsFiltered' => $total_rows,
             'data'            => $data,
         ]);
@@ -82,8 +100,6 @@ class Temuan extends BaseController
     {
         $rules = [
             'nik'        => "required|numeric|min_length[16]|max_length[16]",
-            'nama'       => 'required',
-            'tanggal_kejadian'    => 'required',
             'foto_sopir' => 'max_size[foto_sopir,10240]|ext_in[foto_sopir,png,jpg,jpeg]|mime_in[foto_sopir,image/png,image/jpg,image/jpeg]|is_image[foto_sopir]',
         ];
         if (! $this->validate($rules)) {
@@ -173,8 +189,6 @@ class Temuan extends BaseController
 
         $rules = [
             'nik'        => "required|numeric|min_length[16]|max_length[16]",
-            'nama'       => 'required',
-            'tanggal_kejadian'    => 'required',
             'foto_sopir' => 'max_size[foto_sopir,10240]|ext_in[foto_sopir,png,jpg,jpeg]|mime_in[foto_sopir,image/png,image/jpg,image/jpeg]|is_image[foto_sopir]',
         ];
         if (! $this->validate($rules)) {
@@ -247,29 +261,56 @@ class Temuan extends BaseController
     public function cariTemuan()
     {
         $nik = $this->request->getVar('nik', FILTER_SANITIZE_NUMBER_INT);
-        $cek_temuan = $this->base_model->where('nik', $nik)->findAll();
+        $no_sim = $this->request->getVar('no_sim', $this->filter);
 
-        if ($cek_temuan) {
+        $cek_temuan = $this->base_model->where('nik', $nik)->findAll();
+        $status = 'NIK atau SIM tidak ditemukan';
+        $data_temuan = [];
+        if ($nik AND !$no_sim) {
+            $cek_temuan = $this->base_model->where('nik', $nik)->findAll();
+            if ($cek_temuan) {
+                $status = 'NIK ditemukan';
+                $data_temuan = $cek_temuan;
+            }
+        } elseif (!$nik AND $no_sim) {
+            $cek_temuan = $this->base_model->where('no_sim', $no_sim)->findAll();
+            if ($cek_temuan) {
+                $status = 'SIM ditemukan';
+                $data_temuan = $cek_temuan;
+            }
+        } elseif ($nik AND $no_sim) {
+            $cek_temuan = $this->base_model->where(['nik' => $nik, 'no_sim' => $no_sim])->findAll();
+            if ($cek_temuan) {
+                $status = 'NIK dan SIM ditemukan';
+                $data_temuan = $cek_temuan;
+            }
+        }
+
+        if ($data_temuan) {
             $get_data = [
                 'id_temuan'  => json_encode(array_column($cek_temuan, 'id'), true),
                 'id_pelapor' => json_encode(array_column($cek_temuan, 'id_pelapor'), true),
                 'nama'       => json_encode(array_column($cek_temuan, 'nama'), true),
-                'catatan_kejadian'    => json_encode(array_column($cek_temuan, 'catatan_kejadian'), true),
-                'tanggal_kejadian'    => json_encode(array_column($cek_temuan, 'tanggal_kejadian'), true),
-                'foto_sopir'      => json_encode(array_column($cek_temuan, 'foto_sopir'), true),
+                'no_sim'        => json_encode(array_column($cek_temuan, 'no_sim'), true),
+                'no_ponsel'     => json_encode(array_column($cek_temuan, 'no_ponsel'), true),
+                'tanggal_lahir' => json_encode(array_column($cek_temuan, 'tanggal_lahir'), true),
+                'alamat'        => json_encode(array_column($cek_temuan, 'alamat'), true),
+                'catatan_kejadian'  => json_encode(array_column($cek_temuan, 'catatan_kejadian'), true),
+                'tanggal_kejadian'  => json_encode(array_column($cek_temuan, 'tanggal_kejadian'), true),
+                'foto_sopir'        => json_encode(array_column($cek_temuan, 'foto_sopir'), true),
             ];
 
             $get_data['nik'] = $nik;
             $get_data['id_peminta'] = $this->user_session['id'];
-            model('RiwayatPencarian')->insert($get_data);
+            $get_data['nama_perusahaan'] = $this->user_session['nama_perusahaan'];
+            // model('RiwayatPencarian')->insert($get_data);
 
             $user_session = model('Users')->where('id', session()->get('id_user'))->first();
             $data = [
                 'poin'        => $user_session['poin'] - 1,
                 'poin_keluar' => $user_session['poin_keluar'] + 1,
             ];
-
-            model('Users')->update($user_session['id'], $data);
+            // model('Users')->update($user_session['id'], $data);
         }
 
         $data = [
@@ -278,8 +319,9 @@ class Temuan extends BaseController
             'base_route'  => $this->base_route,
             'title'       => 'Cari Temuan',
             'nik'         => $nik,
-            'status'      => $cek_temuan ? 'NIK ditemukan' : 'NIK tidak ditemukan',
-            'data'        => $this->base_model->where('nik', $nik)->findAll(),
+            'no_sim'      => $no_sim,
+            'status'      => $status,
+            'data'        => $data_temuan,
         ];
 
         $view['sidebar'] = view('dashboard/sidebar');
@@ -290,7 +332,19 @@ class Temuan extends BaseController
     public function unduhPdf()
     {
         $nik = $this->request->getVar('nik', FILTER_SANITIZE_NUMBER_INT);
-        $data['temuan'] = $this->base_model->where('nik', $nik)->findAll();
+        $no_sim = $this->request->getVar('no_sim', $this->filter);
+
+        $data['temuan'] = [];
+        if ($nik AND !$no_sim) {
+            $cek_temuan = $this->base_model->where('nik', $nik)->findAll();
+            if ($cek_temuan) $data['temuan'] = $cek_temuan;
+        } elseif (!$nik AND $no_sim) {
+            $cek_temuan = $this->base_model->where('no_sim', $no_sim)->findAll();
+            if ($cek_temuan) $data['temuan'] = $cek_temuan;
+        } elseif ($nik AND $no_sim) {
+            $cek_temuan = $this->base_model->where(['nik' => $nik, 'no_sim' => $no_sim])->findAll();
+            if ($cek_temuan) $data['temuan'] = $cek_temuan;
+        }
 
         if (! $data['temuan']) {
             return redirect()->to($this->base_route)

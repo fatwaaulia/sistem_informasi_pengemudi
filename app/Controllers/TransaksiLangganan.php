@@ -95,7 +95,7 @@ class TransaksiLangganan extends BaseController
                 "<script>
                     Swal.fire({
                     icon: 'error',
-                    title: 'Free Trial tidak dapat digunakan lagi!',
+                    title: 'Paket ini tidak dapat digunakan lagi!',
                     showConfirmButton: false,
                     timer: 2500,
                     timerProgressBar: true,

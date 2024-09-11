@@ -1,3 +1,7 @@
+<?php
+$user_session = model('Users')->where('id', session()->get('id_user'))->first();
+?>
+
 <section>
 <div class="container-fluid">
     <div class="row">
@@ -8,6 +12,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card p-3 position-relative">
+                <?php if ($user_session['id_role'] ==3 ) : ?>
                 <div class="row mb-3">
                     <div class="col-12 d-flex justify-content-end align-items-end">
                         <a href="<?= $base_route . '/new' ?>" class="btn btn-primary">
@@ -15,10 +20,12 @@
                         </a>
                     </div>
                 </div>
+                <?php endif; ?>
                 <table class="display nowrap w-100" id="myTable">
                     <thead>
                         <tr>
                             <th>No.</th>
+                            <th>Pelapor</th>
                             <th>NIK</th>
                             <th>Nama Lengkap</th>
                             <th>No. SIM</th>
@@ -46,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollX: true,
         columns: [
             { data: 'no_urut' },
+            { data: 'nama_perusahaan' },
             { data: 'nik' },
             { data: 'nama' },
             { data: 'no_sim' },

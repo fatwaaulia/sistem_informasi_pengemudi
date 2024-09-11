@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="shortcut icon" href="<?= base_url() . 'assets/uploads/app_settings/favicon.jpg' ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url() . 'assets/uploads/app_settings/favicon.png' ?>" type="image/x-icon">
     <title>SISTEM LAYANAN INFORMASI PENGEMUDI - <?= $temuan[0]['nik'] ?></title>
     <style>
     body, h1, h2, h3, h4, h5, h6, p, span, a, div, button, label {

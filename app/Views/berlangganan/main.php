@@ -1,3 +1,7 @@
+<?php
+$user_session = model('Users')->where('id', session()->get('id_user'))->first();
+?>
+
 <section>
 <div class="container-fluid">
     <div class="row">
@@ -57,7 +61,15 @@
                     </div>
                     <div class="text-center">
                         <small>*Berlaku hingga 1 tahun</small>
-                        <button class="btn btn-primary w-100 mt-3" data-bs-toggle="modal" data-bs-target="#berlangganan<?= $key+1 ?>">Langganan</button>
+                        <?php
+                        $disable_free_trial = '';
+                        if ($v['harga_promo'] == 0) {
+                            if ($user_session['bonus_free_trial_at'] != null) {
+                                $disable_free_trial = 'disabled';
+                            }
+                        }
+                        ?>
+                        <button class="btn btn-primary w-100 mt-3" data-bs-toggle="modal" data-bs-target="#berlangganan<?= $key+1 ?>" <?= $disable_free_trial ?>>Langganan</button>
                     </div>
                 </div>
             </div>

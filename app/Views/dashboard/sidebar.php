@@ -104,6 +104,13 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			'type'	=> 'no-collapse',
 		],
 		[
+			'title'	=> 'Perusahaan',
+			'icon'	=> 'fa-solid fa-building',
+			'url'	=> base_url($user_role) . '/perusahaan',
+			'role'	=> [1, 2],
+			'type'	=> 'no-collapse',
+		],
+		[
 			'title'	=> 'LANGGANAN',
 			'role'	=> [3],
 			'type'	=> 'heading',
@@ -124,14 +131,14 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 		],
 		[
 			'title'	=> 'TEMUAN',
-			'role'	=> [3],
+			'role'	=> [1, 2, 3],
 			'type'	=> 'heading',
 		],
 		[
 			'title'	=> 'Lapor Temuan',
 			'icon'	=> 'fa-solid fa-magnifying-glass-arrow-right',
 			'url'	=> base_url($user_role) . '/lapor-temuan',
-			'role'	=> [3],
+			'role'	=> [1, 2, 3],
 			'type'	=> 'no-collapse',
 		],
 		[
@@ -145,14 +152,7 @@ $logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
 			'title'	=> 'Riwayat Pencarian',
 			'icon'	=> 'fa-solid fa-list-check',
 			'url'	=> base_url($user_role) . '/riwayat-pencarian',
-			'role'	=> [3],
-			'type'	=> 'no-collapse',
-		],
-		[
-			'title'	=> 'Perusahaan',
-			'icon'	=> 'fa-solid fa-building',
-			'url'	=> base_url($user_role) . '/perusahaan',
-			'role'	=> [1, 2],
+			'role'	=> [1, 2, 3],
 			'type'	=> 'no-collapse',
 		],
 		[

@@ -94,6 +94,17 @@ $routes->group('superadmin/perusahaan', ['filter' => 'EnsureSuperAdmin'], static
     $routes->get('/', 'PengajuanPerusahaan::perusahaanAktif');
     $routes->get('detail/(:segment)', 'PengajuanPerusahaan::detailPerusahaanAktif/$1');
 });
+$routes->group('superadmin/lapor-temuan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+    $routes->get('get-data', 'Temuan::getData');
+    $routes->get('/', 'Temuan::index');
+    $routes->get('edit/(:segment)', 'Temuan::edit/$1');
+    $routes->post('update/(:segment)', 'Temuan::update/$1');
+    $routes->post('delete/(:segment)', 'Temuan::delete/$1');
+});
+$routes->group('superadmin/riwayat-pencarian', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
+    $routes->get('get-data', 'RiwayatPencarian::getData');
+    $routes->get('/', 'RiwayatPencarian::index');
+});
 $routes->group('superadmin/paket-langganan', ['filter' => 'EnsureSuperAdmin'], static function ($routes) {
     $routes->get('get-data', 'PaketLangganan::getData');
     $routes->get('/', 'PaketLangganan::index');
@@ -118,6 +129,17 @@ $routes->group('admin/perusahaan', ['filter' => 'EnsureAdmin'], static function 
     $routes->get('get-data', 'PengajuanPerusahaan::getDataPerusahaanAktif');
     $routes->get('/', 'PengajuanPerusahaan::perusahaanAktif');
     $routes->get('detail/(:segment)', 'PengajuanPerusahaan::detailPerusahaanAktif/$1');
+});
+$routes->group('admin/lapor-temuan', ['filter' => 'EnsureAdmin'], static function ($routes) {
+    $routes->get('get-data', 'Temuan::getData');
+    $routes->get('/', 'Temuan::index');
+    $routes->get('edit/(:segment)', 'Temuan::edit/$1');
+    $routes->post('update/(:segment)', 'Temuan::update/$1');
+    $routes->post('delete/(:segment)', 'Temuan::delete/$1');
+});
+$routes->group('admin/riwayat-pencarian', ['filter' => 'EnsureAdmin'], static function ($routes) {
+    $routes->get('get-data', 'RiwayatPencarian::getData');
+    $routes->get('/', 'RiwayatPencarian::index');
 });
 $routes->group('admin/paket-langganan', ['filter' => 'EnsureAdmin'], static function ($routes) {
     $routes->get('get-data', 'PaketLangganan::getData');

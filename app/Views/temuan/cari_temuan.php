@@ -6,15 +6,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <div class="card p-3 position-relative">
                 <form action="" method="get">
                     <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="number" class="form-control <?= validation_show_error('nik') ? 'is-invalid' : '' ?>" id="nik" name="nik" value="<?= $nik ?>" placeholder="masukkan nik" oninput="document.getElementById('modalNIK').innerText=this.value ? this.value : '~tidak boleh kosong~';" onkeydown="if(event.key === 'Enter') event.preventDefault();" required>
-                        <div class="invalid-feedback">
-                            <?= cutString(validation_show_error('nik')) ?>
-                        </div>
+                        <input type="number" class="form-control" id="nik" name="nik" value="<?= $nik ?>" placeholder="masukkan nik" oninput="document.getElementById('valueNIK').innerText=this.value ? this.value : '~kosong~';" onkeydown="if(event.key === 'Enter') event.preventDefault();">
+                    </div>
+                    <div class="mb-3">
+                        <label for="no_sim" class="form-label">No. SIM</label>
+                        <input type="number" class="form-control" id="no_sim" name="no_sim" value="<?= $no_sim ?>" placeholder="masukkan nomor sim" oninput="document.getElementById('valueSIM').innerText=this.value ? this.value : '~kosong~';" onkeydown="if(event.key === 'Enter') event.preventDefault();">
                     </div>
                     <button type="button" class="btn btn-primary mt-3 float-end" data-bs-toggle="modal" data-bs-target="#cekTemuan">Cek Temuan</button>
                     <!-- Modal -->
@@ -26,7 +27,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Pencarian temuan akan mengurangi poinmu sebanyak <b class="text-danger">-1</b> point. Apakah kamu yakin melakukan pencarian temuan dengan NIK <b id="modalNIK">~tidak boleh kosong~</b> ?</p>
+                                    <p>Pencarian temuan akan mengurangi poinmu sebanyak <b class="text-danger">-1</b> point. Apakah kamu yakin melakukan pencarian temuan dengan NIK <b id="valueNIK">~kosong~</b> dan No. SIM <b id="valueSIM">~kosong~</b> ?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -36,16 +37,15 @@
                         </div>
                     </div>
                 </form>
-                <?php if ($nik) : ?>
+                <?php if ($nik OR $no_sim) : ?>
                 <hr class="mt-4">
                 <div class="mb-2">
                     <span class="fw-600">Hasil Pencarian</span>
                 </div>
-                <h3 class="mb-4"><?= $nik ?></h3>
                 <div>
-                    Status : <span class="<?= ($status == 'NIK ditemukan') ? 'text-success' : 'text-danger' ?>"><?= $status ?></span>
+                    Status : <span><?= $status ?></span>
                 </div>
-                <a href="<?= base_url() . 'perusahaan/cari-temuan/unduh-pdf?nik=' . $nik ?>" target="_blank" class="btn btn-primary mt-3">Unduh Pdf</a>
+                <a href="<?= base_url() . 'perusahaan/cari-temuan/unduh-pdf?nik=' . $nik . '&no_sim=' . $no_sim ?>" target="_blank" class="btn btn-primary mt-3">Unduh Pdf</a>
                 <hr>
                 <?php foreach ($data as $v) : ?>
                 <div class="mb-2">
@@ -67,7 +67,7 @@
                     Catatan Kejadian : <?= $v['catatan_kejadian'] ?>
                 </div>
                 <div class="mb-2">
-                    Tanggal Kejadian : <?= date('d-m-Y', strtotime($v['tanggal_kejadian'])) ?>
+                    Tanggal Kejadian : <?= $v['tanggal_kejadian'] != '0000-00-00' ? date('d-m-Y', strtotime($v['tanggal_kejadian'])) : '' ?>
                 </div>
                 <div class="mb-2">
                     Perusahaan Pelapor : <?= $v['nama_perusahaan'] ?>
@@ -75,7 +75,7 @@
                 <div class="mb-2">
                     Foto Sopir :
                     <?php if($v['foto_sopir']) : ?>
-                    <img src="<?= base_url('assets/uploads/temuan/') . $v['foto_sopir'] ?>" class="w-100 img-style mt-2">
+                    <img src="<?= base_url('assets/uploads/temuan/') . $v['foto_sopir'] ?>" class="wh-250 img-style mt-2">
                     <?php else : echo 'Tidak menyertakan foto'; endif; ?>
                 </div>
                 <hr>

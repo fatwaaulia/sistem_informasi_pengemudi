@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="no_sim" class="form-label">No. SIM</label>
-                                    <input type="text" class="form-control <?= validation_show_error('no_sim') ? 'is-invalid' : '' ?>" id="no_sim" name="no_sim" value="<?= old('no_sim') ?? $data['no_sim'] ?>" placeholder="masukkan nomor sim">
+                                    <input type="number" class="form-control <?= validation_show_error('no_sim') ? 'is-invalid' : '' ?>" id="no_sim" name="no_sim" value="<?= old('no_sim') ?? $data['no_sim'] ?>" placeholder="masukkan nomor sim">
                                     <div class="invalid-feedback">
                                         <?= cutString(validation_show_error('no_sim')) ?>
                                     </div>

@@ -12,12 +12,13 @@
                     <thead>
                         <tr>
                             <th>No.</th>
+                            <th>Nama Perusahaan</th>
                             <th>Waktu Pencarian</th>
                             <th>NIK</th>
                             <th>Nama Lengkap</th>
-                            <th>Rincian</th>
-                            <th>Tanggal Temuan</th>
-                            <th>Bukti</th>
+                            <th>Catatan Kejadian</th>
+                            <th>Tanggal Kejadian</th>
+                            <th>Foto Sopir</th>
                         </tr>
                     </thead>
                 </table>
@@ -36,12 +37,13 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollX: true,
         columns: [
             { data: 'no_urut' },
+            { data: 'nama_perusahaan' },
             { data: 'created_at' },
             { data: null, render: renderNIK },
             { data: null, render: data => (data.id_temuan) ? JSON.parse(data.nama).join('<br>') : '' },
-            { data: null, render: data => (data.id_temuan) ? JSON.parse(data.rincian).join('<br>') : '' },
-            { data: null, render: data => (data.id_temuan) ? JSON.parse(data.tanggal).join('<br>') : '' },
-            { data: null, render: renderBukti },
+            { data: null, render: data => (data.id_temuan) ? JSON.parse(data.catatan_kejadian).join('<br>') : '' },
+            { data: null, render: data => (data.id_temuan) ? JSON.parse(data.tanggal_kejadian).join('<br>') : '' },
+            { data: null, render: renderFotoSopir },
         ],
     });
 });
@@ -50,13 +52,13 @@ function renderNIK(data) {
     return `<span class="${data.id_temuan != '' ? 'text-success' : 'text-danger'}">${data.nik}</span>`;
 }
 
-function renderBukti(data) {
+function renderFotoSopir(data) {
     if (!data.id_temuan) return '';
     let dir = '<?= base_url() ?>assets/uploads/temuan/';
 
-    return JSON.parse(data.bukti).map(gambar => `
-    <a data-fancybox="bukti" href="${dir + gambar}">
-        <img src="${dir + gambar}" class="wh-40 img-style" loading="lazy">
+    return JSON.parse(data.foto_sopir).map(foto => `
+    <a data-fancybox="foto" href="${dir + foto}">
+        <img src="${dir + foto}" class="wh-40 img-style" loading="lazy">
     </a>`);
 }
 </script>

@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <?php
             $pengajuan = false;
             $alert = '';

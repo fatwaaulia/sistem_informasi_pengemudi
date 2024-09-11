@@ -1,10 +1,16 @@
+<style>
+.background {
+	background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(<?= base_url() . 'assets/img/jajaran-truk.jpg' ?>);
+}
+</style>
 <section>
-<div class="container">
-	<div class="row justify-content-center align-items-center vh-100">
+<div class="container-fluid img-style background">
+	<div class="row justify-content-center align-items-center" style="min-height: 100vh">
 		<div class="col-xxl-4 col-lg-4 col-md-6 col-12">
 			<div class="card my-4 pt-3 pb-1">
 				<div class="card-body">
 					<div class="text-center">
+						<img src="<?= base_url() . 'assets/uploads/app_settings/favicon.png' ?>" class="wh-150 mb-2">
 						<h3 class="mb-2 fw-600">Pendaftaran Akun</h3>
 						<p>Buat akun cepat dan mudah.</p>
 					</div>
