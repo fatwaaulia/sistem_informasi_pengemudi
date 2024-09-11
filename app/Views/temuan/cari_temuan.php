@@ -45,6 +45,7 @@
                 <div>
                     Status : <span class="<?= ($status == 'NIK ditemukan') ? 'text-success' : 'text-danger' ?>"><?= $status ?></span>
                 </div>
+                <a href="<?= base_url() . 'perusahaan/cari-temuan/unduh-pdf?nik=' . $nik ?>" target="_blank" class="btn btn-primary mt-3">Unduh Pdf</a>
                 <hr>
                 <?php foreach ($data as $v) : ?>
                 <div class="mb-2">
@@ -53,15 +54,29 @@
                 <div class="mb-2">
                     Nama : <?= $v['nama'] ?>
                 </div>
+                <div class="mb-2">
+                    No. SIM : <?= $v['no_sim'] ?>
+                </div>
+                <div class="mb-2">
+                    Tgl. Lahir : <?= $v['tanggal_lahir'] != '0000-00-00' ? date('d-m-Y', strtotime($v['tanggal_lahir'])) : '' ?>
+                </div>
+                <div class="mb-2">
+                    Alamat : <?= $v['alamat'] ?>
+                </div>
                 <div class="mb-2 text-justify">
-                    Rincian : <?= $v['rincian'] ?>
+                    Catatan Kejadian : <?= $v['catatan_kejadian'] ?>
                 </div>
                 <div class="mb-2">
-                    Tanggal : <?= date('d-m-Y', strtotime($v['tanggal'])) ?>
+                    Tanggal Kejadian : <?= date('d-m-Y', strtotime($v['tanggal_kejadian'])) ?>
                 </div>
                 <div class="mb-2">
-                    Bukti :
-                    <img src="<?= base_url('assets/uploads/temuan/') . $v['bukti'] ?>" class="w-100 img-style mt-2">
+                    Perusahaan Pelapor : <?= $v['nama_perusahaan'] ?>
+                </div>
+                <div class="mb-2">
+                    Foto Sopir :
+                    <?php if($v['foto_sopir']) : ?>
+                    <img src="<?= base_url('assets/uploads/temuan/') . $v['foto_sopir'] ?>" class="w-100 img-style mt-2">
+                    <?php else : echo 'Tidak menyertakan foto'; endif; ?>
                 </div>
                 <hr>
                 <?php endforeach; endif; ?>

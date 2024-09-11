@@ -28,32 +28,60 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="rincian" class="form-label">Rincian</label>
-                                    <textarea class="form-control <?= validation_show_error('rincian') ? 'is-invalid' : '' ?>" id="rincian" name="rincian" rows="3" placeholder="masukkan rincian"><?= old('rincian') ?></textarea>
+                                    <label for="no_sim" class="form-label">No. SIM</label>
+                                    <input type="text" class="form-control <?= validation_show_error('no_sim') ? 'is-invalid' : '' ?>" id="no_sim" name="no_sim" value="<?= old('no_sim') ?>" placeholder="masukkan nomor sim">
                                     <div class="invalid-feedback">
-                                        <?= cutString(validation_show_error('rincian')) ?>
+                                        <?= cutString(validation_show_error('no_sim')) ?>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tanggal" class="form-label">Tanggal Temuan</label>
-                                    <input type="date" class="form-control <?= validation_show_error('tanggal') ? 'is-invalid' : '' ?>" id="tanggal" name="tanggal" value="<?= old('tanggal') ?>">
+                                    <label for="no_ponsel" class="form-label">No. Ponsel</label>
+                                    <input type="number" class="form-control <?= validation_show_error('no_ponsel') ? "is-invalid" : '' ?>" id="no_ponsel" name="no_ponsel" value="<?= old('no_ponsel') ?>" placeholder="6285xxx">
                                     <div class="invalid-feedback">
-                                        <?= cutString(validation_show_error('tanggal')) ?>
+                                        <?= cutString(validation_show_error('no_ponsel')) ?>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bukti" class="form-label">Bukti</label>
+                                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" class="form-control <?= validation_show_error('tanggal_lahir') ? 'is-invalid' : '' ?>" id="tanggal_lahir" name="tanggal_lahir" value="<?= old('tanggal_lahir') ?>">
+                                    <div class="invalid-feedback">
+                                        <?= cutString(validation_show_error('tanggal_lahir')) ?>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <textarea class="form-control <?= validation_show_error('alamat') ? 'is-invalid' : '' ?>" id="alamat" name="alamat" rows="3" placeholder="masukkan alamat"><?= old('alamat') ?></textarea>
+                                    <div class="invalid-feedback">
+                                        <?= cutString(validation_show_error('alamat')) ?>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="catatan_kejadian" class="form-label">Catatan Kejadian</label>
+                                    <textarea class="form-control <?= validation_show_error('catatan_kejadian') ? 'is-invalid' : '' ?>" id="catatan_kejadian" name="catatan_kejadian" rows="3" placeholder="masukkan catatan kejadian"><?= old('catatan_kejadian') ?></textarea>
+                                    <div class="invalid-feedback">
+                                        <?= cutString(validation_show_error('catatan_kejadian')) ?>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tanggal_kejadian" class="form-label">Tanggal Kejadian</label>
+                                    <input type="date" class="form-control <?= validation_show_error('tanggal_kejadian') ? 'is-invalid' : '' ?>" id="tanggal_kejadian" name="tanggal_kejadian" value="<?= old('tanggal_kejadian') ?>">
+                                    <div class="invalid-feedback">
+                                        <?= cutString(validation_show_error('tanggal_kejadian')) ?>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="foto_sopir" class="form-label">Foto Sopir <span class="text-secondary"> (maks. 10 mb, .png/.jpg/.jpeg)</span></label>
                                     <div class="col-md-6 position-relative">
-                                        <img src="<?= base_url('assets/uploads/default.png') ?>" class="w-100 img-style <?= validation_show_error('bukti') ? 'border border-danger' : '' ?>" id="frame">
+                                        <img src="<?= base_url('assets/uploads/default.png') ?>" class="w-100 img-style <?= validation_show_error('foto_sopir') ? 'border border-danger' : '' ?>" id="frame">
                                         <div class="position-absolute" style="bottom:0px;right:0px">
-                                            <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('bukti').click()">
+                                            <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('foto_sopir').click()">
                                                 <i class="fa-solid fa-camera fa-lg"></i>
                                             </button>
-                                            <input type="file" class="form-control d-none" id="bukti" name="bukti" accept="image/*" onchange="preview()">
+                                            <input type="file" class="form-control d-none" id="foto_sopir" name="foto_sopir" accept="image/*" onchange="preview()">
                                         </div>
                                     </div>
                                     <div class="invalid-feedback">
-                                        <?= cutString(validation_show_error('bukti')) ?>
+                                        <?= cutString(validation_show_error('foto_sopir')) ?>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3 float-end">Tambahkan</button>

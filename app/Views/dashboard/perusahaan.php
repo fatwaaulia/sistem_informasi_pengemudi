@@ -35,6 +35,10 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
                         Total Poin
                     </p>
                     <h3 class="mb-0"><?= $user_session['poin'] ?></h3>
+                    <small class="text-primary me-2">
+                        <i class="fa-solid fa-arrow-down"></i>
+                        <?= $user_session['poin_bonus'] ?>
+                    </small>
                     <small class="text-success me-2">
                         <i class="fa-solid fa-arrow-down"></i>
                         <?= $user_session['poin_masuk'] ?>

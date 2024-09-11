@@ -21,9 +21,11 @@
                             <th>No.</th>
                             <th>NIK</th>
                             <th>Nama Lengkap</th>
-                            <th>Rincian</th>
-                            <th>Tanggal Temuan</th>
-                            <th>Bukti</th>
+                            <th>No. SIM</th>
+                            <th>No. Ponsel</th>
+                            <th>Catatan Kejadian</th>
+                            <th>Tanggal Kejadian</th>
+                            <th>Foto Sopir</th>
                             <th>Created At</th>
                             <th>Opsi</th>
                         </tr>
@@ -46,17 +48,19 @@ document.addEventListener('DOMContentLoaded', function() {
             { data: 'no_urut' },
             { data: 'nik' },
             { data: 'nama' },
-            { data: 'rincian' },
-            { data: 'tanggal' },
-            { data: null, render: renderBukti },
+            { data: 'no_sim' },
+            { data: 'no_ponsel' },
+            { data: 'catatan_kejadian' },
+            { data: 'tanggal_kejadian' },
+            { data: null, render: renderFotoSopir },
             { data: 'created_at' },
             { data: null, render: renderOpsi },
         ],
     });
 });
 
-function renderBukti(data) {
-    return `<img src="${data.bukti}" class="wh-40 img-style" loading="lazy">`;
+function renderFotoSopir(data) {
+    return `<img src="${data.foto_sopir}" class="wh-40 img-style" loading="lazy">`;
 }
 
 function renderOpsi(data) {

@@ -147,6 +147,7 @@ $routes->group('perusahaan/lapor-temuan', ['filter' => ['EnsurePerusahaan', 'Ens
 });
 $routes->group('perusahaan/cari-temuan', ['filter' => ['EnsurePerusahaan', 'EnsurePoinPerusahaan']], static function ($routes) {
     $routes->get('/', 'Temuan::cariTemuan');
+    $routes->get('unduh-pdf', 'Temuan::unduhPdf');
 });
 $routes->group('perusahaan/riwayat-pencarian', ['filter' => 'EnsurePerusahaan'], static function ($routes) {
     $routes->get('get-data', 'RiwayatPencarian::getData');
