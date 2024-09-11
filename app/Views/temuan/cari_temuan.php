@@ -45,7 +45,9 @@
                 <div>
                     Status : <span><?= $status ?></span>
                 </div>
+                <?php if ($status != 'NIK atau SIM tidak ditemukan') : ?>
                 <a href="<?= base_url() . 'perusahaan/cari-temuan/unduh-pdf?nik=' . $nik . '&no_sim=' . $no_sim ?>" target="_blank" class="btn btn-primary mt-3">Unduh Pdf</a>
+                <?php endif; ?>
                 <hr>
                 <?php foreach ($data as $v) : ?>
                 <div class="mb-2">
