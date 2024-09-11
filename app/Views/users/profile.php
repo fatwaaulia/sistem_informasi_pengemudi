@@ -38,8 +38,8 @@
                             <input type="email" class="form-control" id="email_perusahaan" name="email_perusahaan" value="<?= $data['email_perusahaan'] ?>" disabled>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">No. Akta Perusahaan</label>
-                            <input type="text" class="form-control" value="<?= $data['no_akta_perusahaan'] ?>" disabled>
+                            <label class="form-label">No. NIB Perusahaan</label>
+                            <input type="text" class="form-control" value="<?= $data['no_nib_perusahaan'] ?>" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="dokumen_akta_perusahaan" class="form-label">Dokumen Akta Perusahaan <span class="text-secondary"> (maks. 10 mb, pdf)</span></label>
