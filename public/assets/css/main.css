@@ -154,14 +154,17 @@ hr { opacity: unset; }
 .btn-primary:focus,
 .form-check-input:checked,
 .pagination .page-item.active .page-link {
-    background-color: var(--main-color)!important;
-    border-color: var(--main-color)!important;
+    background-color: white!important;
+    border-color: #fd312f!important;
     transition: .3s;
-    color: white;
+    color: #fd312f;
+    padding: 10px 20px;
+    font-weight:600;
 }
 .btn-primary:hover {
-    background-color: var(--main-color-hover)!important;
-    border-color: var(--main-color)!important;
+    background-color: #fd312f!important;
+    color: white;
+    border-color: #fd312f!important;
 }
 textarea:focus,
 input:focus,

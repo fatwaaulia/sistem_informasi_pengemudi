@@ -139,18 +139,18 @@ class AppSettings extends BaseController
             </script>");
         }
 
-        $toEmail = urlencode($email);
-        $subject = 'Kirim Email Berhasil';
+        $toEmail = $email;
+        $subject = 'Maintenance Email SLIP Indonesia';
         $message_field = [
             'for_name'      => 'Kamu siapa?',
             'message'       => 'Kirim email berfungsi dengan baik, jangan lupa senyum dulu yaa:)',
-            'button_name'   => base_url(),
-            'button_link'   => 'Tombol',
+            'button_name'   => 'Tombol',
+            'button_link'   => base_url(),
         ];
         $message = view('app_settings/email', $message_field);
 
         $email = service('email');
-        $email->setFrom($email->fromEmail, $email->fromName);   
+        $email->setFrom($email->fromEmail, $email->fromName);
         $email->setTo($toEmail);
         $email->setSubject($subject);
         $email->setMessage($message);
@@ -168,7 +168,6 @@ class AppSettings extends BaseController
             // $email_error = $email->printDebugger(['headers']);
             // print_r($email_error);
             // die;
-            $app_settings = model('AppSettings')->find(1);
             return redirect()->to($this->base_route . '?menu=maintenance')
             ->with('message',
             "<script>

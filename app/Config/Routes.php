@@ -45,6 +45,7 @@ $routes->get('logout', 'Auth::logout');
 // register
 $routes->get('register', 'Auth::register');
 $routes->post('register-process', 'Auth::registerProcess');
+$routes->get('aktivasi-akun', 'Auth::aktivasiAkun');
 // email layout
 $routes->get('email-layout', 'AppSettings::emailLayout');
 

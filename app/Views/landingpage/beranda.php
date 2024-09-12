@@ -56,7 +56,7 @@ overflow: visible;
                             <h1 class="text-danger fw-600"><?= $v['judul'] ?></h1>
                             <h5 class="text-white mt-3"><?= $v['deskripsi'] ?></h5>
                             <a href="<?= base_url('perusahaan/berlangganan') ?>" class="btn btn-primary mt-4">
-                                berlangganan
+                                Berlangganan
                             </a>
                         </div>
                         <div class="col-12 col-lg-6 position-relative" style="min-height:70vh">
@@ -69,7 +69,7 @@ overflow: visible;
         </div>
     </div>
 </div>
- 
+
 <style>
 .owl-carousel .nav-button {
     border-radius:50%!important;
@@ -109,13 +109,13 @@ overflow: visible;
     <div class="container">
         <div class="row">
             <div class="offset-1 col-9 offset-lg-0 col-lg-3 offset-xl-0 col-xl-3">
-                <img src="<?= base_url('assets/img/sopir-jempol-oke.png') ?>" alt="sopir-jempol-oke.png" class="w-100 mb-4 mb-md-0">
-                <h5>SLIP Indonesia</h5>
-                <h3>Satu Layanan, Beragam Manfaat!</h3>
+                <img src="<?= base_url('assets/img/sopir-jempol-oke.png') ?>" alt="sopir-jempol-oke.png" class="w-100 mb-4 mb-md-0 wow fadeInUp">
+                <h5 class="wow fadeInUp">SLIP Indonesia</h5>
+                <h3 class="wow fadeInUp">Satu Layanan, Beragam Manfaat!</h3>
             </div>
             <div class="col-12 col-lg-9 offset-xl-1 col-xl-8">
                 <div class="text-end mb-3">
-                <a href="<?= base_url('perusahaan/berlangganan') ?>"  style="margin-right: 30px">
+                <a href="<?= base_url('perusahaan/berlangganan') ?>" class="wow fadeInUp" style="margin-right: 30px">
                     <b>Lihat Semua Paket</b>
                 </a>
                 </div>
@@ -175,14 +175,14 @@ overflow: visible;
 </section>
 
 <section class="container position-relative bg-white">
-    <div class="row gx-5">
+    <div class="row">
         <div class="col-12 col-lg-6">
-            <img src="<?= base_url('assets/img/pengendara-panggil-teknisi.png') ?>" alt="pengendara-panggil-teknisi.png" style="width:90%">
+            <img src="<?= base_url('assets/img/pengendara-panggil-teknisi.png') ?>" class="wow fadeInUp" alt="pengendara-panggil-teknisi.png" style="width:90%">
         </div>
         <div class="col-12 col-lg-6 align-content-center">
-            <label class="mb-3">SLIP Indonesia</label>
-            <h1 class="fw-700 mb-4">Temukan Driver Terbaik untuk Kesuksesan Ekspedisi Anda</h1>
-            <p>Kami hadir dengan solusi pencarian driver profesional, membantu Anda meningkatkan kinerja perusahaan ekspedisi dengan layanan yang terpercaya dan berkualitas.</p>
+            <label class="mb-3 wow fadeInUp mt-5 mt-lg-0">SLIP Indonesia</label>
+            <h1 class="fw-700 mb-4 wow fadeInUp">Temukan Driver Terbaik untuk Kesuksesan Ekspedisi Anda</h1>
+            <p class="wow fadeInUp">Kami hadir dengan solusi pencarian driver profesional, membantu Anda meningkatkan kinerja perusahaan ekspedisi dengan layanan yang terpercaya dan berkualitas.</p>
         </div>
     </div>
 </section>

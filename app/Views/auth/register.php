@@ -10,7 +10,9 @@
 			<div class="card my-4 pt-3 pb-1">
 				<div class="card-body">
 					<div class="text-center">
-						<img src="<?= base_url() . 'assets/uploads/app_settings/favicon.png' ?>" class="wh-150 mb-2">
+						<a href="<?= base_url() ?>">
+							<img src="<?= base_url() . 'assets/uploads/app_settings/favicon.png' ?>" class="wh-150 mb-2">
+						</a>
 						<h3 class="mb-2 fw-600">Pendaftaran Akun</h3>
 						<p>Buat akun cepat dan mudah.</p>
 					</div>

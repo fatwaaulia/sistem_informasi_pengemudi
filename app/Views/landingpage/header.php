@@ -44,7 +44,7 @@ if (($uri->getSegment(1) == 'berita') && (($uri->getSegment(2)) != null) ) {
     </script>
 
     <!-- my style -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css?v=1.0.1">
     <style>
     section {
         padding: 50px;

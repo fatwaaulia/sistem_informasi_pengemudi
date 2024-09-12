@@ -35,6 +35,76 @@ class Auth extends BaseController
                 'password'  => $this->base_model->password_hash($password),
             ];
             $user = $this->base_model->where($where)->first();
+            
+            // jika user tidak ditemukan
+            if (! $user) {
+                return redirect()->to(base_url('login'))
+                ->with('message',
+                "<script>
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Email atau password salah!',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true,
+                    })
+                </script>");
+            }
+
+            // jika belum aktivasi akun
+            if (! $user['activated_at']) {
+                for (;;) {
+                    $random_string = random_string('alnum', 32);
+                    $cek_token = $this->base_model->where('token', $random_string)->countAllResults();
+                    if ($cek_token == 0) {
+                        $token = $random_string;
+                        break;
+                    }
+                }
+                $this->base_model->update($user['id'], ['token' => $token]);
+
+                // kirim email
+                $toEmail = $user['email'];
+                $subject = 'Pendaftaran Akun SLIP Indonesia';
+                $message_field = [
+                    'for_name'      => $user['nama'],
+                    'message'       => 'Terima kasih telah mendaftar di SLIP Indonesia! <br>
+                                        <br>Langkah selanjutnya, silakan login ke sistem kami dan lengkapi data diri serta informasi perusahaan Anda untuk menikmati kemudahan dalam mengelola data pengemudi.
+                                        <br><br>    
+                                        Klik tombol di bawah ini untuk masuk:',
+                    'button_name'   => 'Masuk Sekarang',
+                    'button_link'   => base_url() . 'aktivasi-akun?token=' . $token,
+                ];
+                $message = view('auth/email', $message_field);
+
+                $email = service('email');
+                $email->setFrom($email->fromEmail, $email->fromName);
+                $email->setTo($toEmail);
+                $email->setSubject($subject);
+                $email->setMessage($message);
+
+                if ($email->send()) {
+                    return redirect()->to(base_url() . 'login')
+                    ->with('message',
+                    "<script>
+                        Swal.fire({
+                        icon: 'info',
+                        title: 'Silakan periksa email Anda!',
+                        })
+                    </script>");
+                } else {
+                    return redirect()->to(base_url() . 'login')
+                    ->with('message',
+                    "<script>
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Permintaan gagal diproses. <a href=" . 'https://wa.me/6285526250131' . " target=" . '_blank' . ">Hubungi CS</a>',
+                        })
+                    </script>");
+                }
+            }
+
+            // jika sudah aktivasi bisa login
             $cek = $this->base_model->where($where)->countAllResults();
             if ($cek == 1) {
                 $session = [
@@ -87,26 +157,115 @@ class Auth extends BaseController
         if (! $this->validate($rules)) {
             return redirect()->back()->withInput();
         } else {
+            for (;;) {
+                $random_string = random_string('alnum', 32);
+                $cek_token = $this->base_model->where('token', $random_string)->countAllResults();
+                if ($cek_token == 0) {
+                    $token = $random_string;
+                    break;
+                }
+            }
+
+            $nama = ucwords($this->request->getVar('nama', $this->filter));
+            $email = $this->request->getVar('email', FILTER_SANITIZE_EMAIL);
             $password = $this->request->getVar('password');
             $data = [
                 'status_pengajuan_perusahaan' => 'Pending',
                 'id_role'         => 3,
                 'nama_perusahaan' => ucwords($this->request->getVar('nama_perusahaan', $this->filter)),
-                'nama'            => ucwords($this->request->getVar('nama', $this->filter)),
-                'no_ponsel'       => ucwords($this->request->getVar('no_ponsel', $this->filter)),
-                'email'           => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
+                'nama'            => $nama,
+                'no_ponsel'       => $this->request->getVar('no_ponsel', $this->filter),
+                'email'           => $email,
                 'password'        => $this->base_model->password_hash($password),
+                'token'           => $token,
             ];
 
             $this->base_model->insert($data);
-            return redirect()->to(base_url('login'))
+
+            // kirim email
+            $toEmail = $email;
+            $subject = 'Pendaftaran Akun SLIP Indonesia';
+            $message_field = [
+                'for_name'      => $nama,
+                'message'       => 'Terima kasih telah mendaftar di SLIP Indonesia! <br>
+                                    <br>Langkah selanjutnya, silakan login ke sistem kami dan lengkapi data diri serta informasi perusahaan Anda untuk menikmati kemudahan dalam mengelola data pengemudi.
+                                    <br><br>    
+                                    Klik tombol di bawah ini untuk masuk:',
+                'button_name'   => 'Masuk Sekarang',
+                'button_link'   => base_url() . 'aktivasi-akun?token=' . $token,
+            ];
+            $message = view('auth/email', $message_field);
+
+            $email = service('email');
+            $email->setFrom($email->fromEmail, $email->fromName);
+            $email->setTo($toEmail);
+            $email->setSubject($subject);
+            $email->setMessage($message);
+
+            if ($email->send()) {
+                return redirect()->to(base_url() . 'register')
+                ->with('message',
+                "<script>
+                    Swal.fire({
+                    icon: 'info',
+                    title: 'Silakan periksa email Anda!',
+                    })
+                </script>");
+            } else {
+                return redirect()->to(base_url() . 'register')
+                ->with('message',
+                "<script>
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Permintaan gagal diproses. <a href=" . 'https://wa.me/6285526250131' . " target=" . '_blank' . ">Hubungi CS</a>',
+                    })
+                </script>");
+            }
+        }
+    }
+
+    public function aktivasiAkun()
+    {
+        // jika pada url tidak ada query token
+        $token = $this->request->getVar('token');
+        if (! $token) {
+            return redirect()->to(base_url() . 'login')
             ->with('message',
             "<script>
                 Swal.fire({
-                icon: 'success',
-                title: 'Selamat akun Anda berhasil dibuat',
+                icon: 'error',
+                title: 'Token tidak ditemukan!',
                 })
             </script>");
         }
+
+        // jika pengguna tidak ditemukan
+        $user = $this->base_model->where('token', $token)->first();
+        if (! $user) {
+            return redirect()->to(base_url() . 'login')
+            ->with('message',
+            "<script>
+                Swal.fire({
+                icon: 'error',
+                title: 'Token tidak ditemukan!',
+                })
+            </script>");
+        }
+
+        // aktivasi akun
+        $data = [
+            'token' => '',
+            'activated_at' => date('Y-m-d H:i:s'),
+        ];
+        $this->base_model->update($user['id'], $data);
+
+        return redirect()->to(base_url() . 'login')
+        ->with('message',
+        "<script>
+            Swal.fire({
+            icon: 'success',
+            title: 'Berhasil aktivasi akun. Silakan masuk!',
+            })
+        </script>");
     }
 }

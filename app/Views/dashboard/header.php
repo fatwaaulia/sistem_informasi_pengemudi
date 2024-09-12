@@ -39,7 +39,7 @@ $description = $app_settings['deskripsi'];
 
     <!-- my style -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css?v=1.0.1">
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/dashboard.css?v=1.0.1">
 </head>
 
 <body>

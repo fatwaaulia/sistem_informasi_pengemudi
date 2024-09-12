@@ -5,7 +5,6 @@
 }
 .smoothScroll { animation: smoothScroll .7s forwards; }
 .navbar {
-    height: 90px;
     box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1)!important;
 }
 .nav-link { color: #000000!important }
@@ -26,39 +25,39 @@ $uri = service('uri');
 $uri->setSilent(true);
 ?>
 
-<nav class="navbar navbar-expand-lg bg-light position-absolute w-100" style="z-index:100">
-    <div class="container">
+<nav class="navbar navbar-expand-lg bg-light position-absolute w-100 p-0" style="z-index:100">
+    <div class="container" style="height:100px">
         <a class="navbar-brand d-flex align-items-center" href="<?= base_url() ?>">
             <img src="<?= $logo ?>" style="height:45px" alt="<?= $app_settings['nama_aplikasi'] ?>">
         </a>
         <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars my-1"></i>
         </button>
-        <div class="collapse navbar-collapse justify-content-between py-3 py-md-0 bg-light" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <!-- <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">HOME</a> -->
+    </div>
+    <div class="collapse navbar-collapse justify-content-between px-0 pb-3 py-md-0 bg-light" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <!-- <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">HOME</a> -->
+        </div>
+        <div class="navbar-nav px-3">
+            <?php 
+            if(session()->get('isLogin')) :
+                $user = model('Users')->where('id', session()->get('id_user'))->first();
+                if ($user['foto_profil']) {
+                    $foto_profil = base_url('assets/uploads/users/' . $user['foto_profil']);
+                } else {
+                    $foto_profil = base_url('assets/uploads/user-default.png');
+                }
+                ?>
+            <a href="<?= base_url('login') ?>" class="mt-3 mt-lg-0 text-decoration-none">
+                <img src="<?= $foto_profil ?>" alt="Profile" class="rounded-circle wh-50">
+                <span class="ps-2 text-black"><?= mb_strimwidth($user['nama'], 0, 15, "..."); ?></span>
+            </a>
+            <?php else : ?>
+            <div class="d-flex justify-content-start mt-3 mt-lg-0">
+                <div><a href="<?= base_url('login') ?>" class="btn btn-primary me-2">Login</a></div>
+                <div><a href="<?= base_url('register') ?>" class="btn btn-primary">Register</a></div>
             </div>
-            <div class="navbar-nav">
-                <?php 
-                if(session()->get('isLogin')) :
-                    $user = model('Users')->where('id', session()->get('id_user'))->first();
-                    if ($user['foto_profil']) {
-                        $foto_profil = base_url('assets/uploads/users/' . $user['foto_profil']);
-                    } else {
-                        $foto_profil = base_url('assets/uploads/user-default.png');
-                    }
-                 ?>
-                <a href="<?= base_url('login') ?>" class="mt-3 mt-lg-0 text-decoration-none">
-                    <img src="<?= $foto_profil ?>" alt="Profile" class="rounded-circle wh-50">
-                    <span class="ps-2 text-black"><?= mb_strimwidth($user['nama'], 0, 15, "..."); ?></span>
-                </a>
-                <?php else : ?>
-                <div class="d-flex justify-content-start mt-3 mt-lg-0">
-                    <div><a href="<?= base_url('login') ?>" class="btn btn-primary me-2">Login</a></div>
-                    <div><a href="<?= base_url('register') ?>" class="btn btn-primary">Register</a></div>
-                </div>
-                <?php endif; ?>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
