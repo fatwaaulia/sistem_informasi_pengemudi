@@ -3,7 +3,7 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
 $user_role = model('Role')->where('id', $user_session['id_role'])->first()['slug'];
 
 $app_settings = model('AppSettings')->find(1);
-$logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'] . '?v=1.0.1';
+$logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'] . '?updated_at=' . $app_settings['updated_at'];
 ?>
 
 <header id="header" class="header fixed-top d-flex align-items-center">

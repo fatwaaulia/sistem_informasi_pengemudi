@@ -34,7 +34,7 @@ $uri->setSilent(true);
             <i class="fa-solid fa-bars my-1"></i>
         </button>
     </div>
-    <div class="collapse navbar-collapse justify-content-between px-0 pb-3 py-md-0 bg-light" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse justify-content-between px-0 pb-3 py-md-0 bg-light w-100" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <!-- <a class="nav-link <?= ($uri->getSegment(1) == '') ? 'nav-active' : '' ?>" href="<?= base_url() ?>">HOME</a> -->
         </div>

@@ -44,7 +44,7 @@ if (($uri->getSegment(1) == 'berita') && (($uri->getSegment(2)) != null) ) {
     </script>
 
     <!-- my style -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css?v=1.0.1">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css?updated_at=<?= $app_settings['updated_at'] ?>">
     <style>
     section {
         padding: 50px;

@@ -38,8 +38,8 @@ $description = $app_settings['deskripsi'];
     <link rel="stylesheet" href="<?= base_url() ?>assets/modules/datatables/css/buttons.dataTables.min.css">
 
     <!-- my style -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css?v=1.0.1">
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/dashboard.css?v=1.0.1">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/main.css?updated_at=<?= $app_settings['updated_at'] ?>">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/dashboard.css?updated_at=<?= $app_settings['updated_at'] ?>">
 </head>
 
 <body>
