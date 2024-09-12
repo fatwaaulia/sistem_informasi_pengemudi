@@ -233,7 +233,7 @@ class Temuan extends BaseController
             if ($foto_sopir != '') {
                 $file = $this->upload_path . 'foto_sopir/' . $find_data['foto_sopir'];
                 if (is_file($file)) unlink($file);
-                $foto_sopir_name = $foto_sopir->getRandomName();
+                $foto_sopir_name = $find_data['foto_sopir'];
                 $this->image->withFile($foto_sopir)->save($this->upload_path . 'foto_sopir/' . $foto_sopir_name, 60);
             } else {
                 $foto_sopir_name = $find_data['foto_sopir'];
@@ -243,7 +243,7 @@ class Temuan extends BaseController
             if ($foto_ktp != '') {
                 $file = $this->upload_path . 'foto_ktp/' . $find_data['foto_ktp'];
                 if (is_file($file)) unlink($file);
-                $foto_ktp_name = $foto_ktp->getRandomName();
+                $foto_ktp_name = $find_data['foto_ktp'];
                 $this->image->withFile($foto_ktp)->save($this->upload_path . 'foto_ktp/' . $foto_ktp_name, 60);
             } else {
                 $foto_ktp_name = $find_data['foto_ktp'];
@@ -253,7 +253,7 @@ class Temuan extends BaseController
             if ($foto_sim != '') {
                 $file = $this->upload_path . 'foto_sim/' . $find_data['foto_sim'];
                 if (is_file($file)) unlink($file);
-                $foto_sim_name = $foto_sim->getRandomName();
+                $foto_sim_name = $find_data['foto_sim'];
                 $this->image->withFile($foto_sim)->save($this->upload_path . 'foto_sim/' . $foto_sim_name, 60);
             } else {
                 $foto_sim_name = $find_data['foto_sim'];
@@ -263,7 +263,7 @@ class Temuan extends BaseController
             if ($foto_temuan != '') {
                 $file = $this->upload_path . 'foto_temuan/' . $find_data['foto_temuan'];
                 if (is_file($file)) unlink($file);
-                $foto_temuan_name = $foto_temuan->getRandomName();
+                $foto_temuan_name = $find_data['foto_temuan'];
                 $this->image->withFile($foto_temuan)->save($this->upload_path . 'foto_temuan/' . $foto_temuan_name, 60);
             } else {
                 $foto_temuan_name = $find_data['foto_temuan'];
@@ -304,9 +304,6 @@ class Temuan extends BaseController
     {
         $id = decode($id_encode);
         $find_data = $this->base_model->find($id);
-
-        $foto_sopir = $this->upload_path . 'foto_sopir/' . $find_data['foto_sopir'];
-        if (is_file($foto_sopir)) unlink($foto_sopir);
 
         $this->base_model->delete($id);
         return redirect()->to($this->base_route)

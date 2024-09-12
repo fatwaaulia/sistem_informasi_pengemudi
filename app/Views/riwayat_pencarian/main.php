@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { data: null, render: data => (data.id_temuan) ? JSON.parse(data.nama).join('<br>') : '' },
             { data: null, render: data => (data.id_temuan) ? JSON.parse(data.catatan_kejadian).join('<br>') : '' },
             { data: null, render: data => (data.id_temuan) ? JSON.parse(data.tanggal_kejadian).join('<br>') : '' },
-            { data: null, render: renderTemuan },
+            { data: null, render: renderFotoSopir },
         ],
     });
 });
@@ -52,18 +52,18 @@ function renderNIK(data) {
     return `<span class="${data.id_temuan != '' ? 'text-success' : 'text-danger'}">${data.nik}</span>`;
 }
 
-function renderTemuan(data) {
-    if (!data.id_temuan || !data.foto_temuan) return '';
-    let dir = '<?= base_url() ?>assets/uploads/temuan/foto_temuan/';
+function renderFotoSopir(data) {
+    if (!data.id_temuan || !data.foto_sopir) return '';
+    let dir = '<?= base_url() ?>assets/uploads/temuan/foto_sopir/';
 
     try {
-        return JSON.parse(data.foto_temuan).map(foto => `
-            <a data-fancybox="foto_temuan" href="${dir + foto}">
+        return JSON.parse(data.foto_sopir).map(foto => `
+            <a data-fancybox="foto" href="${dir + foto}">
                 <img src="${dir + foto}" class="wh-40 img-style" loading="lazy">
             </a>`
         ).join('');
     } catch (e) {
-        console.error('Invalid JSON in foto_temuan:', e);
+        console.error('Invalid JSON in foto_sopir:', e);
         return '';
     }
 }

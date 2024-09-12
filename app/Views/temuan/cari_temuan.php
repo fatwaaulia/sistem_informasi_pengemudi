@@ -79,25 +79,25 @@
                         <div class="col-12 col-md-6">
                             Foto Sopir : <br>
                             <?php if($v['foto_sopir']) : ?>
-                            <img src="<?= base_url('assets/uploads/temuan/foto_sopir/') . $v['foto_sopir'] ?>" class="wh-250 img-style mt-2">
+                            <img src="<?= base_url('assets/uploads/temuan/foto_sopir/') . $v['foto_sopir'] ?>" class="w-100 img-style mt-2">
                             <?php else : echo 'Tidak menyertakan foto sopir'; endif; ?>
                         </div>
                         <div class="col-12 col-md-6">
                             Foto KTP : <br>
                             <?php if($v['foto_ktp']) : ?>
-                            <img src="<?= base_url('assets/uploads/temuan/foto_ktp/') . $v['foto_ktp'] ?>" class="wh-250 img-style mt-2">
+                            <img src="<?= base_url('assets/uploads/temuan/foto_ktp/') . $v['foto_ktp'] ?>" class="w-100 img-style mt-2">
                             <?php else : echo 'Tidak menyertakan foto ktp'; endif; ?>
                         </div>
                         <div class="col-12 col-md-6">
                             Foto SIM : <br>
                             <?php if($v['foto_sim']) : ?>
-                            <img src="<?= base_url('assets/uploads/temuan/foto_sim/') . $v['foto_sim'] ?>" class="wh-250 img-style mt-2">
+                            <img src="<?= base_url('assets/uploads/temuan/foto_sim/') . $v['foto_sim'] ?>" class="w-100 img-style mt-2">
                             <?php else : echo 'Tidak menyertakan foto sim'; endif; ?>
                         </div>
                         <div class="col-12 col-md-6">
                             Foto Temuan : <br>
                             <?php if($v['foto_temuan']) : ?>
-                            <img src="<?= base_url('assets/uploads/temuan/foto_temuan/') . $v['foto_temuan'] ?>" class="wh-250 img-style mt-2">
+                            <img src="<?= base_url('assets/uploads/temuan/foto_temuan/') . $v['foto_temuan'] ?>" class="w-100 img-style mt-2">
                             <?php else : echo 'Tidak menyertakan foto temuan'; endif; ?>
                         </div>
                     </div>

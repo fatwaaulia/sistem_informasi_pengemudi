@@ -21,7 +21,7 @@
                                                 <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('foto_profil').click()">
                                                     <i class="fa-solid fa-camera fa-lg"></i>
                                                 </button>
-                                                <input type="file" class="form-control d-none" id="foto_profil" name="foto_profil" accept="image/*" onchange="preview()">
+                                                <input type="file" class="form-control d-none" id="foto_profil" name="foto_profil" accept=".png,.jpg,.jpeg" onchange="preview()">
                                             </div>
                                         </div>
                                     </div>

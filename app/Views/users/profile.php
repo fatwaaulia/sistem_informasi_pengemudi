@@ -70,7 +70,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <div data-bs-dismiss="modal">
-                                                            <input type="file" class="form-control" name="foto_profil" accept="image/*" onchange="preview()">
+                                                            <input type="file" class="form-control" name="foto_profil" accept=".png,.jpg,.jpeg" onchange="preview()">
                                                             <?php if ($data['foto_profil']) : ?>
                                                             <div class="mt-3">
                                                                 <a href="#" class="text-secondary" data-bs-toggle="modal" data-bs-target="#deleteImage">

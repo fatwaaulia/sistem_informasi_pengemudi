@@ -21,7 +21,7 @@
 </style>
 <?php
 $app_settings = model('AppSettings')->find(1);
-$logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'];
+$logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'] . '?v=' . $app_settings['updated_at'];
 $uri = service('uri');
 $uri->setSilent(true);
 ?>

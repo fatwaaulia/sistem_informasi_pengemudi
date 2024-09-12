@@ -26,9 +26,9 @@ overflow: visible;
   opacity: 1;
 }
 </style>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12 mb-3">
+<div class="w-100">
+    <div class="">
+        <div class="mb-3">
             <div class="owl-carousel owl-header owl-theme">
                 <?php
                 $data_slider = [
@@ -218,10 +218,10 @@ $(document).ready(function() {
         autoplay:true,
         loop:true,
         autoplayTimeout:7000,
-        nav: true,
+        nav: false,
         dots: false,
-        stagePadding: 25,
-        margin: 25,
+        stagePadding: 0,
+        margin: 0,
         responsive: {
             0: {
                 items: 1

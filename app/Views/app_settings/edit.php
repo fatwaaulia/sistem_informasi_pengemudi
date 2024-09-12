@@ -72,7 +72,7 @@
                                             <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('logo').click()">
                                                 <i class="fa-solid fa-camera fa-lg"></i>
                                             </button>
-                                            <input type="file" class="form-control d-none" id="logo" name="logo" accept="image/*" onchange="preview()">
+                                            <input type="file" class="form-control d-none" id="logo" name="logo" accept=".png,.jpg,.jpeg" onchange="preview()">
                                         </div>
                                     </div>
                                     <div class="invalid-feedback">
@@ -94,7 +94,7 @@
                                             <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('favicon').click()">
                                                 <i class="fa-solid fa-camera fa-lg"></i>
                                             </button>
-                                            <input type="file" class="form-control d-none" id="favicon" name="favicon" accept="image/*" onchange="preview2()">
+                                            <input type="file" class="form-control d-none" id="favicon" name="favicon" accept=".png,.jpg,.jpeg" onchange="preview2()">
                                         </div>
                                     </div>
                                     <div class="invalid-feedback">

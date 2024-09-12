@@ -76,7 +76,7 @@
                                         <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('foto_sopir').click()">
                                             <i class="fa-solid fa-camera fa-lg"></i>
                                         </button>
-                                        <input type="file" class="form-control d-none" id="foto_sopir" name="foto_sopir" accept="image/*" onchange="preview()">
+                                        <input type="file" class="form-control d-none" id="foto_sopir" name="foto_sopir" accept=".png,.jpg,.jpeg" onchange="preview()">
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">
@@ -91,7 +91,7 @@
                                         <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('foto_ktp').click()">
                                             <i class="fa-solid fa-camera fa-lg"></i>
                                         </button>
-                                        <input type="file" class="form-control d-none" id="foto_ktp" name="foto_ktp" accept="image/*" onchange="preview2()">
+                                        <input type="file" class="form-control d-none" id="foto_ktp" name="foto_ktp" accept=".png,.jpg,.jpeg" onchange="preview2()">
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">
@@ -106,7 +106,7 @@
                                         <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('foto_sim').click()">
                                             <i class="fa-solid fa-camera fa-lg"></i>
                                         </button>
-                                        <input type="file" class="form-control d-none" id="foto_sim" name="foto_sim" accept="image/*" onchange="preview3()">
+                                        <input type="file" class="form-control d-none" id="foto_sim" name="foto_sim" accept=".png,.jpg,.jpeg" onchange="preview3()">
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">
@@ -121,7 +121,7 @@
                                         <button class="btn btn-secondary rounded-circle" style="padding:8px 10px" type="button" onclick="document.getElementById('foto_temuan').click()">
                                             <i class="fa-solid fa-camera fa-lg"></i>
                                         </button>
-                                        <input type="file" class="form-control d-none" id="foto_temuan" name="foto_temuan" accept="image/*" onchange="preview4()">
+                                        <input type="file" class="form-control d-none" id="foto_temuan" name="foto_temuan" accept=".png,.jpg,.jpeg" onchange="preview4()">
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">
@@ -144,4 +144,19 @@
 $('#select_multiple').select2({
     placeholder: 'pilih',
 });
+</script>
+
+<script>
+function preview() {
+    frame.src = URL.createObjectURL(event.target.files[0]);
+}
+function preview2() {
+    frame2.src = URL.createObjectURL(event.target.files[0]);
+}
+function preview3() {
+    frame3.src = URL.createObjectURL(event.target.files[0]);
+}
+function preview4() {
+    frame4.src = URL.createObjectURL(event.target.files[0]);
+}
 </script>
