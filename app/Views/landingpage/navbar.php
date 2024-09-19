@@ -20,7 +20,7 @@
 </style>
 <?php
 $app_settings = model('AppSettings')->find(1);
-$logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'] . '?v=' . $app_settings['updated_at'];
+$logo = base_url('assets/uploads/app_settings/') . $app_settings['logo'] . '?updated_at=' . $app_settings['updated_at'];
 $uri = service('uri');
 $uri->setSilent(true);
 ?>
@@ -49,7 +49,7 @@ $uri->setSilent(true);
                 }
                 ?>
             <a href="<?= base_url('login') ?>" class="mt-3 mt-lg-0 text-decoration-none">
-                <img src="<?= $foto_profil ?>" alt="Profile" class="rounded-circle wh-50">
+                <img src="<?= $foto_profil ?>" alt="Profile" class="rounded-circle wh-40">
                 <span class="ps-2 text-black"><?= mb_strimwidth($user['nama'], 0, 15, "..."); ?></span>
             </a>
             <?php else : ?>

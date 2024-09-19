@@ -54,7 +54,7 @@ overflow: visible;
                     <div class="row">
                         <div class="col-12 col-lg-5">
                             <h1 class="text-danger fw-600"><?= $v['judul'] ?></h1>
-                            <h5 class="text-white mt-3"><?= $v['deskripsi'] ?></h5>
+                            <p class="text-white mt-3"><?= $v['deskripsi'] ?></p>
                             <a href="<?= base_url('perusahaan/berlangganan') ?>" class="btn btn-primary mt-4">
                                 Berlangganan
                             </a>
