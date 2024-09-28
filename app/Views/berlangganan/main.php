@@ -2,8 +2,7 @@
 $user_session = model('Users')->where('id', session()->get('id_user'))->first();
 ?>
 
-<section>
-<div class="container-fluid">
+<section class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <h5 class="my-4"><?= isset($title) ? $title : '' ?></h5>
@@ -24,10 +23,10 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
         color: #052c65!important;
     }
     </style>
-    <div class="row mb-5 g-4">
+    <div class="row mb-5">
         <?php foreach ($paket_langganan as $key => $v) : ?>
-            <div class="col-12 col-md-6 col-lg-6 col-xl-4">
-            <div class="card card-paket-langganan pt-4 h-100">
+        <div class="col-12 col-md-6 col-lg-6 col-xl-4 d-flex">
+            <div class="card card-paket-langganan pt-4">
                 <?php if ($v['label']) : ?>
                 <div class="position-absolute text-white" style="right:0; top:0; border-radius: 0 var(--border-radius) 0 50px; background: linear-gradient(180deg, #f60 0%, #ff871d 100%);">
                     <div class="fw-500 wow fadeInUp" style="padding:8px 8px 8px 30px">
@@ -36,7 +35,7 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
                     </div>
                 </div>
                 <?php endif; ?>
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <div class="text-center">
                         <h4 class="fw-600 text-primary-emphasis mb-4 wow fadeInUp"><?= $v['nama_paket'] ?></h4>
                         <div class="wow fadeInUp">
@@ -58,13 +57,13 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
                         <div class="d-flex justify-content-center text-primary-emphasis wow fadeInUp">
                             Rp&nbsp;<h2 class="fw-600 text-primary-emphasis"><?= number_format($v['harga_promo'], 0, ',', '.'); ?></h2>
                         </div>
-                        <p class="mt-3"><?= $v['deskripsi'] ?></p>
+                        <p class="mt-3 mb-0"><?= $v['deskripsi'] ?></p>
+                    </div>
+                    <div class="text-center mt-auto">
                         <hr>
                         <div class="d-flex justify-content-center">
                             <h2 class="fw-600 mb-0"><?= $v['poin'] ?></h2>&nbsp;Poin
                         </div>
-                    </div>
-                    <div class="text-center">
                         <small>*Berlaku hingga 1 tahun</small>
                         <?php
                         $disable_free_trial = '';
@@ -137,5 +136,4 @@ $user_session = model('Users')->where('id', session()->get('id_user'))->first();
         </div>
         <?php endforeach; ?>
     </div>
-</div>
 <section>

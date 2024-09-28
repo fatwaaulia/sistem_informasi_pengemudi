@@ -78,6 +78,11 @@ class Filters extends BaseFilters
         'before' => [
             // 'honeypot',
             // 'csrf',
+            'csrf' => [
+                'except' => [
+                    'webhook/xendit',
+                ]
+            ],
             // 'invalidchars',
         ],
         'after' => [

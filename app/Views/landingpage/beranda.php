@@ -124,7 +124,7 @@ overflow: visible;
                     $paket_langganan = model('PaketLangganan')->findAll();
                     foreach($paket_langganan as $v) :
                     ?>
-                    <div class="card card-paket-langganan pt-4" style="min-height:380px">
+                    <div class="card card-paket-langganan pt-4" style="min-height:420px">
                         <?php if ($v['label']) : ?>
                         <div class="position-absolute text-white" style="right:0; top:0; border-radius: 0 var(--border-radius) 0 50px; background: linear-gradient(180deg, #f60 0%, #ff871d 100%);">
                             <div class="fw-500 wow fadeInUp" style="padding:8px 8px 8px 30px">
@@ -133,7 +133,7 @@ overflow: visible;
                             </div>
                         </div>
                         <?php endif; ?>
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <div class="text-center">
                                 <h4 class="fw-600 text-primary-emphasis mb-4 wow fadeInUp"><?= $v['nama_paket'] ?></h4>
                                 <div class="wow fadeInUp">
@@ -155,13 +155,13 @@ overflow: visible;
                                 <div class="d-flex justify-content-center text-primary-emphasis wow fadeInUp">
                                     Rp&nbsp;<h2 class="fw-600 text-primary-emphasis"><?= number_format($v['harga_promo'], 0, ',', '.'); ?></h2>
                                 </div>
-                                <p class="mt-3 wow fadeInUp"><?= $v['deskripsi'] ?></p>
+                                <p class="mt-3 mb-0 wow fadeInUp"><?= $v['deskripsi'] ?></p>
+                            </div>
+                            <div class="text-center mt-auto">
                                 <hr>
                                 <div class="d-flex justify-content-center wow fadeInUp">
                                     <h2 class="fw-600 mb-0"><?= $v['poin'] ?></h2>&nbsp;Poin
                                 </div>
-                            </div>
-                            <div class="text-center">
                                 <small class="wow fadeInUp">*Berlaku hingga 1 tahun</small>
                                 <a href="<?= base_url() . 'perusahaan/berlangganan' ?>" class="btn btn-primary w-100 mt-3">Langganan</a>
                             </div>
@@ -177,7 +177,7 @@ overflow: visible;
 <section class="container position-relative bg-white">
     <div class="row">
         <div class="col-12 col-lg-6">
-            <img src="<?= base_url('assets/img/pengendara-panggil-teknisi.png') ?>" class="wow fadeInUp" alt="pengendara-panggil-teknisi.png" style="width:90%">
+            <img src="<?= base_url('assets/img/pengendara-panggil-teknisi.png') ?>" alt="pengendara-panggil-teknisi.png" style="width:90%">
         </div>
         <div class="col-12 col-lg-6 align-content-center">
             <label class="mb-3 wow fadeInUp mt-5 mt-lg-0">SLIP Indonesia</label>

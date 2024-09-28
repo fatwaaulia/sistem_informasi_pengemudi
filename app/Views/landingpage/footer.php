@@ -11,7 +11,7 @@ footer a:hover {color: white;}
     <div class="container">
         <div class="row">
             <div class="col-lg-6 py-1">
-                <span>Copyright © 2024 | Web App</span>
+                <span>Copyright © 2024 | <?= $app_settings['nama_perusahaan']; ?></span>
             </div>
             <div class="col-lg-6 py-1 text-end">
                 <a href="<?= base_url() ?>kebijakan-privasi" class="me-2">Kebijakan Privasi</a>

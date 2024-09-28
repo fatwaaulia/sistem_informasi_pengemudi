@@ -157,13 +157,13 @@ hr { opacity: unset; }
     background-color: white!important;
     border-color: #fd312f!important;
     transition: .3s;
-    color: #fd312f;
+    color: #fd312f!important;
     padding: 10px 20px;
     font-weight:600;
 }
 .btn-primary:hover {
     background-color: #fd312f!important;
-    color: white;
+    color: white!important;
     border-color: #fd312f!important;
 }
 textarea:focus,

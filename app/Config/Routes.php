@@ -31,11 +31,6 @@ $routes->get('kebijakan-privasi', 'Landingpage::kebijakanPrivasi');
 $routes->get('syarat-ketentuan', 'Landingpage::syaratKetentuan');
 
 /*--------------------------------------------------------------
-  # API
---------------------------------------------------------------*/
-$routes->post('webhook/xendit', 'Webhook::xendit');
-
-/*--------------------------------------------------------------
   # Autentikasi
 --------------------------------------------------------------*/
 // login
@@ -48,6 +43,11 @@ $routes->post('register-process', 'Auth::registerProcess');
 $routes->get('aktivasi-akun', 'Auth::aktivasiAkun');
 // email layout
 $routes->get('email-layout', 'AppSettings::emailLayout');
+
+/*--------------------------------------------------------------
+  # API
+--------------------------------------------------------------*/
+$routes->post('webhook/xendit', 'Webhook::xendit');
 
 /*--------------------------------------------------------------
   # Dashboard & Profil
