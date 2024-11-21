@@ -29,10 +29,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="no_hp" class="form-label">No. HP</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">+62</span>
-                                    <input type="number" class="form-control <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" id="no_hp" name="no_hp" value="<?= old('no_hp') ?? $data['no_hp'] ?>" placeholder="8xx">
-                                </div>
+                                <input type="number" class="form-control <?= validation_show_error('no_hp') ? 'is-invalid' : '' ?>" id="no_hp" name="no_hp" value="<?= old('no_hp') ?? $data['no_hp'] ?>" placeholder="628xx">
                                 <div class="form-text">
                                     wajib terdaftar di whatsapp!
                                 </div>

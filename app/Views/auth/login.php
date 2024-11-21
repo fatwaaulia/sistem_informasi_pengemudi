@@ -1,3 +1,5 @@
+<?php $app_settings = model('AppSettings')->find(1); ?>
+
 <style>
 .background {
 	background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(<?= base_url() . 'assets/img/jajaran-truk.jpg' ?>);
@@ -34,7 +36,7 @@
 								</div>
 								<img src="<?= base_url('assets/icon/show.png') ?>" class="position-absolute" id="eye_password">
 							</div>
-							<a href="https://wa.me/6285526250131" target="_blank" class="float-end">
+							<a href="https://wa.me/<?= $app_settings['no_hp'] ?>" target="_blank" class="float-end">
 								<small>Lupa password? Hubungi CS</small>
 							</a>
 						</div>
