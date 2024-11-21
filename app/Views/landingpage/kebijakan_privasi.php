@@ -1,3 +1,5 @@
+<?php $app_settings = model('AppSettings')->find(1); ?>
+
 <style>
 .header {
     min-height: 40vh;
@@ -72,7 +74,7 @@ h5 {
             <p>Anda dapat memilih untuk membatasi pengumpulan atau penggunaan informasi pribadi Anda dengan cara berikut:</p>
             <ul>
                 <li>Ketika diminta untuk mengisi formulir di situs web, cari kotak yang dapat Anda klik untuk menunjukkan bahwa Anda tidak ingin informasi tersebut digunakan untuk tujuan pemasaran langsung.</li>
-                <li>Jika sebelumnya Anda telah setuju kepada kami untuk menggunakan informasi pribadi Anda untuk tujuan pemasaran langsung, Anda dapat berubah pikiran kapan saja dengan menghubungi kami di 085526520131 atau mengirim email ke contact@slipindonesia.com</li>
+                <li>Jika sebelumnya Anda telah setuju kepada kami untuk menggunakan informasi pribadi Anda untuk tujuan pemasaran langsung, Anda dapat berubah pikiran kapan saja dengan menghubungi kami di <?= $app_settings['no_hp']; ?> atau mengirim email ke contact@slipindonesia.com</li>
             </ul>
 
             <h4>Perubahan Kebijakan Privasi</h3>
@@ -81,7 +83,7 @@ h5 {
             <h4>Hubungi Kami</h3>
             <p>Jika Anda memiliki pertanyaan atau keluhan terkait kebijakan privasi ini, Anda dapat menghubungi kami di:</p>
             <ul>
-                <li>Nomor Telepon: 085526520131</li>
+                <li>Nomor Telepon: <?= $app_settings['no_hp']; ?></li>
                 <li>Email: contact@slipindonesia.com</li>
             </ul>
 

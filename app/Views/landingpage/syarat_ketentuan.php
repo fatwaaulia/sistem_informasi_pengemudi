@@ -1,3 +1,5 @@
+<?php $app_settings = model('AppSettings')->find(1); ?>
+
 <style>
 .header {
     min-height: 40vh;
@@ -99,7 +101,7 @@ h5 {
             <h4>Kontak Kami</h3>
             <p>Jika Anda memiliki pertanyaan mengenai syarat dan ketentuan ini, Anda dapat menghubungi kami di:</p>
             <ul>
-                <li>Nomor Telepon: 085526520131</li>
+                <li>Nomor Telepon: <?= $app_settings['no_hp']; ?></li>
                 <li>Email: contact@slipindonesia.com</li>
             </ul>
 
